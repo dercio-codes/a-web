@@ -85,7 +85,7 @@ function MerchSection() {
                 background: "#FFF203",
                 fontWeight: "bold",
                 cursor: "pointer",
-                borderRadius: "5px",
+                borderRadius: "3px",
                 fontSize: "10px",
               }}
               className="active-tv-font"

@@ -28,24 +28,41 @@ const Subscriptions = () => {
           border: "4px solid #FCFCFB",
           height: "400px",
           width: "300px",
-          textAlign: "center",
+          // textAlign: "center",
           padding: "50px 30px",
-          fontFamily: "Arcade Normal",
           fontSize: "13px",
+          display:'flex',
+          alignItems:'center',
+          flexDirection:'column'
         }}
         data-aos="flip-left"
         data-aos-easing="linear"
         data-aos-duration="3000"
       >
-        <Typography variant="h5" className="active-tv-font" sx={{marginBottom:'25px'}}>MONTHLY MEMBERSHIP</Typography>
-        <hr style={{width:'70px'}}/>
-        <Typography className="active-tv-font" sx={{margin:'25px 0', fontSize:'10px'}}>Flexible. Earn 2 Producer Points per month by going monthly.</Typography>
-        <Typography sx={{marginBottom:'25px'}}>
-          <strong className="active-tv-font" style={{fontSize:'10px'}}>$3.99 / month</strong>
+        <Typography
+          variant="h6"
+          align="center"
+          className="active-tv-font"
+          sx={{ marginBottom: "25px", fontSize:'21px'  }}
+        >
+          MONTHLY MEMBERSHIP
+        </Typography>
+        <hr style={{ width: "70px" }} />
+        <Typography
+          className="active-tv-font"
+          align="center"
+          sx={{ margin: "25px 0", fontSize: "10px" }}
+        >
+          Flexible. Earn 2 Producer Points per month by going monthly.
+        </Typography>
+        <Typography sx={{ marginBottom: "25px" }}>
+          <strong className="active-tv-font" style={{ fontSize: "10px" }}>
+            $3.99 / month
+          </strong>
         </Typography>
         <Link href="/signup" passHref={true}>
           <button
-          className="active-tv-font card"
+            className="active-tv-font card"
             style={{
               border: "1px black solid",
               backgroundColor: "white",
@@ -55,6 +72,7 @@ const Subscriptions = () => {
               textAlign: "center",
               fontFamily: "Arcade Normal",
               fontSize: "11px",
+              cursor: "pointer",
             }}
           >
             GO MONTHLY
@@ -71,31 +89,51 @@ const Subscriptions = () => {
           // textAlign: "center",
           padding: "150px 30px",
           fontSize: "13px",
-          display:'flex',
-          flexDirection:'column',
-          alignItems:'center',
-          justifyContent:'center'
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <img src="glitch-tv.gif" alt="active tv glitch tv" width={100} height={60}/>
-        <Typography variant="h5" className="active-tv-font" sx={{marginBottom:'25px'}}>ANNUAL MEMBERSHIP</Typography>
-        <hr style={{width:'70px'}}/>
-        <Typography>Flexible. Earn 2 Producer Points per month by going monthly.</Typography>
-        <Typography>
+        <img
+          src="glitch-tv.gif"
+          alt="active tv glitch tv"
+          width={120}
+          height={80}
+          style={{ marginBottom: "25px" }}
+        />
+        <Typography
+          variant="h6"
+          className="active-tv-font"
+          align="center"
+          sx={{ marginBottom: "25px", fontSize:'21px' }}
+        >
+          ANNUAL <br /> MEMBERSHIP
+        </Typography>
+        <hr style={{ width: "70px" }} />
+        <Typography
+          sx={{ margin: "25px 0", fontSize: "10px" }}
+          align="center"
+          className="active-tv-font"
+        >
+          Flexible. Earn 2 Producer Points per month by going monthly.
+        </Typography>
+        <Typography
+          sx={{ marginBottom: "25px", fontSize: "10px" }}
+          className="active-tv-font"
+        >
           <strong>$39.99 / year</strong>
         </Typography>
         <Link href="/signup" passHref={true}>
           <button
-            className="card"
+            className="active-tv-font card"
             style={{
               backgroundColor: "#fff203",
               width: "240px",
-              borderRadius: "5px",
-              height: "40px",
-              textAlign: "center",
-              margin: "0 0 0 0%",
+              borderRadius: "3px",
+              cursor: "pointer",
+              padding: "13px 0",
               border: "none",
-              fontFamily: "Arcade Normal",
               fontSize: "12px",
             }}
           >
@@ -109,18 +147,30 @@ const Subscriptions = () => {
           border: "4px solid #FCFCFB",
           height: "400px",
           width: "300px",
-          textAlign: "center",
-          padding: "20px 30px",
-          fontFamily: "Arcade Normal",
+          // textAlign: "center",
+          padding: "50px 30px",
           fontSize: "10px",
+          display:'flex',
+          alignItems:'center',
+          // justifyContent:'center',
+          flexDirection:'column'
         }}
         data-aos="flip-right"
         data-aos-easing="linear"
         data-aos-duration="3000"
       >
-        <Typography variant="h5" className="active-tv-font">FREE 14-DAY TRIAL</Typography>
-        <hr style={{width:'70px'}}/>
-        <Typography>Every subscription gets a {"14-day"} free trial!</Typography>
+        <Typography
+          variant="h6"
+          className="active-tv-font"
+          style={{ marginBottom: "25px",fontSize:'21px'  }}
+          align="center"
+        >
+          FREE 14-DAY <br /> TRIAL
+        </Typography>
+        <hr style={{ width: "70px" }} />
+        <Typography className="active-tv-font" sx={{ fontSize: "10px", marginTop:'25px' }}>
+          Every subscription gets a {"14-day"} free trial!
+        </Typography>
       </Box>
     </Box>
   );

@@ -56,7 +56,8 @@ const Banner = () => {
               border: 'none',
               margin: '35px 0 0 2px',
               fontFamily: "Arcade Normal",
-              fontSize: "10px"
+              fontSize: "10px",
+              cursor:'pointer'
             }}
           >
             START WITH A FREE TRAIL!
