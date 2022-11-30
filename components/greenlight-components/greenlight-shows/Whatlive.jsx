@@ -11,9 +11,10 @@ const Whatlive = () => {
     <Box sx={{ ...styles.container }}>
       <Box style={styles.header}>
         <Typography
+          className={'active-tv-font'}
           sx={{ fontWeight: "bold" }}
           color="#fff"
-          fontSize={20}
+          fontSize={18}
           variant="h3"
           textTransform={"uppercase"}
           letterSpacing={"2px"}

@@ -98,24 +98,24 @@ const styles = {
   container: {
     minHeight: "calc(100vh - 70px)",
     //   background: "url('active-tv-login-test1.png')",
-    // backgroundSize:'cover',
-    alignItems: "center",
-    width: "100%",
-    justifyContent: "center",
-    background: "url('login-bg.jpg')",
-    padding: "90px 0",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  contentBox: {
-    width: "700px",
-    background: "rgba(0,0,0,0.5)",
-    // opacity: 0.7,
-    height: "500px",
-    // padding: "95px 90px",
-    padding: "110px 90px",
-    // margin:'0 0 0 290px'
+      // backgroundSize:'cover',
+      alignItems: "center",
+      width: "100%",
+      justifyContent: "center",
+      background: "url('login-bg.jpg')",
+      padding:'90px 0',
+      display:'flex',
+      alignItems:'center',
+      justifyContent:'center'
+    },
+    contentBox: {
+      width: "700px",
+      background: "rgba(0,0,0,0.8)",
+      opacity: 0.7,
+      height: "500px",
+      // padding: "95px 90px",
+      padding: "110px 90px",
+      // margin:'0 0 0 290px'
     //   color:"white",
   },
 };

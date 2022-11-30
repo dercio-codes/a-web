@@ -20,14 +20,17 @@ const Card = ({ img, link }) => {
   );
 };
 
+
+
 const NewIdeas = () => {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.header}>
         <Typography
+          className={'active-tv-font'}
           sx={{ fontWeight: "bold" }}
           color="#fff"
-          fontSize={20}
+          fontSize={18}
           variant="h3"
           textTransform={"uppercase"}
           letterSpacing={"2px"}
@@ -36,6 +39,8 @@ const NewIdeas = () => {
         </Typography>
       </Box>
       <Box sx={styles.cardWrapper}>
+    {/*map throught the new ideas , displaying the cards*/}
+    
         <Card link={'https://www.google.com"'} img={"img-a.jpg"} />
         <Card link={'https://www.google.com"'} img={"img-b.jpg"} />
       </Box>

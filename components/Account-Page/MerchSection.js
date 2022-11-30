@@ -8,19 +8,11 @@ import { Typography } from "@mui/material";
 
 const main = {
   backgroundImage:
-    "url('https://cdn.shopify.com/s/files/1/0659/9281/8935/products/FridayEditedSHOPIFYPhotos.081.jpg?v=1668081113&width=750')",
+    "url('https://cdn.shopify.com/s/files/1/0659/9281/8935/files/Screenshot_2022-10-04_at_12.47.37.jpg?v=1664880575&width=1500')",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   width: "100%",
   height: "600px",
-  // display: "flex",
-  // alignItems: "center",
-  // justfifyContent: "center",
-  // flexDirection: "column",
-  // color: "white",
-  // paddingTop: "150px",
-  // lineHeight: "30px",
-  // fontSize: "12px"
 };
 
 function MerchSection() {

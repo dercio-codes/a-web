@@ -15,6 +15,8 @@ const Subscriptions = () => {
       className="active-tv-font"
       style={{
         width: "100%",
+        // background: "url('active-tv-login-test1.png')",
+        backgroundSize:'cover',
         display: "flex",
         justifyContent: "center",
         minHeight: "100vh",
@@ -23,6 +25,15 @@ const Subscriptions = () => {
         color: "white",
       }}
     >
+
+  <Box style={{
+        display: "flex",
+        justifyContent: "center",
+        minHeight: "100vh",
+        minWidth:'100%',
+        alignItems: "center",
+        background:'rgba(0,0,0,0.7)'
+      }}>  
       <Box
         style={{
           border: "4px solid #FCFCFB",
@@ -173,6 +184,8 @@ const Subscriptions = () => {
         </Typography>
       </Box>
     </Box>
+
+</Box>
   );
 };
 

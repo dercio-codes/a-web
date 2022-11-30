@@ -31,18 +31,23 @@ export default function Paypage() {
 
   function subscriptionType(e) {
     const value = e.target.value;
-    const filteredPackages =
-      value === "all" ? PACKAGES : PACKAGES.filter((p) => p.type === value);
+    const filteredPackages = value === "all" ? PACKAGES : PACKAGES.filter((p) => p.type === value);
     setPrice(filteredPackages);
   }
 
   //========================================
 
   if (typeof window != "undefined") {
+
     const paymentForm = document.getElementById('paymentForm');
+
     paymentForm.addEventListener("submit", payWithPaystack, false);
+
+
     function payWithPaystack(e) {
+
       e.preventDefault();
+
       let handler = PaystackPop.setup({
         // key: "pk_test_084cd47b971a5efe11466a7b7a7bc0f8dcf3bd7f", // Replace with your public key
         key: 'pk_live_52c4e5f9c94fa016c914d46dbf8176fa56deb720',
@@ -63,6 +68,8 @@ export default function Paypage() {
       handler.openIframe();
     }
   }
+
+
   return (
     <Box 
      style={{ 

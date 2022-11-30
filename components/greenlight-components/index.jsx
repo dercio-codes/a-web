@@ -6,6 +6,10 @@ import Button from "@mui/material/Button";
 import ReactPlayer from "react-player";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { useState, useEffect } from "react";
+import Aos from "aos"
+import "aos/dist/aos.css"
+
+
 
 const GreenlightBanner = () => {
   const [showImage, setShowImage] = useState(true);
@@ -15,6 +19,10 @@ const GreenlightBanner = () => {
   useEffect(() => {
     setShowImage(true);
     setShowPlayer(false);
+
+    //
+    Aos.init({ duration: 2000 });
+
   }, []);
 
   const playVideo = () => {
@@ -31,6 +39,9 @@ const GreenlightBanner = () => {
     >
       {/* the image banner */}
       <Box sx={showImage ? styles.introImage : styles.none}>
+      
+        
+      <Box sx={{background:'rgba(0,0,0,.4)'}}>
         <Grid container>
           <Grid sx={styles.gridItem} item md={4} sm={4} xs={12}>
             <Box sx={{ ...styles.content }}>
@@ -65,7 +76,7 @@ const GreenlightBanner = () => {
                   PRODUCE
                 </span>
                 <b style={{ display: "flex" }}>
-                  <img className="bulb" src="green-light.png" alt="bulb" />
+                  <img data-aos="fade-right" className="bulb" src="green-light.png" alt="bulb" />
 
                   <span style={{ color: "#fff" }}> THAT! </span>
                 </b>
@@ -76,9 +87,10 @@ const GreenlightBanner = () => {
                   ...styles.bannerHeading,
                   fontWeight: "700",
                   marginTop: "20px",
+                  letterSpacing:'0px',
                   fontSize: {
-                    md: 20,
-                    sm: 18,
+                    md: 16,
+                    sm: 14,
                     xs: 16,
                   },
                 }}
@@ -95,10 +107,12 @@ const GreenlightBanner = () => {
                   ...styles.bannerHeading,
                   fontWeight: "200",
                   marginTop: "20px",
+                  letterSpacing:'2px',
+                  lineHeight:'24px',
                   fontSize: {
-                    md: 14,
-                    sm: 12,
-                    xs: 8,
+                    md: 10,
+                    sm: 8,
+                    xs: 6,
                   },
                 }}
               >
@@ -135,6 +149,7 @@ const GreenlightBanner = () => {
           </Grid>
           <Grid sx={{...styles.gridItem ,height:{xs:'10px!important'}}} item md={4} sm={4} xs={12}></Grid>
         </Grid>
+        </Box>
       </Box>
 
       {/* the player */}
@@ -143,13 +158,11 @@ const GreenlightBanner = () => {
           controls={true}
           playing={player}
           //  playing={false}
-          width="92%"
-          height="92%"
+          width="100%"
+          height="100%"
           style={styles.player}
           url="produce-vid.webm"
-          // url="https://www.youtube.com/watch?v=eOsjzbb8AUE" //this one
-          // url="blob:https://www.corridordigital.com/b2b5d4c0-f1af-4f9b-bc29-e3ca017ab030"
-          // url="blob:https://www.corridordigital.com/0de238d9-3089-49fa-b585-bb1d89ddb337"
+        
         />
       </Box>
 
@@ -188,7 +201,8 @@ const styles = {
       xs: "80vh",
     },
     width: "100%",
-    background: "url('top_banner_full.jpg')",
+    // background: "url('top_banner_full.jpg')",
+    background:"url('banner-test.jpg')",
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
@@ -197,6 +211,7 @@ const styles = {
   },
   content: {
     // border: "1px solid red",
+
     minHeight: {
       md: "400px",
       sm: "200px",

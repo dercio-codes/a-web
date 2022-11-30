@@ -17,7 +17,6 @@ import axios from "axios";
 import { USER_CONTEXT } from "../../context/MainContext";
 import { useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-// import axios from "axios";
 import { isEmpty } from "@aws-amplify/core";
 
 const Navbar = () => {
@@ -52,30 +51,6 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  // const [loading, setLoading] = useState(false);
-  // const [posts, setPosts] = useState([]);
-  // const [searchTitle, setSearchTitle] = useState("");
-
-  // const endpoint = `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/cognito_pool/get-config`;
-
-  const tokenHalndler = async () => {
-    const response = await axios({
-      method: "get",
-      url: endpoint,
-      Authorization: `Bearer ${authorisedJWT} `,
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   "Access-Control-Allow-Origin": "*",
-      //   "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT,DELETE",
-      //   "Access-Control-Allow-Headers":
-      //   "Origin, X-Requested-With, Content-Type",
-      //   "Access-Control-Allow-Credentials": true,
-      //   // Authorization: `Bearer ${authorisedJWT} `,
-      // },
-    });
-    console.log("Response => ", response);
   };
 
   useEffect(() => {
@@ -125,7 +100,7 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ mr: 2, display: { xs: "none", md: "flex", sm: "" } }}
           >
             {/* <img
               src="https://www.activetvonline.co.za/static/media/logo.718a6dab.png"
@@ -218,8 +193,8 @@ const Navbar = () => {
                     display: "block",
                     fontSize: "12px",
                     "&:hover": {
-                      color: "#12171f",
-                      borderBottom: "1px solid #12171F",
+                      color: "#32a453",
+                      borderBottom: "1px solid #32a453",
                     },
                   }}
                 >
@@ -260,8 +235,8 @@ const Navbar = () => {
                     display: "block",
                     fontSize: "12px",
                     "&:hover": {
-                      color: "#7AB273",
-                      borderBottom: "1px solid #7AB273",
+                      color: "#32a453",
+                      borderBottom: "1px solid #32a453",
                     },
                   }}
                 >
@@ -273,7 +248,6 @@ const Navbar = () => {
 
             <Link href="https://activetvstore.com/">
               <a target="_blank">
-                
                 <Button
                   onClick={handleCloseNavMenu}
                   className={"active-tv-font"}
@@ -283,8 +257,8 @@ const Navbar = () => {
                     display: "block",
                     fontSize: "12px",
                     "&:hover": {
-                      color: "#CCC0BF",
-                      borderBottom: "1px solid #CCC0BF",
+                      color: "#32a453",
+                      borderBottom: "1px solid #32a453",
                     },
                   }}
                 >

@@ -182,7 +182,10 @@ const styles = {
     width: '50%',
     border: '1px solid #444',
     backgroundColor:'rgba(0,0,0,0.8)',
-    padding:'0 20px'
+    padding:'0 20px',
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'flex-start'
   },
   none: {
     display: 'none'

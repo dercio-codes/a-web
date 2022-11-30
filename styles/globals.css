@@ -338,3 +338,8 @@
     image{
       object-fit: cover;
     }
+
+    .points{
+        /*background: rgb(41,41,41);*/
+/*background: linear-gradient(0deg, rgba(41,41,41,1) 8%, rgba(17,18,18,1) 10%, rgba(50,178,59,1) 75%);*/
+  }
