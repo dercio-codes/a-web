@@ -50,8 +50,8 @@ const Banner = () => {
           </li>
         </ul>
         <Link href="/signup">
-          <button className='card'
-            className={'active-tv-font'}
+          <button
+            className={'active-tv-font card'}
             style={{
               backgroundColor: '#fff203',
               width: '423px',
