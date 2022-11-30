@@ -19,7 +19,7 @@ function AccountFooter() {
   return (
     <div style={background} className='active-tv-font'>
       <h3>INSTAGRAM CONTACT</h3>
-      <p>2022 © Corridor Digital</p>
+      <p>2022 © Active Tv</p>
     </div>
   )
 }

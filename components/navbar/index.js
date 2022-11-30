@@ -20,7 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 // import axios from "axios";
 import { isEmpty } from "@aws-amplify/core";
 
-  const Navbar = () => {
+const Navbar = () => {
   const pages = ["Home", "Shows", "Greenlight", "Merch", "Learn More"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -29,7 +29,8 @@ import { isEmpty } from "@aws-amplify/core";
   const [posts, setPosts] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   // destructuring the authenticated user from context
-  const { AuthenticatedUser, authorisedJWT, loggedIn, setLoggedIn } = React.useContext(USER_CONTEXT);
+  const { AuthenticatedUser, authorisedJWT, loggedIn, setLoggedIn } =
+    React.useContext(USER_CONTEXT);
   // //user initial
   const currentUser = AuthenticatedUser.name;
   const userIntial = currentUser.charAt(0);
@@ -57,7 +58,6 @@ import { isEmpty } from "@aws-amplify/core";
   // const [posts, setPosts] = useState([]);
   // const [searchTitle, setSearchTitle] = useState("");
 
-
   // const endpoint = `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/cognito_pool/get-config`;
 
   const tokenHalndler = async () => {
@@ -77,9 +77,6 @@ import { isEmpty } from "@aws-amplify/core";
     });
     console.log("Response => ", response);
   };
-
-
-
 
   useEffect(() => {
     const loadingPosts = async () => {
@@ -109,9 +106,8 @@ import { isEmpty } from "@aws-amplify/core";
     console.log("RESPONSE=>", response);
   };
 
-  const limit = 5
+  const limit = 5;
 
-  
   return (
     <AppBar
       position="sticky"
@@ -275,8 +271,9 @@ import { isEmpty } from "@aws-amplify/core";
               </a>
             </Link>
 
-            <Link href="/merch">
-              <a>
+            <Link href="https://activetvstore.com/">
+              <a target="_blank">
+                
                 <Button
                   onClick={handleCloseNavMenu}
                   className={"active-tv-font"}
@@ -295,121 +292,119 @@ import { isEmpty } from "@aws-amplify/core";
                 </Button>
               </a>
             </Link>
-            {
-              !loggedIn && (
-
-                <Link href="/account">
-                  <a>
-                    <Button
-                      className={"active-tv-font"}
-                      onClick={handleCloseNavMenu}
-                      sx={{
-                        m: 2,
-                        color: "#eee",
-                        display: "block",
-                        fontSize: "12px",
-                        "&:hover": {
-                          color: "#7A9EA3",
-                          borderBottom: "1px solid #7A9EA3",
-                        },
-                      }}
-                    >
-                      Learn More
-                    </Button>
-                  </a>
-                </Link>
-              )
-
-            }
-
-            <Link href="/">
-              <a>
-                <Button
-                  className={"active-tv-font"}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    m: 2,
-                    color: "#eee",
-                    display: "block",
-                    fontSize: "12px",
-                    "&:hover": {
-                      color: "#7A9EA3",
-                      borderBottom: "1px solid #7A9EA3",
-                    },
-                  }}
-                >
-                  Learn More
-                </Button>
-              </a>
-            </Link>
-           
+            {!loggedIn && (
+              <Link href="/account">
+                <a>
+                  <Button
+                    className={"active-tv-font"}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      m: 2,
+                      color: "#eee",
+                      display: "block",
+                      fontSize: "12px",
+                      "&:hover": {
+                        color: "#7A9EA3",
+                        borderBottom: "1px solid #7A9EA3",
+                      },
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </a>
+              </Link>
+            )}
           </Box>
 
           {/* Shows search input should only display once a user is signed up or logged in */}
-            <Box sx={{ display:"flex", alignItems:"center", justifyContent:"center",}}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             {loggedIn && (
               <Box
-            className="outer"
-            sx={{ minWidth: { xs: "50px", sm: "100px", md: "300px" } }}
-          >
-            <a className="anchr">
-              <SearchIcon />
-            </a>
-            <input
-              type="text"
-              name=""
-              className="search_box"
-              placeholder="Search shows..."
-              onChange={(e) => setSearchTitle(e.target.value)}
-            />
+                className="outer"
+                sx={{ minWidth: { xs: "50px", sm: "100px", md: "300px" } }}
+              >
+                <a className="anchr">
+                  <SearchIcon />
+                </a>
+                <input
+                  type="text"
+                  name=""
+                  className="search_box"
+                  placeholder="Search shows..."
+                  onChange={(e) => setSearchTitle(e.target.value)}
+                />
 
-            <Box sx={{marginTop:"55px"}}>
-            {(
-              posts
-              .slice(0, limit).filter((value) => {
-                  if (searchTitle === "") {
-                    return null;
-                  } else if (
-                    value.Title.toLowerCase().includes(
-                      searchTitle.toLowerCase()
-                    )
-                  ) {
-                    return value;
-                  }
-                })
-                .slice(0, limit).map((item, index) => (
-                  <Link href={`/shows-episodes/${item.Title}`} key={index}>
-                    <a>
-                  <div
-                    style={{
-                      background: "#333333",
-                      width: "400px",
-                      height: "60px",
-                      display: "flex",
-                      marginRight: "500px",
-                      borderBottom:"1px solid #121212",
-                      padding: "5px",
-                      borderRadius:"5px",
-                      cursor:"pointer"
-                    }}
-                  >
-                    <img src={item.CoverArtLarge} width={50} height={50} />
-                    <Box sx={{ flexDirection:"column"}}>
-                    <p style={{paddingLeft:"10px", fontSize:"10px"}} className={"active-tv-font"}>{item.Title}</p>
-                    <p style={{paddingLeft:"10px", fontSize:"8px", color:"lightgrey"}} className={"active-tv-font"}>{item.description}</p>
-                    </Box>
-                  </div>
-                    </a>
-                </Link>
-                ))
+                <Box sx={{ marginTop: "55px" }}>
+                  {posts
+                    .slice(0, limit)
+                    .filter((value) => {
+                      if (searchTitle === "") {
+                        return null;
+                      } else if (
+                        value.Title.toLowerCase().includes(
+                          searchTitle.toLowerCase()
+                        )
+                      ) {
+                        return value;
+                      }
+                    })
+                    .slice(0, limit)
+                    .map((item, index) => (
+                      <Link href={`/shows-episodes/${item.Title}`} key={index}>
+                        <a>
+                          <div
+                            style={{
+                              background: "#333333",
+                              width: "400px",
+                              height: "60px",
+                              display: "flex",
+                              marginRight: "500px",
+                              borderBottom: "1px solid #121212",
+                              padding: "5px",
+                              borderRadius: "5px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            <img
+                              src={item.CoverArtLarge}
+                              width={50}
+                              height={50}
+                            />
+                            <Box sx={{ flexDirection: "column" }}>
+                              <p
+                                style={{
+                                  paddingLeft: "10px",
+                                  fontSize: "10px",
+                                }}
+                                className={"active-tv-font"}
+                              >
+                                {item.Title}
+                              </p>
+                              <p
+                                style={{
+                                  paddingLeft: "10px",
+                                  fontSize: "8px",
+                                  color: "lightgrey",
+                                }}
+                                className={"active-tv-font"}
+                              >
+                                {item.description}
+                              </p>
+                            </Box>
+                          </div>
+                        </a>
+                      </Link>
+                    ))}
+                </Box>
+              </Box>
             )}
-            </Box>
           </Box>
-            ) 
-            }
-            </Box>
-                
-          
 
           {/* coin system below */}
           <Box sx={{ display: { xs: "none", md: "block" } }}>

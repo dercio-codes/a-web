@@ -16,10 +16,10 @@ const Banner = () => {
       <Box
         style={{
           // border: '1px solid white',
-          background:"rgba(0, 0, 0,0.7)",
+          background:"rgba(0, 0, 0,0.6)",
           color: 'white',
           // margin: '-8px 0 0 0',
-          height: '100%',
+          height: '100vh',
           padding: '180px 70px',
           fontFamily: "Arcade Normal",
           fontSize: "11px"
@@ -33,20 +33,21 @@ const Banner = () => {
         </Typography>
         <ul>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
-            <Typography style={{color: 'white' }}>Watch exclusive content ad-free</Typography>
+            <Typography className="active-tv-font" style={{color: '#FFFFFF', fontSize:'9px' }}>Watch exclusive content ad-free</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
-            <Typography style={{ color: 'white' }}>YOU decide what shows get made</Typography>
+            <Typography className="active-tv-font" style={{ color: '#FFFFFF', fontSize:'9px' }}>YOU decide what shows get made</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
-            <Typography style={{ color: 'white' }}>15% off on ALL merch</Typography>
+            <Typography className="active-tv-font" style={{ color: '#FFFFFF', fontSize:'9px' }}>15% off on ALL merch</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
-            <Typography style={{ color: 'white' }}>Watch on ANY device</Typography>
+            <Typography className="active-tv-font" style={{ color: '#FFFFFF', fontSize:'9px' }}>Watch on ANY device</Typography>
           </li>
         </ul>
         <Link href="/signup">
-          <button className='card'
+          <button 
+          className="active-tv-font card"
             style={{
               backgroundColor: '#fff203',
               width: '423px',
@@ -55,13 +56,13 @@ const Banner = () => {
               border: 'none',
               margin: '35px 0 0 2px',
               fontFamily: "Arcade Normal",
-              fontSize: "12px"
+              fontSize: "10px"
             }}
           >
             START WITH A FREE TRAIL!
           </button>
         </Link>
-        <Typography style={{ margin: '20px 0 0 40px' }}>
+        <Typography className="active-tv-font" style={{ margin: '20px 0 0 40px', fontSize:'10px' }}>
           Join in minutes. Cancel any time.
         </Typography>
 

@@ -2,6 +2,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
 import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 
 import { useEffect } from "react";
 
@@ -36,20 +37,20 @@ const Subscriptions = () => {
         data-aos-easing="linear"
         data-aos-duration="3000"
       >
-        <h1>MONTHLY MEMBERSHIP</h1>
-        <hr />
-        <p>Flexible. Earn 2 Producer Points per month by going monthly.</p>
-        <p>
-          <strong>$3.99 / month</strong>
-        </p>
+        <Typography variant="h5" className="active-tv-font" sx={{marginBottom:'25px'}}>MONTHLY MEMBERSHIP</Typography>
+        <hr style={{width:'70px'}}/>
+        <Typography className="active-tv-font" sx={{margin:'25px 0', fontSize:'10px'}}>Flexible. Earn 2 Producer Points per month by going monthly.</Typography>
+        <Typography sx={{marginBottom:'25px'}}>
+          <strong className="active-tv-font" style={{fontSize:'10px'}}>$3.99 / month</strong>
+        </Typography>
         <Link href="/signup" passHref={true}>
           <button
-            className="card"
+          className="active-tv-font card"
             style={{
               border: "1px black solid",
               backgroundColor: "white",
               width: "240px",
-              borderRadius: "5px",
+              borderRadius: "3px",
               height: "40px",
               textAlign: "center",
               fontFamily: "Arcade Normal",
@@ -67,19 +68,22 @@ const Subscriptions = () => {
           height: "530px",
           width: "420px",
           margin: "-30px 0 0 0",
-          textAlign: "center",
+          // textAlign: "center",
           padding: "150px 30px",
-          fontFamily: "Arcade Normal",
           fontSize: "13px",
+          display:'flex',
+          flexDirection:'column',
+          alignItems:'center',
+          justifyContent:'center'
         }}
       >
         <img src="glitch-tv.gif" alt="active tv glitch tv" width={100} height={60}/>
-        <h1>ANNUAL MEMBERSHIP</h1>
-        <hr />
-        <p>Flexible. Earn 2 Producer Points per month by going monthly.</p>
-        <p>
+        <Typography variant="h5" className="active-tv-font" sx={{marginBottom:'25px'}}>ANNUAL MEMBERSHIP</Typography>
+        <hr style={{width:'70px'}}/>
+        <Typography>Flexible. Earn 2 Producer Points per month by going monthly.</Typography>
+        <Typography>
           <strong>$39.99 / year</strong>
-        </p>
+        </Typography>
         <Link href="/signup" passHref={true}>
           <button
             className="card"
@@ -114,9 +118,9 @@ const Subscriptions = () => {
         data-aos-easing="linear"
         data-aos-duration="3000"
       >
-        <h1>FREE 14-DAY TRIAL</h1>
-        <hr />
-        <p>Every subscription gets a {"14-day"} free trial!</p>
+        <Typography variant="h5" className="active-tv-font">FREE 14-DAY TRIAL</Typography>
+        <hr style={{width:'70px'}}/>
+        <Typography>Every subscription gets a {"14-day"} free trial!</Typography>
       </Box>
     </Box>
   );

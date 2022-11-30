@@ -18,14 +18,25 @@ import { USER_CONTEXT } from "../../context/MainContext";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
-
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+// import LoginIcon from '@mui/icons-material/Login';
 
 export default function PositionedPopper({ user, userInitial }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState();
   // const [loggedIn , setLoggedIn]  = React.useState(true)
-  const { loggedIn, setLoggedIn, setUser, ForceReload, setAvaters,  imgProfile,setImgProfile, isContained,setIsContained,} =useContext(USER_CONTEXT);
+  const {
+    loggedIn,
+    setLoggedIn,
+    setUser,
+    ForceReload,
+    setAvaters,
+    imgProfile,
+    setImgProfile,
+    isContained,
+    setIsContained,
+  } = useContext(USER_CONTEXT);
 
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
@@ -57,7 +68,7 @@ export default function PositionedPopper({ user, userInitial }) {
             <Paper
               sx={{
                 background: "#222",
-                minHeight: "300px",
+                minHeight: "250px",
                 minWidth: "250px",
                 padding: "5px 1px",
                 display: "flex",
@@ -76,28 +87,37 @@ export default function PositionedPopper({ user, userInitial }) {
                   justifyContent: "center",
                 }}
               >
-                <Box style={{background:`url(${imgProfile})`, backgroundSize:isContained ? "cover":"contain"}} sx={styles.DropUser}>
+                <Box
+                  style={{
+                    background: `url(${imgProfile})`,
+                    backgroundSize: isContained ? "cover" : "contain",
+                  }}
+                  sx={styles.DropUser}
+                >
                   {loggedIn ? (
-                    <Typography className={'active-tv-font'} variant="h1" color="#fff" fontSize={30}>
-                      {userInitial} 
+                    <Typography
+                      className={"active-tv-font"}
+                      variant="h1"
+                      color="#fff"
+                      fontSize={30}
+                    >
+                      {userInitial}
                     </Typography>
                   ) : (
                     <Box
                       sx={{
                         height: "60px",
                         width: "70px",
-                        backgroundImage:
-                          'url("ATV_logo.png")',
+                        backgroundImage: 'url("ATV_logo.png")',
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
                     />
                   )}
-
                 </Box>
               </Box>
-              
-{/* 
+
+              {/* 
               <Box style={AvaterPack}>
 
 
@@ -106,7 +126,7 @@ export default function PositionedPopper({ user, userInitial }) {
                 {loggedIn ? (
                   <Typography className={'active-tv-font'} variant="h1" color="#fff" fontSize={30}>
                     {/* {userInitial}  */}
-                    {/* <AvaterPicChanger />
+              {/* <AvaterPicChanger />
 
                   </Typography>
                 ) : (
@@ -115,12 +135,15 @@ export default function PositionedPopper({ user, userInitial }) {
                   />
                 )}
 
-              </Box> */} 
+              </Box> */}
               {/* </Box> */}
-
 
               <Button
                 sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
                   "&:hover": {
                     background: "transparent",
                   },
@@ -133,27 +156,49 @@ export default function PositionedPopper({ user, userInitial }) {
                 <AccountCircleIcon
                   sx={{ color: "#fff", marginRight: "16px" }}
                 />
-                <Typography className={'active-tv-font'} variant="p" color="#fff" fontSize={10}>
+                <Typography
+                  className={"active-tv-font"}
+                  variant="p"
+                  color="#fff"
+                  fontSize={10}
+                >
                   account
                 </Typography>
               </Button>
-              <Button variant="text" sx={{
-                width: 'auto', '&:hover': {
-                  background: 'transparent'
-                }
-              }} onClick={() => {
-                Router.push('/contact-us')
-              }}>
-                <SupportAgentIcon sx={{ color: "#fff", marginRight: '16px' }} />
-                <Typography className={'active-tv-font'} variant="p" color="#fff" fontSize={10}>
-
+              <Button
+                variant="text"
+                sx={{
+                  // width: "auto",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  "&:hover": {
+                    background: "transparent",
+                  },
+                }}
+                onClick={() => {
+                  Router.push("/contact-us");
+                }}
+              >
+                <SupportAgentIcon sx={{ color: "#fff", marginRight: "16px" }} />
+                <Typography
+                  className={"active-tv-font"}
+                  variant="p"
+                  color="#fff"
+                  fontSize={10}
+                >
                   Need help?
                 </Typography>
               </Button>
               <Button
                 variant="text"
                 sx={{
-                  width: "auto",
+                  // width: "auto",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
                   "&:hover": {
                     background: "transparent",
                   },
@@ -167,34 +212,108 @@ export default function PositionedPopper({ user, userInitial }) {
                     height: "30px",
                     width: "30px",
                     marginRight: "12px",
-                    backgroundImage:
-                      'url("ATV_logo.png")',
+                    backgroundImage: 'url("ATV_logo.png")',
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
                 />
-                <Typography className={'active-tv-font'} variant="p" color="#fff" fontSize={10}>
+                <Typography
+                  className={"active-tv-font"}
+                  variant="p"
+                  color="#fff"
+                  fontSize={10}
+                >
                   Active studio
                 </Typography>
               </Button>
+              {loggedIn && (
+                <Button
+                  variant="text"
+                  sx={{
+                    // width: "auto",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    "&:hover": {
+                      background: "transparent",
+                    },
+                  }}
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  <LogoutIcon sx={{ color: "#fff", marginRight: "16px" }} />
+                  <Typography
+                    className={"active-tv-font"}
+                    variant="p"
+                    color="#fff"
+                    fontSize={10}
+                  >
+                    Sign out
+                  </Typography>
+                </Button>
+              )}
+              {!loggedIn && (
+                <Button
+                  variant="text"
+                  sx={{
+                    // width: "auto",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    "&:hover": {
+                      background: "transparent",
+                    },
+                  }}
+                  onClick={() => {
+                    Router.push("/login");
+                  }}
+                >
+                  <LoginIcon sx={{ color: "#fff", marginRight: "16px" }} />
+                  <Typography
+                    className={"active-tv-font"}
+                    variant="p"
+                    color="#fff"
+                    fontSize={10}
+                    sx={{marginTop:'5px'}}
+                  >
+                    Login
+                  </Typography>
+                </Button>
+              )}
 
-              <Button
-                variant="text"
-                sx={{
-                  width: "auto",
-                  "&:hover": {
-                    background: "transparent",
-                  },
-                }}
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                <LogoutIcon sx={{ color: "#fff", marginRight: "16px" }} />
-                <Typography className={'active-tv-font'} variant="p" color="#fff" fontSize={10}>
-                  Sign out
-                </Typography>
-              </Button>
+              {!loggedIn && (
+                <Button
+                  variant="text"
+                  sx={{
+                    // width: "auto",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    "&:hover": {
+                      background: "transparent",
+                    },
+                  }}
+                  onClick={() => {
+                    Router.push("/signup");
+                    // signup();
+                  }}
+                >
+                  <LockOpenIcon sx={{ color: "#fff", marginRight: "16px" }} />
+                  <Typography
+                    className={"active-tv-font"}
+                    variant="p"
+                    color="#fff"
+                    fontSize={10}
+                    sx={{marginTop:'5px'}}
+                  >
+                    Sign Up
+                  </Typography>
+                </Button>
+              )}
             </Paper>
           </Fade>
         )}
@@ -202,9 +321,23 @@ export default function PositionedPopper({ user, userInitial }) {
       {/* the user */}
       <Grid container justifyContent="center">
         <Grid item>
-          <Button className={'active-tv-font'} onClick={handleClick("bottom-end")}>
-            <Avatar className={'active-tv-font'} style={{background:`url(${imgProfile})`, backgroundSize:isContained ? "cover":"contain"}} sx={{ bgcolor: "#333", fontSize: 20, border:"1px solid white" }}>
-              {loggedIn ? userInitial : <Avatar sx={{ bgcolor: "#333" }} ></Avatar>}
+          <Button
+            className={"active-tv-font"}
+            onClick={handleClick("bottom-end")}
+          >
+            <Avatar
+              className={"active-tv-font"}
+              style={{
+                background: `url(${imgProfile})`,
+                backgroundSize: isContained ? "cover" : "contain",
+              }}
+              sx={{ bgcolor: "#333", fontSize: 20, border: "1px solid white" }}
+            >
+              {loggedIn ? (
+                userInitial
+              ) : (
+                <Avatar sx={{ bgcolor: "#333" }}></Avatar>
+              )}
             </Avatar>
           </Button>
         </Grid>
@@ -222,6 +355,6 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    border:"1px solid white",
+    border: "1px solid white",
   },
 };

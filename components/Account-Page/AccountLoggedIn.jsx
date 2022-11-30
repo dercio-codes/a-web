@@ -126,6 +126,7 @@ const AccountLoggedIn = () => {
                 <Typography
                 sx={{
                   marginBottom: "4px",
+                  color:'#009ada',
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
@@ -137,6 +138,7 @@ const AccountLoggedIn = () => {
                  <Typography
                 sx={{
                   marginBottom: "4px",
+                  color:'#009ada',
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
@@ -189,6 +191,7 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
+                  color:'#009ada',
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
@@ -200,6 +203,7 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
+                  color:'#009ada',
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
@@ -245,13 +249,13 @@ const AccountLoggedIn = () => {
               </Typography>
               <Typography
                 className="active-tv-font"
-                sx={{ display: "flex", alignItems: "center" }}
+                sx={{ display: "flex", alignItems: "center", }}
                 variant="h3"
                 fontSize={10}
               >
                 Since signing up {"you've"} earned 0 points
                 <img
-                  style={{ margin: "0 5px" }}
+                  style={{ marginLeft: "4px", marginBottom:'2px' }}
                   src="coin.gif"
                   alt="coin"
                   width={18}
@@ -263,6 +267,7 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
+                  color:'#009ada',
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
@@ -302,6 +307,7 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
+                  color:'#009ada',
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
@@ -313,6 +319,7 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
+                  color:'#009ada',
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
@@ -342,7 +349,7 @@ const styles = {
   },
   contentBox: {
     width: "75%",
-    background: "rgba(0,0,0,0.7)",
+    background: "rgba(0,0,0,0.6)",
     height: "90%",
     padding: "20px 50px",
     flexDirection: "column",
