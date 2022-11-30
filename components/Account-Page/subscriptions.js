@@ -2,6 +2,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
 import Box from "@mui/material/Box";
+import {Typography} from '@mui/material'
 
 import { useEffect } from "react";
 
@@ -14,14 +15,25 @@ const Subscriptions = () => {
       className="active-tv-font"
       style={{
         width: "100%",
+        background: "url('active-tv-login-test1.png')",
+        backgroundSize:'cover',
         display: "flex",
         justifyContent: "center",
         minHeight: "100vh",
         alignItems: "center",
-        background: "#121212",
+        // background: "#121212",
         color: "white",
       }}
     >
+
+  <Box style={{
+        display: "flex",
+        justifyContent: "center",
+        minHeight: "100vh",
+        minWidth:'100%',
+        alignItems: "center",
+        background:'rgba(0,0,0,0.7)'
+      }}>  
       <Box
         style={{
           border: "4px solid #FCFCFB",
@@ -114,11 +126,13 @@ const Subscriptions = () => {
         data-aos-easing="linear"
         data-aos-duration="3000"
       >
-        <h1>FREE 14-DAY TRIAL</h1>
+        <Typography className={'active-tv-font'} variant="h6" fontSize={18}>FREE 14-DAY TRIAL</Typography>
         <hr />
         <p>Every subscription gets a {"14-day"} free trial!</p>
       </Box>
     </Box>
+
+</Box>
   );
 };
 

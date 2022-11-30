@@ -30,27 +30,28 @@ const Banner = () => {
         }}
         data-aos="fade-right"
         data-aos-easing="linear"
-        data-aos-duration="1500"
+        data-aos-duration="1000"
       >
         <Typography variant="h3" className="active-tv-font" fontSize={35}>
           JOIN THE CREW
         </Typography>
         <ul>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }} className="active-tv-font">
-            <Typography style={{color: 'white' }} className="active-tv-font">Watch exclusive content ad-free</Typography>
+            <Typography tyle={{ color: 'white' }} fontSize={12} className="active-tv-font">Watch exclusive content ad-free</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }} className="active-tv-font">
-            <Typography style={{ color: 'white' }} className="active-tv-font">YOU decide what shows get made</Typography>
+            <Typography tyle={{ color: 'white' }} fontSize={12} className="active-tv-font">YOU decide what shows get made</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
-            <Typography style={{ color: 'white' }} className="active-tv-font">15% off on ALL merch</Typography>
+            <Typography tyle={{ color: 'white' }} fontSize={12} className="active-tv-font">15% off on ALL merch</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
-            <Typography style={{ color: 'white' }} className="active-tv-font">Watch on ANY device</Typography>
+            <Typography style={{ color: 'white' }} fontSize={12} className="active-tv-font">Watch on ANY device</Typography>
           </li>
         </ul>
         <Link href="/signup">
           <button className='card'
+            className={'active-tv-font'}
             style={{
               backgroundColor: '#fff203',
               width: '423px',
@@ -59,7 +60,8 @@ const Banner = () => {
               border: 'none',
               margin: '35px 0 0 2px',
               fontFamily: "Arcade Normal",
-              fontSize: "12px"
+              fontSize: "12px",
+              cursor:'pointer'
             }}
           >
             START WITH A FREE TRAIL!

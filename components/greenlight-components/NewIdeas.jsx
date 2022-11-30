@@ -40,6 +40,7 @@ const NewIdeas = () => {
       </Box>
       <Box sx={styles.cardWrapper}>
     {/*map throught the new ideas , displaying the cards*/}
+    
         <Card link={'https://www.google.com"'} img={"img-a.jpg"} />
         <Card link={'https://www.google.com"'} img={"img-b.jpg"} />
       </Box>
