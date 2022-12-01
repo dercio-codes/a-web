@@ -8,7 +8,7 @@ import { Typography } from "@mui/material";
 
 const main = {
   backgroundImage:
-    "url('https://cdn.shopify.com/s/files/1/0659/9281/8935/files/Screenshot_2022-10-04_at_12.47.37.jpg?v=1664880575&width=1500')",
+    "url('https://cdn.shopify.com/s/files/1/0659/9281/8935/files/SHOPIFY_IMAGES.005.jpg?v=1667478867&width=750')",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   width: "100%",
@@ -41,7 +41,7 @@ function MerchSection() {
       >
         <Typography
           variant="h3"
-          fontSize={30}
+          fontSize={25}
           className="active-tv-font"
           align="center"
           data-aos="fade-up"
@@ -50,7 +50,7 @@ function MerchSection() {
         </Typography>
         <Typography
           variant="p"
-          fontSize={13}
+          fontSize={10}
           sx={{ mt: 2 }}
           className="active-tv-font"
           data-aos="fade-up"
@@ -59,7 +59,7 @@ function MerchSection() {
         </Typography>
         <Typography
           variant="p"
-          fontSize={13}
+          fontSize={10}
           sx={{ mt: 1, mb: 2 }}
           className="active-tv-font"
           data-aos="fade-up"

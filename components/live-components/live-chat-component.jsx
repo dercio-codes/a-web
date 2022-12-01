@@ -1,15 +1,9 @@
 import React from "react";
 import { Box, Typography, Paper, TextField } from "@mui/material";
-import SectionHeader from "../utils/SectionHeader";
 import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
-// import Picker from 'emoji-picker-react';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import SendIcon from '@mui/icons-material/Send';
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import SendIcon from "@mui/icons-material/Send";
 
 const LiveChatComponent = () => {
   return (
@@ -17,7 +11,15 @@ const LiveChatComponent = () => {
       elevation={2}
       sx={{ height: "100%", width: "100%", background: "rgba(1,1,1,.5)" }}
     >
-      <Paper elevation={2} sx={{ height: "10%" , display:'flex' , alignItems:'center' , padding:'16px' }}>
+      <Paper
+        elevation={2}
+        sx={{
+          height: "10%",
+          display: "flex",
+          alignItems: "center",
+          padding: "16px",
+        }}
+      >
         <Typography
           className="active-tv-font"
           fontSize={"16px"}
@@ -29,8 +31,15 @@ const LiveChatComponent = () => {
       </Paper>
 
       <Box sx={{ height: "75%", background: "" }}></Box>
-      <Paper elevation={3} sx={{ height: "15%", background: "" ,   display: "flex",
-            alignItems: "center", }}>
+      <Paper
+        elevation={3}
+        sx={{
+          height: "15%",
+          background: "",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <Paper
           component="form"
           sx={{
@@ -38,7 +47,6 @@ const LiveChatComponent = () => {
             display: "flex",
             alignItems: "center",
             width: "100%",
-            // height:'100%'
           }}
         >
           <IconButton sx={{ p: "10px" }} aria-label="menu">
@@ -52,14 +60,6 @@ const LiveChatComponent = () => {
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SendIcon />
           </IconButton>
-          {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          <IconButton
-            color="primary"
-            sx={{ p: "10px" }}
-            aria-label="directions"
-          >
-            <DirectionsIcon />
-          </IconButton> */}
         </Paper>
       </Paper>
     </Paper>

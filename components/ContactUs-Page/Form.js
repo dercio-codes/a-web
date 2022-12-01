@@ -182,24 +182,18 @@ export default Form;
 const styles = {
   container: {
     minHeight: "calc(100vh - 70px)",
-    //   background: "url('active-tv-login-test1.png')",
-    // backgroundSize:'cover',
     display: "flex",
-    // color:'#fff',
     alignItems: "center",
     width: "100%",
     justifyContent: "center",
-    // padding:'30px 0'
     background: "url('login-bg.jpg')",
     padding: "90px 0",
   },
   contentBox: {
     width: "700px",
     background: "rgba(0,0,0,0.6)",
-    // opacity: 0.7,
     height: "950px",
     padding: "110px 90px",
     flexDirection: "column",
-    //   color:"white",
   },
 };

@@ -4,35 +4,29 @@ import { Typography, Button } from "@mui/material";
 import { useState, useContext } from "react";
 import { Grid } from "@mui/material";
 import { USER_CONTEXT } from "../../context/MainContext";
-import DeleteModal from './deleteModal'
+import DeleteModal from "./deleteModal";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
-import Link from 'next/link'
-
+import Link from "next/link";
 
 const AccountLoggedIn = () => {
-  const { AuthenticatedUser,displayName } = useContext(USER_CONTEXT); //pulling out the current authenticated user
+  const { AuthenticatedUser, displayName } = useContext(USER_CONTEXT); //pulling out the current authenticated user
 
   const [subscribed, setSubscribed] = useState(false);
 
- const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
- const AvaterPack = {
-  // paddingRight:"395px",
-  display:"flex", 
-  alignItems:"center",
-  justifyContent:"center",
-}
+  const AvaterPack = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
 
   return (
     <Box className={"active-tv-font"} sx={styles.container}>
+      <DeleteModal open={open} setOpen={setOpen} />
 
-     <DeleteModal open={open} setOpen={setOpen} />
-      
       <Box sx={styles.contentBox}>
         {/* insert code here */}
-
-      
-
 
         <Box
           style={{
@@ -47,10 +41,9 @@ const AccountLoggedIn = () => {
           }}
         >
           <p>Account</p>
-          
         </Box>
-        
-           <Box
+
+        <Box
           sx={{
             minHeight: "80px",
             borderTop: "1px solid #F2F2F2 ",
@@ -61,19 +54,29 @@ const AccountLoggedIn = () => {
               <Typography className="active-tv-font" variant="h3" fontSize={10}>
                 Profile photo
               </Typography>
-               <Typography sx={{margin:'10px 0'}} color="#999"  className="active-tv-font" variant="h3" fontSize={9}>
-                 change image
+              <Typography
+                sx={{ margin: "10px 0" }}
+                color="#999"
+                className="active-tv-font"
+                variant="h3"
+                fontSize={9}
+              >
+                change image
               </Typography>
-
             </Grid>
             <Grid sx={styles.gridItem} item md={5.5}></Grid>
             <Grid sx={{ ...styles.gridItem, ...styles.lastGrid }} item md={3}>
-               <Box style={AvaterPack}>
-                { 
-                <Typography variant="h1" color="#fff" fontSize={30} style={{marginTop:"45px"}}>
-                    <AvaterPicChanger/>
-                </Typography>
-              }
+              <Box style={AvaterPack}>
+                {
+                  <Typography
+                    variant="h1"
+                    color="#fff"
+                    fontSize={30}
+                    style={{ marginTop: "45px" }}
+                  >
+                    <AvaterPicChanger />
+                  </Typography>
+                }
               </Box>
 
               <Typography
@@ -84,15 +87,10 @@ const AccountLoggedIn = () => {
                 variant="h5"
                 fontSize={18}
                 color={"#4d4df7"}
-              >
-                {/*<Link href="/"> image profile</Link>*/}
-              </Typography>
-
-              </Grid>
+              ></Typography>
+            </Grid>
           </Grid>
         </Box>
-
-
 
         <Box
           sx={{
@@ -100,64 +98,69 @@ const AccountLoggedIn = () => {
             borderTop: "1px solid #F2F2F2 ",
           }}
         >
-
           <Grid container>
             <Grid sx={styles.gridItem} item md={3.5}>
-            {/*  <Typography className="active-tv-font" variant="h3" fontSize={13}>
-                profile
-              </Typography>
-*/}            <Typography className="active-tv-font" variant="h3" fontSize={10}>
+              <Typography className="active-tv-font" variant="h3" fontSize={10}>
                 display name
               </Typography>
-               <Typography sx={{margin:'10px 0'}} className="active-tv-font" variant="h3" fontSize={10}>
+              <Typography
+                sx={{ margin: "10px 0" }}
+                className="active-tv-font"
+                variant="h3"
+                fontSize={10}
+              >
                 email
               </Typography>
-
             </Grid>
             <Grid sx={styles.gridItem} item md={5.5}>
-               <Typography  className="active-tv-font" variant="h3" fontSize={10}>
+              <Typography className="active-tv-font" variant="h3" fontSize={10}>
                 {displayName}
               </Typography>
-              <Typography sx={{margin:'10px 0'}} className="active-tv-font" variant="h3" fontSize={10}>
+              <Typography
+                sx={{ margin: "10px 0" }}
+                className="active-tv-font"
+                variant="h3"
+                fontSize={10}
+              >
                 {AuthenticatedUser.name}
               </Typography>
             </Grid>
             <Grid sx={{ ...styles.gridItem, ...styles.lastGrid }} item md={3}>
-                <Typography
+              <Typography
                 sx={{
                   marginBottom: "4px",
-                  color:'#009ada',
+                  color: "#009ada",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#4d4df7"}
               >
                 <Link href="/ResetNamePassWord">Change user details</Link>
               </Typography>
-                 <Typography
+              <Typography
                 sx={{
                   marginBottom: "4px",
-                  color:'#009ada',
+                  color: "#009ada",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#4d4df7"}
               >
                 <Link href="/changepassword">Change password</Link>
               </Typography>
               <Typography
-                onClick={()=>setOpen(true)}
+                onClick={() => setOpen(true)}
                 sx={{
                   marginBottom: "10px",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#df522b"}
               >
-                <Link  href="#">Delete account</Link> {/*//check here*/}
+                <Link href="#">Delete account</Link>
               </Typography>
             </Grid>
           </Grid>
@@ -166,7 +169,8 @@ const AccountLoggedIn = () => {
           sx={{
             minHeight: "80px",
             borderTop: "1px solid #F2F2F2 ",
-          }} nknkm
+          }}
+          nknkm
         >
           <Grid container>
             <Grid sx={styles.gridItem} item md={3.5}>
@@ -187,15 +191,15 @@ const AccountLoggedIn = () => {
                 Have an active Patreon membership?
               </Typography>
             </Grid>
-            <Grid sx={{ ...styles.gridItem,...styles.lastGrid }} item md={3}>
+            <Grid sx={{ ...styles.gridItem, ...styles.lastGrid }} item md={3}>
               <Typography
                 sx={{
                   marginBottom: "4px",
-                  color:'#009ada',
+                  color: "#009ada",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#4d4df7"}
               >
                 <Link href="/subscribepayment">Payment method</Link>
@@ -203,11 +207,11 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
-                  color:'#009ada',
+                  color: "#009ada",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#4d4df7"}
               >
                 <Link href="/subscribepayment">subscribe now</Link>
@@ -237,7 +241,7 @@ const AccountLoggedIn = () => {
                 }}
                 variant="h3"
                 fontSize={10}
-              >apo
+              >
                 You have 0 Producer Points
                 <img
                   style={{ margin: "0 5px" }}
@@ -249,13 +253,13 @@ const AccountLoggedIn = () => {
               </Typography>
               <Typography
                 className="active-tv-font"
-                sx={{ display: "flex", alignItems: "center", }}
+                sx={{ display: "flex", alignItems: "center"}}
                 variant="h3"
                 fontSize={10}
               >
                 Since signing up {"you've"} earned 0 points
                 <img
-                  style={{ marginLeft: "4px", marginBottom:'2px' }}
+                  style={{marginBottom: "2px", paddingLeft:'2px' }}
                   src="coin.gif"
                   alt="coin"
                   width={18}
@@ -267,11 +271,11 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
-                  color:'#009ada',
+                  color: "#009ada",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#4d4df7"}
               >
                 <Link href="/produce">Point History</Link>
@@ -284,13 +288,11 @@ const AccountLoggedIn = () => {
                 variant="h5"
                 fontSize={18}
                 color={"#4d4df7"}
-              >
-                {/*<Link href="/produce">test</Link>*/}
-              </Typography>
+              ></Typography>
             </Grid>
           </Grid>
         </Box>
-             <Box
+        <Box
           sx={{
             minHeight: "80px",
             borderTop: "1px solid #F2F2F2 ",
@@ -307,11 +309,11 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
-                  color:'#009ada',
+                  color: "#009ada",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#4d4df7"}
               >
                 <Link href="/">FAQ</Link>
@@ -319,11 +321,11 @@ const AccountLoggedIn = () => {
               <Typography
                 sx={{
                   marginBottom: "4px",
-                  color:'#009ada',
+                  color: "#009ada",
                   "&:hover": { textDecoration: "underline" },
                 }}
                 variant="h5"
-                fontSize={18}
+                fontSize={15}
                 color={"#4d4df7"}
               >
                 <Link href="/contact-us">Contact support</Link>
@@ -341,7 +343,7 @@ const styles = {
   container: {
     minHeight: "calc(100vh - 70px)",
     background: "url('active-tv-login-test1.png')",
-    backgroundSize:'cover',
+    backgroundSize: "cover",
     display: "flex",
     alignItems: "center",
     width: "100%",
@@ -355,11 +357,9 @@ const styles = {
     flexDirection: "column",
   },
   gridItem: {
-    // border: "1px solid yellow",
     minHeight: "80px",
     display: "flex",
     flexDirection: "column",
-    // gap:'5px',
     padding: "20px 0 0 0",
     color: "#fff",
   },

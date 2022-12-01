@@ -18,7 +18,7 @@ import { USER_CONTEXT } from "../../context/MainContext";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 // import LoginIcon from '@mui/icons-material/Login';
 
 export default function PositionedPopper({ user, userInitial }) {
@@ -74,7 +74,6 @@ export default function PositionedPopper({ user, userInitial }) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                // justifyContent: 'flex-end',
                 zIndex: 1000,
               }}
             >
@@ -117,27 +116,6 @@ export default function PositionedPopper({ user, userInitial }) {
                 </Box>
               </Box>
 
-              {/* 
-              <Box style={AvaterPack}>
-
-
-              <Box >
-
-                {loggedIn ? (
-                  <Typography className={'active-tv-font'} variant="h1" color="#fff" fontSize={30}>
-                    {/* {userInitial}  */}
-              {/* <AvaterPicChanger />
-
-                  </Typography>
-                ) : (
-                  <Box
-                    sx={{}}
-                  />
-                )}
-
-              </Box> */}
-              {/* </Box> */}
-
               <Button
                 sx={{
                   width: "100%",
@@ -168,7 +146,6 @@ export default function PositionedPopper({ user, userInitial }) {
               <Button
                 variant="text"
                 sx={{
-                  // width: "auto",
                   width: "100%",
                   display: "flex",
                   alignItems: "center",
@@ -194,7 +171,6 @@ export default function PositionedPopper({ user, userInitial }) {
               <Button
                 variant="text"
                 sx={{
-                  // width: "auto",
                   width: "100%",
                   display: "flex",
                   alignItems: "center",
@@ -230,7 +206,6 @@ export default function PositionedPopper({ user, userInitial }) {
                 <Button
                   variant="text"
                   sx={{
-                    // width: "auto",
                     width: "100%",
                     display: "flex",
                     alignItems: "center",
@@ -258,7 +233,6 @@ export default function PositionedPopper({ user, userInitial }) {
                 <Button
                   variant="text"
                   sx={{
-                    // width: "auto",
                     width: "100%",
                     display: "flex",
                     alignItems: "center",
@@ -277,9 +251,9 @@ export default function PositionedPopper({ user, userInitial }) {
                     variant="p"
                     color="#fff"
                     fontSize={10}
-                    sx={{marginTop:'5px'}}
+                    sx={{ marginTop: "5px" }}
                   >
-                    Login
+                    Sign in
                   </Typography>
                 </Button>
               )}
@@ -288,7 +262,6 @@ export default function PositionedPopper({ user, userInitial }) {
                 <Button
                   variant="text"
                   sx={{
-                    // width: "auto",
                     width: "100%",
                     display: "flex",
                     alignItems: "center",
@@ -299,7 +272,6 @@ export default function PositionedPopper({ user, userInitial }) {
                   }}
                   onClick={() => {
                     Router.push("/signup");
-                    // signup();
                   }}
                 >
                   <LockOpenIcon sx={{ color: "#fff", marginRight: "16px" }} />
@@ -308,7 +280,7 @@ export default function PositionedPopper({ user, userInitial }) {
                     variant="p"
                     color="#fff"
                     fontSize={10}
-                    sx={{marginTop:'5px'}}
+                    sx={{ marginTop: "5px" }}
                   >
                     Sign Up
                   </Typography>

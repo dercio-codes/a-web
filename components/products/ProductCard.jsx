@@ -35,15 +35,6 @@ const ProductCard = ({
   };
 
   const [increment, setIncrement] = useState(1);
-  // const [decrement, setDecrement] = useState(1)
-
-  // const AddProduct = () => {
-  //   setIncrement(increment + 1)
-  // }
-
-  // const removeProduct = () => {
-  //   setDecrement(increment -1)
-  // }
 
   return (
     <Box>
@@ -53,7 +44,6 @@ const ProductCard = ({
             elevation={3}
             sx={{
               height: "100%",
-              // border: "1px solid rgba(1,1,1,0.2)",
               color: "rgba(1,1,1,0.5)",
               fontWeight: "900",
               maxHeight: "350px",
@@ -70,7 +60,6 @@ const ProductCard = ({
               textAlign: "center",
               "&:hover": {
                 transform: "scale(1)",
-                // border: "1px solid rgba(1,1,1,0.2)",
                 color: "black",
                 cursor: "pointer",
                 transition: "0.7s",
@@ -114,7 +103,6 @@ const ProductCard = ({
 
       <Dialog
         fullScreen
-        // sx={{height:'90vh'}}
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
@@ -168,7 +156,6 @@ const ProductCard = ({
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
               navigation
-              // pagination={{ clickable: true }}
             >
               <SwiperSlide>
                 <img
@@ -197,14 +184,6 @@ const ProductCard = ({
                 />
               </SwiperSlide>
             </Swiper>
-
-            {/* <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent:'center',width:'100%',pl:5,pr:5}}>
-              <Typography className="active-tv-font" noWrap={true} width={"100%"} fontSize="13px"align="center" sx={{mb:2}}>{productName}
-              </Typography>
-
-              <Typography align="center" className="active-tv-font"  width={"100%"} fontSize="9px" lineHeight={'15px'}>{productDescription}
-              </Typography>
-            </Box> */}
           </Grid>
 
           <Grid
@@ -313,7 +292,6 @@ const ProductCard = ({
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  // flexDirection: "column",
                   border: "1px solid black",
                   height: "40px",
                   width: "40%",
@@ -387,50 +365,9 @@ const ProductCard = ({
                   style={{ fontSize: "8px", textAlign: "center" }}
                 >
                   <li style={{ marginBottom: 7 }}>100% cotton {"t-shirt"}</li>
-                  {/* <li>Light Blue t-shirt with ink print </li> */}
-                  <li>Featuring the {'Active'} design </li>
+                  <li>Featuring the {"Active"} design </li>
                 </ul>
               </Box>
-
-              {/* <Box sx={{ width: "100%", mt: 6 }}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Typography
-                    className="active-tv-font"
-                    fontSize="10px"
-                    align="center"
-                  ></Typography>
-                  <Typography
-                    className="active-tv-font"
-                    fontSize="10px"
-                    align="center"
-                  >
-                    FULL LENGTH
-                  </Typography>
-                  <Typography
-                    className="active-tv-font"
-                    fontSize="10px"
-                    align="center"
-                  >
-                    CHEST
-                  </Typography>
-                </Box>
-
-                <Box sx={{ width: "100%", mt: 5 }}>
-                  <Sizes size="SMALL" num1='28"' num2='18"' />
-                  <Sizes size="MEDIUM" num1='29"' num2='20"' />
-                  <Sizes size="LARGE" num1='30"' num2='22"' />
-                  <Sizes size="X-LARGE" num1='31"' num2='24"' />
-                  <Sizes size="2X-LARGE" num1='32"' num2='26"' />
-                  <Sizes size="3X-LARGE" num1='33"' num2='28"' />
-                  <Sizes size="4X-LARGE" num1='34"' num2='30"' />
-                </Box>
-              </Box> */}
             </Box>
           </Grid>
         </Grid>

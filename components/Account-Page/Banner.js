@@ -22,10 +22,8 @@ const Banner = () => {
     >
       <Box
         style={{
-          // border: '1px solid white',
           background: "rgba(0, 0, 0,0.5)",
           color: "white",
-          // margin: '-8px 0 0 0',
           height: "100vh",
           padding: "40px 100px",
           fontFamily: "Arcade Normal",

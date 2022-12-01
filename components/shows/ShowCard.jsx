@@ -2,26 +2,18 @@ import { Typography, Box } from "@mui/material";
 import React, { useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
 import { ShowsContext } from "../../context/ShowContext";
-const ShowCard = (
-  {
-  img,
-  text,
-  openModal,
-}
-) => {
+const ShowCard = ({ img, text, openModal }) => {
   const { setShowsDetails } = useContext(USER_CONTEXT);
-  const {getShow} = useContext(ShowsContext)
+  const { getShow } = useContext(ShowsContext);
 
   return (
     <>
       <Box
         onClick={() => {
-          
-          getShow(text)
+          getShow(text);
           setShowsDetails({
             title: text,
             img: img,
-            
           });
         }}
         style={{

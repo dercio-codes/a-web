@@ -60,22 +60,11 @@ const LoginComp = () => {
   console.log("user", AuthenticatedUser);
   const endpoint = `http://127.0.0.1:3000/store-users`;
   const tokenHandler = async () => {
-    // const response = await axios({
-    //   method: "POST",
-    //   url: endpoint,
-    //   data :AuthenticatedUser,
-    //   // BearerToken: authorisedJWT,
-    //   // mode: 'no-cors',
-    //   });
     const response = await axios.post(endpoint, AuthenticatedUser, {
       "Content-Type": "application/json",
     });
     console.log("RESPONSE=>", response);
   };
-
-  // useEffect(() => {
-  //   console.log(signUp);
-  // }, []);
 
   //register user
   async function signUp(username, password, email) {
@@ -96,7 +85,6 @@ const LoginComp = () => {
 
       if (user) {
         setRedirecting(true);
-        // setErrorLogs('signing up')
         setTimeout(() => {
           setRedirecting(false);
           Router.push("/confirm"); //redirecting the user to the confirm page inorder for us to insert the code sent from email
@@ -104,7 +92,6 @@ const LoginComp = () => {
       }
     } catch (error) {
       console.log("error signing up:", error);
-      // alert('something went wrong  ,please fill in the fields correctly')
       setErrorLogs(error.message);
     }
   }
@@ -448,7 +435,6 @@ const loginStyles = {
     },
   },
   formContainer: {
-    // border: "1px solid red",
     height: "100%",
     width: {
       md: "50%",
@@ -462,7 +448,6 @@ const loginStyles = {
     },
   },
   header: {
-    //  border:'1px solid blue',
     minHeight: "250px",
     display: "flex",
     alignItems: "center",
@@ -483,14 +468,12 @@ const loginStyles = {
       sm: "0px",
       xs: "0px",
     },
-    // border: "1px solid yellow",
-    // padding: "20px 0",
+
     color: "white",
   },
   input: {
     width: "100%",
     height: "50px",
-    // padding: " 0 5px",
     fontSize: "15px",
     background: "#fff",
     display: "flex",
@@ -506,7 +489,6 @@ const loginStyles = {
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    // border:'1px solid red',
     padding: {
       md: "5px 0",
       sm: " 5px 10px",
@@ -528,7 +510,6 @@ const loginStyles = {
   buttonContainer: {
     display: "flex",
     alignItems: "center",
-    // border: "1px solid blue",
     height: "100px",
 
     padding: {
@@ -550,7 +531,6 @@ const loginStyles = {
   fieldset: {
     border: "none",
     borderTop: "1px solid #f2f2f2",
-    // border:'4px 0  2px 1px solid grey',
   },
   legend: {
     margin: "0 auto",

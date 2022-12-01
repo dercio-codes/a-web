@@ -29,7 +29,7 @@ const CorridorStore = () => {
           Please check out our FAQ pages to see if your answer is there first,
           if not use one of the contact methods below.
         </Typography>
-        <Link href="/">
+        <Link href="/about">
           <Typography
             className={"active-tv-font"}
             style={{ fontSize: "8px", color: "yellow", marginTop: "10px" }}
@@ -108,24 +108,19 @@ export default CorridorStore;
 const styles = {
   container: {
     minHeight: "calc(100vh - 70px)",
-    //   background: "url('active-tv-login-test1.png')",
-    // backgroundSize:'cover',
     display: "flex",
     alignItems: "center",
     width: "100%",
     justifyContent: "center",
-    // padding:'30px 0'
     background: "url('login-bg.jpg')",
     padding: "90px 0",
   },
   contentBox: {
     width: "700px",
     background: "rgba(0,0,0,0.5)",
-    // opacity: 0.7,
     height: "520px",
     padding: "30px 90px",
     flexDirection: "column",
     padding: "110px 90px",
-    //   color:"white",
   },
 };

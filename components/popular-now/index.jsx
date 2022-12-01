@@ -1,5 +1,4 @@
 import React from "react";
-// import * as React from 'react';
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -20,11 +19,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function RowAndColumnSpacing() {
   return (
-    <Box sx={{zIndex:'1'}}>
+    <Box sx={{ zIndex: "1" }}>
       <Box sx={{ padding: "8px 48px" }}>
         <SectionHeader text={"Popular Now"} textColor={"#eee"} />
       </Box>
-      <Box sx={{ padding:'16px 48px'}}>
+      <Box sx={{ padding: "16px 48px" }}>
         <Grid container spacing={2} columns={12}>
           {[1, 1, 1, 1, 1, 1, 1].map((item, index) => {
             if (index > 0) {

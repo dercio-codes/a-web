@@ -1,31 +1,23 @@
-import React from 'react'
-// import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
+import React from "react";
+import Dialog from "@mui/material/Dialog";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
 import ProductCard from "./ProductCard";
 import { Box } from "@mui/material";
-
-
-
-
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
 const Popup = () => {
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -35,8 +27,6 @@ const Popup = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-
 
   return (
     <Box>
@@ -50,7 +40,7 @@ const Popup = () => {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative',background:'red'}} >
+        <AppBar sx={{ position: "relative", background: "red" }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -60,25 +50,11 @@ const Popup = () => {
             >
               <CloseIcon />
             </IconButton>
-            
           </Toolbar>
         </AppBar>
-        {/* <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItem>
-        </List> */}
-        
       </Dialog>
     </Box>
-  )
-}
+  );
+};
 
-export default Popup
+export default Popup;

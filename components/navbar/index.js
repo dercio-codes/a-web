@@ -27,10 +27,8 @@ const Navbar = () => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
-  // destructuring the authenticated user from context
   const { AuthenticatedUser, authorisedJWT, loggedIn, setLoggedIn } =
     React.useContext(USER_CONTEXT);
-  // //user initial
   const currentUser = AuthenticatedUser.name;
   const userIntial = currentUser.charAt(0);
 
@@ -66,32 +64,14 @@ const Navbar = () => {
     loadingPosts();
   }, []);
 
-  const endpoint = `http://127.0.0.1:3000/store-users`;
-  const tokenHandler = async () => {
-    // const response = await axios({
-    //   method: "POST",
-    //   url: endpoint,
-    //   data :AuthenticatedUser,
-    //   // BearerToken: authorisedJWT,
-    //   // mode: 'no-cors',
-    //   });
-    const response = await axios.get(endpoint, authorisedJWT, {
-      "Content-Type": "application/json",
-    });
-    console.log("RESPONSE=>", response);
-  };
-
   const limit = 5;
 
   return (
     <AppBar
       position="sticky"
       sx={{
-        // background: "#111",
-        // background:'linear-gradient(to bottom, #131313, #111, #181818)',
         background: "black",
         height: "70px",
-        // padding:'10px 0'
       }}
     >
       <Container maxWidth="xl" sx={{ paddingTop: "0px" }}>
@@ -102,11 +82,6 @@ const Navbar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex", sm: "" } }}
           >
-            {/* <img
-              src="https://www.activetvonline.co.za/static/media/logo.718a6dab.png"
-              alt=""
-              height="70px"
-            /> */}
             <Box
               sx={{
                 height: "60px",
@@ -178,7 +153,6 @@ const Navbar = () => {
               display: { xs: "none", md: "flex" },
               paddingTop: "0px",
               height: "70px",
-              // border: "0.1px solid #32a453",
               alignItems: "center",
             }}
           >
@@ -409,7 +383,6 @@ const Navbar = () => {
 export default Navbar;
 
 const coinContainer = {
-  // border: "1px solid red",
   width: "100px",
   minHeight: "50px",
   display: "flex",
