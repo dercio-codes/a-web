@@ -1,4 +1,7 @@
-import * as React from "react";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 import Box from "@mui/material/Box";
 import ShowCard from "./ShowCard";
 import Typography from "@mui/material/Typography";
@@ -8,8 +11,11 @@ import { useEffect, useState, useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
 import Link from "next/link";
 import axios from "axios";
+import Whatlive from '../greenlight-components/greenlight-shows/Whatlive';
 
-export default function ShowsDisplay({ shows }) {
+
+
+export default function ShowsDisplay({ shows,background, img, height, width , logo , title }) {
 
   
 
@@ -31,18 +37,35 @@ export default function ShowsDisplay({ shows }) {
     }, 3000);
   };
   return (
-    <Box>
-      <ShowHeader title="Shows" />
-      <Box
-        sx={{
-          display: "flex",
-          gap: 5,
-          width: "100%",
-          flexWrap: "wrap",
-        }}
+    <Box sx={{height:"100vw"}}>
+      <ShowHeader title="Shows"/>
+      <Box sx={{width:"100%", height:"250px"}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
       >
         {shows.map((show, index) => (
-          <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+          <Box 
+          sx={{
+            width:"290px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            "&:hover": {
+              cursor:'pointer',
+              filter:"blur(1px)",
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
              <a>
             <ShowCard
               color={show.color}
@@ -50,6 +73,7 @@ export default function ShowsDisplay({ shows }) {
               img={show.CoverArtLarge}
               text={show.Title}
             />
+
             
             <Typography
               className="active-tv-font"
@@ -60,15 +84,176 @@ export default function ShowsDisplay({ shows }) {
                 padding: "10px",
                 textTransform: "capitalize",
                 background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px"
               }}
             >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
               {show.Title}
             </Typography>
+            
             </a>
           </Link>
-
+          </Box>
         ))} 
+      </Carousel>
       </Box>
+
+
+
+      <Box sx={{marginTop:"50px"}}>
+      <ShowHeader title="React series"/>
+      <Box sx={{width:"100%", height:"250px"}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
+      >
+        {shows.map((show, index) => (
+          <Box 
+          sx={{
+            width: `${
+              width == "LG" ? "367px" : width == "MD" ? "300.55px" : "250px"
+            }`,
+            height: `${
+              height == "LG" ? "408.55px" : height == "MD" ? "308.55px" : "208px"
+            }`,
+            height:"185px",
+            backgroundSize: height == "LG" ? "cover" : height == "MD" ? "cover" : "cover",
+            marginLeft:"30px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            "&:hover": {
+              cursor:'pointer',
+              filter:"blur(1px)",
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+             <a>
+            <ShowCard
+              color={show.color}
+              openModal={handleOpen}
+              img={show.CoverArtLarge}
+              text={show.Title}
+            />
+
+            
+            <Typography
+              className="active-tv-font"
+              fontSize={10}
+              sx={{
+                color: "#fff",
+                fontWeight: "bold",
+                padding: "10px",
+                textTransform: "capitalize",
+                background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px",
+              }}
+            >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
+              {show.Title}
+            </Typography>
+            
+            </a>
+          </Link>
+          </Box>
+        ))} 
+      </Carousel>
+      </Box>
+      </Box>
+
+      <ShowHeader title="Shows"/>
+      <Box sx={{width:"94%", height:"300px",background: "url('	https://images.watchcorridor.com/i/5973731a-e7b7-465f-b14f-f993daae6890.jpg')",backgroundSize:"cover", position:"absolute",}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
+      >
+        {shows.map((show, index) => (
+          <Box 
+          sx={{
+            position:"relative",
+            marginTop:"160px",
+            width:"320px",
+            height:"220px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            boxShadow:"  0px 0px 5px 5px rgba(0,0,0,0.75)",
+            "&:hover": {
+              cursor:'pointer',
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+             <a>
+            <ShowCard
+              color={show.color}
+              openModal={handleOpen}
+              img={show.CoverArtLarge}
+              text={show.Title}
+            />
+
+            
+            <Typography
+              className="active-tv-font"
+              fontSize={10}
+              sx={{
+                color: "#fff",
+                fontWeight: "bold",
+                padding: "10px",
+                textTransform: "capitalize",
+                background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px"
+              }}
+            >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
+              {show.Title}
+            </Typography>
+            
+            </a>
+          </Link>
+          </Box>
+        ))} 
+      </Carousel>
+      </Box>
+
     </Box>
   );
 }

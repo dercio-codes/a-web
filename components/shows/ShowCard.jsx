@@ -28,7 +28,7 @@ const ShowCard = (
           ...styles.container,
           // background: `url(${img})`,
           borderRadius: "10px 10px 0 0",
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "",
         }}
       >
@@ -38,6 +38,7 @@ const ShowCard = (
             objectFit: "cover",
             objectPosition: "top",
             borderRadius: "10px 10px 0 0",
+            
           }}
           alt="img"
           width={"100%"}
@@ -49,9 +50,9 @@ const ShowCard = (
 };
 const styles = {
   container: {
-    height: "200px",
-    width: "200px",
-    backgroundSize: "cover",
+    // height: "200px",
+    // width: "200px",
+    backgroundSize: "contain",
     backgroundPosition: "top",
     cursor: "pointer",
   },
