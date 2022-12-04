@@ -39,6 +39,8 @@ export default function PositionedPopper({ user, userInitial }) {
     setImgProfile,
     isContained,
     setIsContained,
+    picture,
+    setPicture
   } = useContext(USER_CONTEXT);
 
   const handleClick = (newPlacement) => (event) => {
@@ -91,7 +93,7 @@ export default function PositionedPopper({ user, userInitial }) {
               >
                 <Box
                   style={{
-                    background: imgProfile ? `url(${imgProfile})`: '#333',
+                    background: imgProfile ? `url(${imgProfile})`: '#111',
                     backgroundSize: isContained ? "cover" : "contain",
                   }}
                   sx={styles.DropUser}

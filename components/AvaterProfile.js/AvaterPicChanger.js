@@ -78,7 +78,7 @@ export default function AvaterPicChanger({ grady }) {
   const [accept, setAccept] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-    const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained } =
+    const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained,updatePictureAttribute } =
     useContext(USER_CONTEXT);
 
   const handleConfirm = async (avaters)=>{
@@ -86,12 +86,12 @@ export default function AvaterPicChanger({ grady }) {
          
          if(accepted){
               setImgProfile(avaters);
+              updatePictureAttribute(avaters)
               setIsContained(true);
          }
-     // setOpen(false);
+    
   }
 
-  // console.log(data)
 
 
 
