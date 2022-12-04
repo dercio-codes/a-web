@@ -11,7 +11,7 @@ const Whatlive = () => {
     <Box sx={{ ...styles.container }}>
       <Box style={styles.header}>
         <Typography
-          className={'active-tv-font'}
+          className={"active-tv-font"}
           sx={{ fontWeight: "bold" }}
           color="#fff"
           fontSize={18}
@@ -19,7 +19,7 @@ const Whatlive = () => {
           textTransform={"uppercase"}
           letterSpacing={"2px"}
         >
-         {" what's live"}
+          {" what's live"}
         </Typography>
       </Box>
 
@@ -41,8 +41,12 @@ const Whatlive = () => {
         </Grid>
         <Grid sx={{ ...styles.item }} item sm={8} xs={12} md={10}>
           <Box sx={styles.title}>
-            {/* <Typography variant="h3" fontSize={20} color="#FFF203"> */}
-            <Typography variant="h3" fontSize={20} color="#32a453" padding="0px 10px">
+            <Typography
+              variant="h3"
+              fontSize={20}
+              color="#32a453"
+              padding="0px 10px"
+            >
               WATCH SECOND SEASON {">"}
             </Typography>
           </Box>
@@ -79,8 +83,12 @@ const Whatlive = () => {
         </Grid>
         <Grid sx={{ ...styles.item }} item sm={8} xs={12} md={10}>
           <Box sx={styles.title}>
-            {/* <Typography variant="h3" fontSize={20} color="#FFF203"> */}
-            <Typography variant="h3" fontSize={20} color="#32a453" padding="0px 10px">
+            <Typography
+              variant="h3"
+              fontSize={20}
+              color="#32a453"
+              padding="0px 10px"
+            >
               WATCH SECOND SEASON {">"}
             </Typography>
           </Box>
@@ -117,8 +125,12 @@ const Whatlive = () => {
         </Grid>
         <Grid sx={{ ...styles.item }} item sm={8} xs={12} md={10}>
           <Box sx={styles.title}>
-            {/* <Typography variant="h3" fontSize={20} color="#FFF203"> */}
-            <Typography variant="h3" fontSize={20} color="#32a453" padding="0px 10px">
+            <Typography
+              variant="h3"
+              fontSize={20}
+              color="#32a453"
+              padding="0px 10px"
+            >
               WATCH SECOND SEASON {">"}
             </Typography>
           </Box>
@@ -155,8 +167,12 @@ const Whatlive = () => {
         </Grid>
         <Grid sx={{ ...styles.item }} item sm={8} xs={12} md={10}>
           <Box sx={styles.title}>
-            {/* <Typography variant="h3" fontSize={20} color="#FFF203"> */}
-            <Typography variant="h3" fontSize={20} color="#32a453" padding="0px 10px">
+            <Typography
+              variant="h3"
+              fontSize={20}
+              color="#32a453"
+              padding="0px 10px"
+            >
               WATCH SECOND SEASON {">"}
             </Typography>
           </Box>
@@ -182,12 +198,11 @@ export default Whatlive;
 
 const styles = {
   container: {
-    // border: "1px solid red",
     minHeight: "800px",
     padding: "20px 100px",
+    backgroundColor: "#111",
   },
   header: {
-    // border: "1px solid red",
     padding: "20px 0",
     height: "70px",
     display: "flex",
@@ -204,16 +219,13 @@ const styles = {
     },
   },
   item: {
-    // border: "1px solid blue",
     minHeight: {
       md: "400px",
       sm: "",
     },
     padding: "20px 0",
-    // border:'1px solid red'
   },
   seasonHead: {
-    // border: "1px solid violet",
     height: "350px",
     width: "200px",
     borderRadius: "20px",
@@ -234,14 +246,12 @@ const styles = {
     borderRadius: "inherit",
   },
   title: {
-    // border:'1px solid red',
     height: "40px",
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   itemText: {
-    //  border:'1px solid red',
     padding: "15px 0",
     height: "30px",
     display: "flex",
@@ -249,7 +259,6 @@ const styles = {
     justifyContent: "flex-start",
   },
   swiperCover: {
-    // border:'1px solid red',
     minHeight: "270px",
     overflowX: "scroll",
   },

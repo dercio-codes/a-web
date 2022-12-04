@@ -1,66 +1,95 @@
-import React from 'react'
-import Aos from "aos"
-import "aos/dist/aos.css"
-import { useEffect } from 'react'
-import Link from 'next/link';
+import React from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import Link from "next/link";
 import { Box } from "@mui/system";
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 
 const main = {
-  backgroundImage: "url('https://active-tv-app-public-content.s3.us-east-2.amazonaws.com/video-thumbnails/The%2520Nerve%2520of%2520Asking%2520A%2520Girl%2520Out%2520%257C%2520Episode%25204-fd95f404-39e2-4da4-8113-af4eb92fa843.jpg')",
+  backgroundImage:
+    "url('https://cdn.shopify.com/s/files/1/0659/9281/8935/files/SHOPIFY_IMAGES.005.jpg?v=1667478867&width=750')",
   backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
   width: "100%",
-  minHeight: "600px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  flexDirection: "column",
-  color: "white",
-  // padding: "50px 0",
-  // lineHeight: "30px",
-  fontSize: "12px"
-}
+  height: "600px",
+};
 
 function MerchSection() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
-  }, [])
+  }, []);
 
   return (
-    <Box style={main}  className="active-tv-font">
-    <Box sx={{ 
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  flexDirection: "column",
-  background:'rgba(0,0,0,0.7)',
-  minHeight:'600px',
-  padding: "50px 0",
-  width:'100%',
-
-}}>
-      <Typography variant='h3' fontSize={30} className='active-tv-font' align="center" data-aos="fade-up">ALL MERCH 15% OFF & FIRST DIBS</Typography>
-      <Typography variant="p" fontSize={13} sx={{ mt: 2, mb: 2 }} className='active-tv-font' data-aos="fade-up">Site members get 15% off all product and the first</Typography>
-      <Typography variant="p" fontSize={13} sx={{ mt: 2, mb: 2 }} className='active-tv-font' data-aos="fade-up">opportunity to buy new product before the general public.</Typography>
-      <Link href="/merch" passHref={true}>
-        <button style={{
-          border: "none",
-          width: "250px",
-          height: "50px",
-          color: "#000",
-          background: "#FFF203",
-          fontWeight: "bold",
-          cursor: "pointer",
-          borderRadius: "25px",
-          fontSize: "10px"
+    <Box style={main} className="active-tv-font">
+      <Box
+        style={{
+          background: "rgba(0, 0, 0,0.6)",
+          color: "white",
+          width: "100%",
+          height: "100%",
+          fontFamily: "Arcade Normal",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          color: "white",
+          paddingTop: "150px",
+          lineHeight: "30px",
+          fontSize: "12px",
         }}
-        className="active-tv-font"
+      >
+        <Typography
+          variant="h3"
+          fontSize={25}
+          className="active-tv-font"
+          align="center"
           data-aos="fade-up"
-        >SEE IT IN ACTION</button>
-      </Link>
+        >
+          ALL MERCH 15% OFF & FIRST DIBS
+        </Typography>
+        <Typography
+          variant="p"
+          fontSize={10}
+          sx={{ mt: 2 }}
+          className="active-tv-font"
+          data-aos="fade-up"
+        >
+          Site members get 15% off all product and the first
+        </Typography>
+        <Typography
+          variant="p"
+          fontSize={10}
+          sx={{ mt: 1, mb: 2 }}
+          className="active-tv-font"
+          data-aos="fade-up"
+        >
+          opportunity to buy new product before the general public.
+        </Typography>
+        <Link href="https://activetvstore.com/" passHref={true}>
+          <a target="_blank">
+            <button
+              style={{
+                border: "none",
+                width: "250px",
+                height: "50px",
+                color: "#000",
+                background: "#FFF203",
+                fontWeight: "bold",
+                cursor: "pointer",
+                borderRadius: "3px",
+                fontSize: "10px",
+              }}
+              className="active-tv-font"
+              data-aos="fade-up"
+            >
+              CHECK OUT MERCH
+            </button>
+          </a>
+        </Link>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default MerchSection
+export default MerchSection;

@@ -11,25 +11,15 @@ export const Episode = ({ img, thumb, duration, title, year }) => {
   const [thumbnail, setThumbnail] = useState(false);
 
   const showThumbnail = (val) => {
-    // setTimeout(() => {
     setThumbnail(val);
-    // }, 500);
   };
 
   const hideThumbnail = (val) => {
-    // setTimeout(() => {
     setThumbnail(val);
-    // }, 0);
   };
 
   return thumbnail ? (
-    <Box onMouseLeave={() => hideThumbnail(false)} 
-      sx={{ ...styles.thumbnail }}>
-      {/* <img
-        style={{ ...styles.episodeImg, height: "70%" }}
-        src={thumb}
-        alt="thumb-nail"
-      /> */}
+    <Box onMouseLeave={() => hideThumbnail(false)} sx={{ ...styles.thumbnail }}>
       <Box
         sx={{
           backgroundSize: "cover",
@@ -90,7 +80,8 @@ export const Episode = ({ img, thumb, duration, title, year }) => {
       </Box>
     </Box>
   ) : (
-    <Box onMouseEnter={() => showThumbnail(true)}
+    <Box
+      onMouseEnter={() => showThumbnail(true)}
       sx={{
         ...styles.episode,
         background: `url(${img})`,
@@ -108,8 +99,7 @@ export const Episode = ({ img, thumb, duration, title, year }) => {
           {duration}
         </Typography>
       </Box>
-      {/* <img style={styles.episodeImg} src={img} alt="episode" /> */}
-      <Box sx={{...styles.title, borderRadius:'0 0 10px 10px'}}>
+      <Box sx={{ ...styles.title, borderRadius: "0 0 10px 10px" }}>
         <Typography
           fontWeight={"bold"}
           variant="h3"
@@ -130,7 +120,6 @@ export const Episode = ({ img, thumb, duration, title, year }) => {
 };
 
 const GreenlightSwiper = () => {
-  // data passed static values
   const thumbnail = "apes.gif";
   const img = "crew-image1.webp";
   const duration = "04:00";
@@ -230,7 +219,6 @@ const styles = {
     justifyContent: "space-between",
   },
   thumbnail: {
-    // border: "1px solid blue",
     height: "250px",
     width: "230px",
     borderRadius: "10px",
@@ -257,7 +245,6 @@ const styles = {
   },
   title: {
     textOverflow: "ellipsis",
-    // border:'1px solid red',
     height: "30px",
     backgroundColor: "rgba(0,0,0,0.7)",
     display: "flex",
@@ -265,14 +252,11 @@ const styles = {
     padding: "0 8px",
   },
   duration: {
-    //  position:'absolute',
     width: "100%",
     padding: "2px",
-    //  background: 'rgba(0, 0 ,0 ,0.9)',
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-    //  border:'1px solid red'
   },
   thumbContainer: {
     height: "60%",
@@ -283,7 +267,5 @@ const styles = {
     width: "20%",
     display: "flex",
     justifyContent: "center",
-
-    // border:'1px solid red'
   },
 };

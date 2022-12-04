@@ -10,9 +10,6 @@ import Link from "next/link";
 import axios from "axios";
 
 export default function ShowsDisplay({ shows }) {
-
-  
-
   //states
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -22,8 +19,6 @@ export default function ShowsDisplay({ shows }) {
   const { showsDetails, setShowsDetails } = useContext(USER_CONTEXT);
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#FFFFFF");
-
-
 
   const getEpisodes = () => {
     setTimeout(() => {
@@ -42,32 +37,35 @@ export default function ShowsDisplay({ shows }) {
         }}
       >
         {shows.map((show, index) => (
-          <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
-             <a>
-            <ShowCard
-              color={show.color}
-              openModal={handleOpen}
-              img={show.CoverArtLarge}
-              text={show.Title}
-            />
-            
-            <Typography
-              className="active-tv-font"
-              fontSize={10}
-              sx={{
-                color: "#fff",
-                fontWeight: "bold",
-                padding: "10px",
-                textTransform: "capitalize",
-                background: "rgba(0,0,0,0.3)",
-              }}
-            >
-              {show.Title}
-            </Typography>
+          <Link
+            passHref={true}
+            key={index}
+            href={`/shows-episodes/${show.Title}`}
+          >
+            <a>
+              <ShowCard
+                color={show.color}
+                openModal={handleOpen}
+                img={show.CoverArtLarge}
+                text={show.Title}
+              />
+
+              <Typography
+                className="active-tv-font"
+                fontSize={10}
+                sx={{
+                  color: "#fff",
+                  fontWeight: "bold",
+                  padding: "10px",
+                  textTransform: "capitalize",
+                  background: "rgba(0,0,0,0.3)",
+                }}
+              >
+                {show.Title}
+              </Typography>
             </a>
           </Link>
-
-        ))} 
+        ))}
       </Box>
     </Box>
   );
@@ -101,7 +99,6 @@ const styles = {
     width: "100%",
     height: "100%",
     display: "flex",
-    // justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
     background: "#111",

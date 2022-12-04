@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
 
-const ShowsCard = ({ background, img, height, width , logo , title}) => {
+const ShowsCard = ({ background, img, height, width, logo, title }) => {
   return (
     <Box
       sx={{
@@ -12,21 +12,21 @@ const ShowsCard = ({ background, img, height, width , logo , title}) => {
         }`,
         background: `url(${img})`,
         backgroundPosition: "center",
-        backgroundSize: height == "LG" ? "cover" : height == "MD" ? "cover" : "cover",
+        backgroundSize:
+          height == "LG" ? "cover" : height == "MD" ? "cover" : "cover",
         backgroundRepeat: "no-repeat",
         border: "2px #757575 solid",
         position: "relative",
         borderRadius: "12px",
         marginRight: "12px",
         "&:hover": {
-          cursor:'pointer',
+          cursor: "pointer",
           border: "2px lightgray solid",
           transition: "0.6s",
           transform: "scale(1.1)",
-          backgroundImage:`url("${background}")`,
+          backgroundImage: `url("${background}")`,
           backgroundRepeat: "repeat",
-          backgroundSize:'contain'
-          // "url('https://i.ytimg.com/an_webp/3ECOCed1dSo/mqdefault_6s.webp?du=3000&sqp=CKzZ45oG&rs=AOn4CLDrM8yN2mCqI-F0MWXo91tzXlE-zw')",
+          backgroundSize: "contain",
         },
       }}
     >
@@ -79,14 +79,13 @@ const ShowsCard = ({ background, img, height, width , logo , title}) => {
             <img
               style={{ width: "45px", height: "45px", borderRadius: "50%" }}
               src={logo}
-              // src="https://images.watchcorridor.com/i/bfaab7bf-711f-4c59-9dea-75e994342147.jpg"
             />
           </Box>
           <Box>
             <Typography
               sx={{
                 color: "white",
-                fontWeight:'600'
+                fontWeight: "600",
               }}
             >
               {title}

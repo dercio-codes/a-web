@@ -1,13 +1,18 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import Link from "next/link";
 
 const container = {
   width: "100%",
-  height: "120px",
+  height: "64px",
   backgroundColor: "#111",
-  // border: '1px solid red',
-  position: 'relative'
+  position: "relative",
 };
 
 const overLay = {
@@ -18,9 +23,8 @@ const overLay = {
   justifyContent: "flex-end",
   padding: "0 100px",
   background: "rgba(0,0,0,0.3)",
-  // border: '1px solid yellow',
-  position:'absolute',
-  bottom: 0
+  position: "absolute",
+  bottom: 0,
 };
 
 const container2 = {
@@ -43,8 +47,8 @@ const container3 = {
 const fontSize = {
   fontSize: {
     xs: 6,
-    md: 10,
-    lg: 13,
+    md: 9,
+    lg: 10,
   },
   color: "white",
 };
@@ -55,27 +59,43 @@ const Footer = () => {
       <Box sx={overLay}>
         <Box sx={container2}>
           <Box sx={container3}>
-            <Typography className="active-tv-font" sx={fontSize}>
-              INSTAGRAM CONTACT
-            </Typography>
-            <Typography className="active-tv-font" sx={fontSize}>
-              {new Date().getFullYear()} © Active Tv
+            <Link href="/">
+              <a>
+                <Typography
+                  className="active-tv-font"
+                  sx={{ fontSize: "9px", color: "white" }}
+                >
+                  Terms & Conditions
+                </Typography>
+              </a>
+            </Link>
+            <Typography
+              className="active-tv-font"
+              sx={{ fontSize: "9px", color: "white" }}
+            >
+              {new Date().getFullYear()} © ActiveTv777.co.za
             </Typography>
           </Box>
-          <Typography
-            className="active-tv-font"
+          <Box
             sx={{
-              fontSize: {
-                xs: 5,
-                md: 7,
-                lg: 9,
-              },
-              color: "gray",
-              paddingTop: '20px'
+              width: "120px",
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
-            v6.51.4
-          </Typography>
+            <InstagramIcon
+              sx={{ color: "white", cursor: "pointer", fontSize: "22px" }}
+            />
+            <YouTubeIcon
+              sx={{ color: "white", cursor: "pointer", fontSize: "22px" }}
+            />
+            <FacebookIcon
+              sx={{ color: "white", cursor: "pointer", fontSize: "20px" }}
+            />
+            <TwitterIcon
+              sx={{ color: "white", cursor: "pointer", fontSize: "20px" }}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>

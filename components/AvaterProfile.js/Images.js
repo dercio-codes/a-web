@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
 
 export default function Images() {
-  // const [avaters, setAvaters] = useState([]);
-  const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained } = useContext(USER_CONTEXT);
+  const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained } =
+    useContext(USER_CONTEXT);
 
   const handleImage = async (url) => {
     const response = await fetch(
@@ -62,8 +62,8 @@ export default function Images() {
               height={70}
               style={images}
               onClick={() => {
-                setImgProfile(profile)
-                setIsContained(true)
+                setImgProfile(profile);
+                setIsContained(true);
                 handleImage(profile);
               }}
             />
