@@ -37,17 +37,17 @@ const Banner = () => {
         </Typography>
         <ul>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }} className="active-tv-font">
-            <Typography tyle={{ color: 'white' }} fontSize={12} className="active-tv-font">Watch exclusive content ad-free</Typography>
+            <Typography sx={{ color: 'white' }} fontSize={12} className="active-tv-font">Watch exclusive content ad-free</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }} className="active-tv-font">
-            <Typography tyle={{ color: 'white' }} fontSize={12} className="active-tv-font">YOU decide what shows get made</Typography>
+            <Typography tsyle={{ color: 'white' }} fontSize={12} className="active-tv-font">YOU decide what shows get made</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
-            <Typography tyle={{ color: 'white' }} fontSize={12} className="active-tv-font">15% off on ALL merch</Typography>
+            <Typography style={{ color: 'white' }} fontSize={12} className="active-tv-font">15% off on ALL merch</Typography>
           </li>
           <li style={{ color: '#fff203', margin: '10px 0 0 0' }}>
             <Typography style={{ color: 'white' }} fontSize={12} className="active-tv-font">Watch on ANY device</Typography>
-          </li>
+          </li>s
         </ul>
         <Link href="/signup">
           <button className='card'
