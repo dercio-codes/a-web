@@ -37,7 +37,7 @@ const GreenlightBanner = () => {
       <Box sx={showImage ? styles.introImage : styles.none}>
         <Box sx={{ background: "rgba(0,0,0,.4)" }}>
           <Grid container>
-            <Grid sx={styles.gridItem} item md={4} sm={4} xs={12}>
+            <Grid sx={{...styles.gridItem,alignItems:'flex-end'}} item md={4} sm={4} xs={12}>
               <Box sx={{ ...styles.content }}>
                 <Typography
                   className={"active-tv-font"}
@@ -48,10 +48,13 @@ const GreenlightBanner = () => {
 
                     fontWeight: "300",
                     fontStyle: "italic",
+                    marginTop:{
+                      xs:2
+                    },
                     fontSize: {
-                      md: 40,
-                      sm: 24,
-                      xs: 24,
+                      md: 32,
+                      sm: 20,
+                      xs: 16,
                     },
                   }}
                   variant="h1"
@@ -60,7 +63,7 @@ const GreenlightBanner = () => {
                   <span
                     style={{
                       fontWeight: "200",
-                      textDecorationColor: "darkgreen",
+                      // textDecorationColor: "darkgreen",
                       textDecoration: "line-through",
                       textDecorationStyle: "dotted",
                       textDecorationThickness: "2px",
@@ -80,6 +83,7 @@ const GreenlightBanner = () => {
                     <span style={{ color: "#fff" }}> THAT! </span>
                   </b>
                 </Typography>
+
                 <Typography
                   className={"active-tv-font"}
                   sx={{
@@ -90,7 +94,7 @@ const GreenlightBanner = () => {
                     fontSize: {
                       md: 16,
                       sm: 14,
-                      xs: 16,
+                      xs: 13,
                     },
                   }}
                   variant="h3"
@@ -140,6 +144,7 @@ const GreenlightBanner = () => {
                     style={styles.playIcon}
                     src="play-circle-final.png"
                     alt="play-svg"
+                    
                   />
                 </Button>
               </Box>
@@ -215,6 +220,7 @@ const styles = {
     width: "100%",
     padding: "0 50px",
     display: "flex",
+    // border:'1px solid red',
     justifyContent: {
       md: "center",
       sm: "flex-start",
