@@ -52,9 +52,9 @@ export default function Images() {
 
   return (
     <Box style={container} onClick={changeAvatorHandler}>
-      {avaters.map((profile) => {
+      {avaters.map((profile, index) => {
         return (
-          <div>
+          <div key={index}>
             <img
               src={profile}
               alt="avaterImage"
