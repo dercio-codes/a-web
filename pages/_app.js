@@ -80,20 +80,17 @@ function MyApp({ Component, pageProps }) {
     ForceReload();
   };
 
-  //update user profile img
 
+  //update user profile img
   const updatePictureAttribute = async (pictureAttribute) => {
     let user = await Auth.currentAuthenticatedUser().then((user) => user);
 
     await Auth.updateUserAttributes(user, {
-      picture: pictureAttribute,
-      
+         picture: pictureAttribute,
     });
     await Router.push("/account");
     ForceReload();
   };
-
-
 
 
 
@@ -184,3 +181,5 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+
