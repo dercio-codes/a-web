@@ -5,6 +5,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import Images from "./Images";
+import data from './avatar.json'
+import { useContext } from "react";
+import { USER_CONTEXT } from "../../context/MainContext";
+
 
 const style = {
   position: "absolute",
@@ -71,8 +75,25 @@ const imgBackground = {
 
 export default function AvaterPicChanger({ grady }) {
   const [open, setOpen] = React.useState(false);
+  const [accept, setAccept] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+    const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained,updatePictureAttribute } =
+    useContext(USER_CONTEXT);
+
+  const handleConfirm = async (avaters)=>{
+       const accepted =  window.confirm('are you sure you want to update profile picture?')
+         
+         if(accepted){
+              setImgProfile(avaters);
+              updatePictureAttribute(avaters)
+              setIsContained(true);
+         }
+    
+  }
+
+
+
 
   return (
     <div>
@@ -108,10 +129,32 @@ export default function AvaterPicChanger({ grady }) {
           </Box>
           <Box style={images}>
             <Images />
+            
+            {data.map((avaters ,index) =>{
+
+              return(
+
+                 <img  
+                   key={index} 
+                   height={100} 
+                   style={{margin:6 , cursor:'pointer', borderRadius:'100px'}} 
+                   src={avaters}
+                   onClick={() => {
+                    handleConfirm(avaters)
+                
+              }}
+                 />
+
+                
+                )
+            })}
+
+
+
           </Box>
 
           <Box style={buttons}>
-            <Button style={confirmBtn} onClick={handleClose}>
+            <Button style={confirmBtn} onClick={()=>setAccept(true)}>
               confirm
             </Button>
             <Button onClick={handleClose} style={cancelBtn}>

@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }) {
   const [avaters, setAvaters] = useState([]);
   const [imgProfile, setImgProfile] = useState("");
   const [isContained, setIsContained] = useState(false);
+  const [picture , setPicture] = useState('')
   const [showsDetails, setShowsDetails] = useState({
     title: "",
     img: "imortal.webp",
@@ -79,6 +80,25 @@ function MyApp({ Component, pageProps }) {
     ForceReload();
   };
 
+  //update user profile img
+
+  const updatePictureAttribute = async (pictureAttribute) => {
+    let user = await Auth.currentAuthenticatedUser().then((user) => user);
+
+    await Auth.updateUserAttributes(user, {
+      picture: pictureAttribute,
+      
+    });
+    await Router.push("/account");
+    ForceReload();
+  };
+
+
+
+
+
+
+
   const checkUser = async () => {
     await Auth.currentAuthenticatedUser({
       bypassCache: false,
@@ -88,6 +108,7 @@ function MyApp({ Component, pageProps }) {
         const currentUser = user.attributes.email;
         const DisplayUser = user.attributes.name;
         const sub = user.attributes.sub;
+        const picture = user.attributes.picture
 
         //retrieve web-token
         const token = user.signInUserSession.idToken.jwtToken;
@@ -98,6 +119,7 @@ function MyApp({ Component, pageProps }) {
         // our setters
         setUser(currentUser);
         setDisplayName(DisplayUser);
+        setImgProfile(picture)
         setLoggedIn(true);
 
         //testing logs
@@ -143,6 +165,9 @@ function MyApp({ Component, pageProps }) {
         setSubCode,
         avaters,
         setAvaters,
+        picture,
+        setPicture,
+        updatePictureAttribute,
         AuthenticatedUser: {
           name: user,
           email: user,

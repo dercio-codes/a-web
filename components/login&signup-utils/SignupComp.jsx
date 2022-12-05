@@ -78,6 +78,7 @@ const LoginComp = () => {
           // other custom attributes
           "custom:display_name": username,
           name: username,
+          picture:''
         },
       });
 

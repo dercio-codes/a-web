@@ -12,13 +12,16 @@ import Router from "next/router";
 import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
+import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from "@mui/icons-material/Login";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 // import LoginIcon from '@mui/icons-material/Login';
 
 export default function PositionedPopper({ user, userInitial }) {
@@ -36,6 +39,8 @@ export default function PositionedPopper({ user, userInitial }) {
     setImgProfile,
     isContained,
     setIsContained,
+    picture,
+    setPicture
   } = useContext(USER_CONTEXT);
 
   const handleClick = (newPlacement) => (event) => {
@@ -88,7 +93,7 @@ export default function PositionedPopper({ user, userInitial }) {
               >
                 <Box
                   style={{
-                    background: `url(${imgProfile})`,
+                    background: imgProfile ? `url(${imgProfile})`: '#111',
                     backgroundSize: isContained ? "cover" : "contain",
                   }}
                   sx={styles.DropUser}
@@ -100,7 +105,7 @@ export default function PositionedPopper({ user, userInitial }) {
                       color="#fff"
                       fontSize={30}
                     >
-                      {userInitial}
+                      {!imgProfile && userInitial}
                     </Typography>
                   ) : (
                     <Box
@@ -143,31 +148,7 @@ export default function PositionedPopper({ user, userInitial }) {
                   account
                 </Typography>
               </Button>
-              <Button
-                variant="text"
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  "&:hover": {
-                    background: "transparent",
-                  },
-                }}
-                onClick={() => {
-                  Router.push("/contact-us");
-                }}
-              >
-                <SupportAgentIcon sx={{ color: "#fff", marginRight: "16px" }} />
-                <Typography
-                  className={"active-tv-font"}
-                  variant="p"
-                  color="#fff"
-                  fontSize={10}
-                >
-                  Need help?
-                </Typography>
-              </Button>
+
               <Button
                 variant="text"
                 sx={{
@@ -202,7 +183,60 @@ export default function PositionedPopper({ user, userInitial }) {
                   Active studio
                 </Typography>
               </Button>
-              {loggedIn && (
+
+            { loggedIn &&  <Button
+                             variant="text"
+                              sx={{
+                              width: "100%",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              "&:hover": {
+                                background: "transparent",
+                              },
+                            }}
+                            onClick={() => {
+                              Router.push("/learn");
+                            }}
+                          >
+                            <MenuBookIcon sx={{ color: "#fff", marginRight: "16px" }}  />
+                            <Typography
+                              className={"active-tv-font"}
+                              variant="p"
+                              color="#fff"
+                              fontSize={10}
+                            >
+                              Learn more
+                            </Typography>
+                          </Button>}
+
+
+              <Button
+                variant="text"
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  "&:hover": {
+                    background: "transparent",
+                  },
+                }}
+                onClick={() => {
+                  Router.push("/contact-us");
+                }}
+              >
+                <HelpOutlineIcon sx={{ color: "#fff", marginRight: "16px" }} />
+                <Typography
+                  className={"active-tv-font"}
+                  variant="p"
+                  color="#fff"
+                  fontSize={10}
+                >
+                  Need help?
+                </Typography>
+              </Button>
+              {loggedIn ? (
                 <Button
                   variant="text"
                   sx={{
@@ -228,9 +262,8 @@ export default function PositionedPopper({ user, userInitial }) {
                     Sign out
                   </Typography>
                 </Button>
-              )}
-              {!loggedIn && (
-                <Button
+              ) :
+                 <Button
                   variant="text"
                   sx={{
                     width: "100%",
@@ -242,7 +275,7 @@ export default function PositionedPopper({ user, userInitial }) {
                     },
                   }}
                   onClick={() => {
-                    Router.push("/login");
+                    Router.push('/login')
                   }}
                 >
                   <LoginIcon sx={{ color: "#fff", marginRight: "16px" }} />
@@ -251,41 +284,14 @@ export default function PositionedPopper({ user, userInitial }) {
                     variant="p"
                     color="#fff"
                     fontSize={10}
-                    sx={{ marginTop: "5px" }}
                   >
                     Sign in
                   </Typography>
                 </Button>
-              )}
 
-              {!loggedIn && (
-                <Button
-                  variant="text"
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    "&:hover": {
-                      background: "transparent",
-                    },
-                  }}
-                  onClick={() => {
-                    Router.push("/signup");
-                  }}
-                >
-                  <LockOpenIcon sx={{ color: "#fff", marginRight: "16px" }} />
-                  <Typography
-                    className={"active-tv-font"}
-                    variant="p"
-                    color="#fff"
-                    fontSize={10}
-                    sx={{ marginTop: "5px" }}
-                  >
-                    Sign Up
-                  </Typography>
-                </Button>
-              )}
+            }
+             
+
             </Paper>
           </Fade>
         )}
@@ -297,20 +303,27 @@ export default function PositionedPopper({ user, userInitial }) {
             className={"active-tv-font"}
             onClick={handleClick("bottom-end")}
           >
-            <Avatar
+            <Box
               className={"active-tv-font"}
-              style={{
-                background: `url(${imgProfile})`,
-                backgroundSize: isContained ? "cover" : "contain",
-              }}
-              sx={{ bgcolor: "#333", fontSize: 20, border: "1px solid white" }}
+             
             >
               {loggedIn ? (
-                userInitial
+                
+                <Avatar
+                    sx={{ 
+                  
+                  fontSize: 20 ,
+                  background:  imgProfile ? `url(${imgProfile})`:'#333',
+                  backgroundSize: isContained ? "cover" : "contain"
+                }}
+                >
+              { !imgProfile && userInitial}
+                        
+                </Avatar>
               ) : (
-                <Avatar sx={{ bgcolor: "#333" }}></Avatar>
+                <Avatar sx={{ bgcolor:  "#333" }}></Avatar>
               )}
-            </Avatar>
+            </Box>
           </Button>
         </Grid>
       </Grid>
@@ -327,6 +340,6 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    border: "1px solid white",
+    // border: "1px solid white",
   },
 };

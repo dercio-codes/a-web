@@ -335,6 +335,7 @@ const Navbar = () => {
                                 {item.Title}
                               </p>
                               <p
+                               id="SearchDescript"
                                 style={{
                                   paddingLeft: "10px",
                                   fontSize: "8px",
