@@ -13,7 +13,6 @@ export const FreeToWatchItem = ({ image, showTitle }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        // marginBottom: "16px",
         position: "relative",
         alignItems: "flex-end",
         "&:hover": {

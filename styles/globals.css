@@ -30,6 +30,7 @@
    * {
      box-sizing: border-box;
      /* border: 0.2px solid blue; */
+     /* height: 100vh; */
    }
    /* width */
    ::-webkit-scrollbar {

@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Router from 'next/router'
+import Router from "next/router";
 import Link from "next/link";
 import { Box } from "@mui/system";
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
-import { USER_CONTEXT } from '../context/MainContext'
-import {useContext} from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import { USER_CONTEXT } from "../context/MainContext";
+import { useContext } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const background = {
   backgroundColor: "#111",
@@ -22,108 +20,91 @@ const background = {
   justifyContent: "center",
   color: "white",
   background: "url('active-tv-login-test1.png')",
-  backgroundSize: 'cover',
-  
+  backgroundSize: "cover",
 };
 
 const container = {
-  // border: "1px solid yellow",
-  // minWidth: "700px",
-  // minHeight: "370px",
   flexDirection: "column",
   padding: "40px",
-  // paddingTop: "50px",
   background: "rgba(0,0,0,0.6)",
-
 };
 
 const InputContainer = {
   display: "flex",
   flexDirection: "column",
   marginTop: "30px",
-  // padding:'0 30px',
   fontSize: "10px",
 };
 
 const inputBox = {
   width: "600px",
   borderRadius: "4px",
-
-  // height: "30px",
   fontSize: "13px",
-  outline: 'none',
-  padding: '10px',
-  border: 'none',
-  marginTop: '10px'
+  outline: "none",
+  padding: "10px",
+  border: "none",
+  marginTop: "10px",
 };
 
 const ButtonStyle = {
   border: "1px solid yellow",
   background: "transparent",
   color: "yellow",
-  // marginTop: "30px",
   minWidth: "180px",
   cursor: "pointer",
   fontSize: "10px",
-  height:"40px"
+  height: "40px",
 };
 
 const ButtonTwo = {
   border: "1px solid white",
   background: "transparent",
   color: "white",
-  // marginTop: "20px",
   width: "250px",
   cursor: "pointer",
   fontSize: "10px",
 };
 
 function ResetNamePassword() {
-
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const { updateAttributes , ForceRedirect , displayName, AuthenticatedUser } = useContext(USER_CONTEXT);
-  
+  const { updateAttributes, ForceRedirect, displayName, AuthenticatedUser } =
+    useContext(USER_CONTEXT);
 
-
-  
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (name , email) {
-    try{
-       updateAttributes(name, email)
-        // Router.push('/account')
-      //reset the inputs to null
-      setEmail("")
-      setName("")
-    }catch(err){
-       toast.error(err.message, {
-position: "top-right",
-autoClose: 1000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-});
+    if ((name, email)) {
+      try {
+        updateAttributes(name, email);
+        setEmail("");
+        setName("");
+      } catch (err) {
+        toast.error(err.message, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
     }
-   
-  
-
-   }
-
-
   };
-
-
 
   return (
     <Box className="active-tv-font" style={background}>
-
       <form style={container} onSubmit={handleSubmit}>
-        <Typography className="active-tv-font" variant="h4" color={'yellow'} fontSize={14}>EDIT USER DETAILS</Typography>
+        <Typography
+          className="active-tv-font"
+          variant="h4"
+          color={"yellow"}
+          fontSize={14}
+        >
+          EDIT USER DETAILS
+        </Typography>
         <hr style={{ marginRight: "20px" }} />
 
         <Box style={InputContainer}>
@@ -149,13 +130,20 @@ theme: "dark",
           />
         </Box>
 
-        <Box style={{ display: "flex",gap:20, paddingTop:'25px'}}>
-
+        <Box style={{ display: "flex", gap: 20, paddingTop: "25px" }}>
           <Button type="submit" style={ButtonStyle} className="active-tv-font">
-            <Typography variant="p" className="changepassword">Change user details</Typography>
+            <Typography variant="p" className="changepassword">
+              Change user details
+            </Typography>
           </Button>
-          <Button className="active-tv-font" style={{...ButtonStyle, border: "1px solid #fff",color:'#fff'}} href="/account">
-              <Typography variant="p" className="changepassword">Back to account</Typography>
+          <Button
+            className="active-tv-font"
+            style={{ ...ButtonStyle, border: "1px solid #fff", color: "#fff" }}
+            href="/account"
+          >
+            <Typography variant="p" className="changepassword">
+              Back to account
+            </Typography>
           </Button>
 
           <ToastContainer />

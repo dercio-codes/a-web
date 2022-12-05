@@ -23,8 +23,7 @@ const Categories = [
 
 const MerchNavbar = ({ card }) => {
   const { selectedCategory, setSelectedCategory } =
-    React.useContext(USER_CONTEXT)
-
+    React.useContext(USER_CONTEXT);
 
   const [openSearchField, setSearchField] = React.useState(false);
   const [searchField, setSeachField] = React.useState(null);
@@ -57,35 +56,44 @@ const MerchNavbar = ({ card }) => {
         }}
       >
         <Grid container>
-          <Grid item xs={5} md={6}  sx={{
-            // width: "50%",
-            padding: "12px 0px 12px 12px",
-            background: "",
-            display: "flex",
-            alignItems:'center',
-            // justifyContent: "flex-end",
-          }}>
+          <Grid
+            item
+            xs={5}
+            md={6}
+            sx={{
+              // width: "50%",
+              padding: "12px 0px 12px 12px",
+              background: "",
+              display: "flex",
+              alignItems: "center",
+              // justifyContent: "flex-end",
+            }}
+          >
             <Typography
               className="active-tv-font"
               sx={{
-                  fontSize:{
-                    xs:'12px',
-                    lg:"24px",
+                fontSize: {
+                  xs: "12px",
+                  lg: "24px",
                 },
-                  fontWeight:550,
-                  color:"rgba(1,1,1,.9)",
-
+                fontWeight: 550,
+                color: "rgba(1,1,1,.9)",
               }}
             >
               Active Store
             </Typography>
           </Grid>
-          <Grid item xs={7} md={6}  sx={{
-            padding: "12px 0px 12px 12px",
-            background: "",
-            display: "flex",
-            justifyContent: "flex-end",
-          }} >
+          <Grid
+            item
+            xs={7}
+            md={6}
+            sx={{
+              padding: "12px 0px 12px 12px",
+              background: "",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
             <Fade in={openSearchField}>
               <InputBase
                 sx={{
@@ -113,8 +121,6 @@ const MerchNavbar = ({ card }) => {
             </IconButton>
           </Grid>
         </Grid>
-
-
       </Box>
       <Paper
         sx={{

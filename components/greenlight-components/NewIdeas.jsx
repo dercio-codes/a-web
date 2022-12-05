@@ -20,14 +20,12 @@ const Card = ({ img, link }) => {
   );
 };
 
-
-
 const NewIdeas = () => {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.header}>
         <Typography
-          className={'active-tv-font'}
+          className={"active-tv-font"}
           sx={{ fontWeight: "bold" }}
           color="#fff"
           fontSize={18}
@@ -39,8 +37,6 @@ const NewIdeas = () => {
         </Typography>
       </Box>
       <Box sx={styles.cardWrapper}>
-    {/*map throught the new ideas , displaying the cards*/}
-    
         <Card link={'https://www.google.com"'} img={"img-a.jpg"} />
         <Card link={'https://www.google.com"'} img={"img-b.jpg"} />
       </Box>
@@ -55,8 +51,8 @@ const styles = {
     backgroundPosition: "top",
     backgroundSize: "cover",
     minHeight: "550px",
-    // border: "1xpx solid red",
     padding: "0px 100px 40px",
+    backgroundColor: "#111",
   },
   cardContainer: {
     height: "450px",
@@ -68,7 +64,6 @@ const styles = {
     borderRadius: "10px",
   },
   header: {
-    // border:'1px solid red' ,
     minHeight: "75px",
     display: "flex",
     alignItems: "center",

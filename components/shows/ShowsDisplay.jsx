@@ -29,163 +29,16 @@ export default function ShowsDisplay({ shows,background, img, height, width , lo
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#FFFFFF");
 
-
-
   const getEpisodes = () => {
     setTimeout(() => {
       setEmpty(false);
     }, 3000);
   };
   return (
-    <Box sx={{height:"100vw"}}>
-      <ShowHeader title="Shows"/>
-      <Box sx={{width:"100%", height:"250px"}}>
-      <Carousel
-        showArrows={true}
-        showIndicators={false}
-        showStatus={false}
-        infiniteLoop={true}
-        centerMode={true}
-        centerSlidePercentage={30}
-      >
-        {shows.map((show, index) => (
-          <Box 
-          sx={{
-            width:"290px",
-            border: "1px lightgrey solid",
-            borderRadius: "12px",
-            "&:hover": {
-              cursor:'pointer',
-              filter:"blur(1px)",
-              border: "2px #757575 solid",
-              transition: "0.8s",
-              transform: "scale(0.9)",
-              backgroundRepeat: "repeat",
-              backgroundSize:'contain',
-            },
-          }}
-          >
-            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
-             <a>
-            <ShowCard
-              color={show.color}
-              openModal={handleOpen}
-              img={show.CoverArtLarge}
-              text={show.Title}
-            />
-
-            
-            <Typography
-              className="active-tv-font"
-              fontSize={10}
-              sx={{
-                color: "#fff",
-                fontWeight: "bold",
-                padding: "10px",
-                textTransform: "capitalize",
-                background: "rgba(0,0,0,0.3)",
-                display:"flex", 
-                alignItems:"center",
-                justifyContent:"center",
-                justifyContent:"space-between",
-                height:"43px"
-              }}
-            >
-              <img
-              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
-              src={show.CoverArtLarge}
-            />
-              {show.Title}
-            </Typography>
-            
-            </a>
-          </Link>
-          </Box>
-        ))} 
-      </Carousel>
-      </Box>
-
-
-
-      <Box sx={{marginTop:"50px"}}>
-      <ShowHeader title="React series"/>
-      <Box sx={{width:"100%", height:"250px"}}>
-      <Carousel
-        showArrows={true}
-        showIndicators={false}
-        showStatus={false}
-        infiniteLoop={true}
-        centerMode={true}
-        centerSlidePercentage={30}
-      >
-        {shows.map((show, index) => (
-          <Box 
-          sx={{
-            width: `${
-              width == "LG" ? "367px" : width == "MD" ? "300.55px" : "250px"
-            }`,
-            height: `${
-              height == "LG" ? "408.55px" : height == "MD" ? "308.55px" : "208px"
-            }`,
-            height:"185px",
-            backgroundSize: height == "LG" ? "cover" : height == "MD" ? "cover" : "cover",
-            marginLeft:"30px",
-            border: "1px lightgrey solid",
-            borderRadius: "12px",
-            "&:hover": {
-              cursor:'pointer',
-              filter:"blur(1px)",
-              border: "2px #757575 solid",
-              transition: "0.8s",
-              transform: "scale(0.9)",
-              backgroundRepeat: "repeat",
-              backgroundSize:'contain',
-            },
-          }}
-          >
-            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
-             <a>
-            <ShowCard
-              color={show.color}
-              openModal={handleOpen}
-              img={show.CoverArtLarge}
-              text={show.Title}
-            />
-
-            
-            <Typography
-              className="active-tv-font"
-              fontSize={10}
-              sx={{
-                color: "#fff",
-                fontWeight: "bold",
-                padding: "10px",
-                textTransform: "capitalize",
-                background: "rgba(0,0,0,0.3)",
-                display:"flex", 
-                alignItems:"center",
-                justifyContent:"center",
-                justifyContent:"space-between",
-                height:"43px",
-              }}
-            >
-              <img
-              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
-              src={show.CoverArtLarge}
-            />
-              {show.Title}
-            </Typography>
-            
-            </a>
-          </Link>
-          </Box>
-        ))} 
-      </Carousel>
-      </Box>
-      </Box>
-
-      <ShowHeader title="Shows"/>
-      <Box sx={{width:"94%", height:"300px",background: "url('	https://images.watchcorridor.com/i/5973731a-e7b7-465f-b14f-f993daae6890.jpg')",backgroundSize:"cover", position:"absolute",}}>
+    <Box sx={{ height:"440vh"}}>
+      <Box>
+      <ShowHeader title="THE-SIBS"/>
+      <Box sx={{width:"94%", height:"300px",background: "url('https://active-studio-content-bucket.s3.us-east-2.amazonaws.com/Shows/The-SIbs/large-the-sibs.jpg')",backgroundSize:"cover", position:"absolute", borderRadius:"15px"}}>
       <Carousel
         showArrows={true}
         showIndicators={false}
@@ -199,11 +52,10 @@ export default function ShowsDisplay({ shows,background, img, height, width , lo
           sx={{
             position:"relative",
             marginTop:"160px",
-            width:"320px",
-            height:"220px",
+            width:"290px",
             border: "1px lightgrey solid",
             borderRadius: "12px",
-            boxShadow:"  0px 0px 5px 5px rgba(0,0,0,0.75)",
+            filter:"blur(0px)",
             "&:hover": {
               cursor:'pointer',
               border: "2px #757575 solid",
@@ -252,6 +104,363 @@ export default function ShowsDisplay({ shows,background, img, height, width , lo
           </Box>
         ))} 
       </Carousel>
+      </Box>
+      </Box>
+
+      <Box sx={{marginTop:"450px"}}>
+      <ShowHeader title="AWAKEN"/>
+      <Box sx={{width:"94%", height:"300px",background: "url('https://active-studio-content-bucket.s3.us-east-2.amazonaws.com/Shows/Awaken/large-thumbnail.jpg')",backgroundSize:"cover", position:"absolute", borderRadius:"15px"}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
+      >
+        {shows.map((show, index) => (
+          <Box 
+          sx={{
+            position:"relative",
+            marginTop:"160px",
+            width:"290px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            filter:"blur(0px)",
+            "&:hover": {
+              cursor:'pointer',
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+             <a>
+            <ShowCard
+              color={show.color}
+              openModal={handleOpen}
+              img={show.CoverArtLarge}
+              text={show.Title}
+            />
+
+            
+            <Typography
+              className="active-tv-font"
+              fontSize={10}
+              sx={{
+                color: "#fff",
+                fontWeight: "bold",
+                padding: "10px",
+                textTransform: "capitalize",
+                background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px"
+              }}
+            >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
+              {show.Title}
+            </Typography>
+            
+            </a>
+          </Link>
+          </Box>
+        ))} 
+      </Carousel>
+      </Box>
+      </Box>
+
+
+      <Box sx={{marginTop:"450px"}}>
+      <ShowHeader title="HE-NOSE"/>
+      <Box sx={{width:"94%", height:"300px",background: "url('https://active-studio-content-bucket.s3.us-east-2.amazonaws.com/Shows/He-Nose/large-mqdefault_6s.jpg')",backgroundSize:"cover", position:"absolute", borderRadius:"15px"}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
+      >
+        {shows.map((show, index) => (
+          <Box 
+          sx={{
+            position:"relative",
+            marginTop:"160px",
+            width:"290px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            filter:"blur(0px)",
+            "&:hover": {
+              cursor:'pointer',
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+             <a>
+            <ShowCard
+              color={show.color}
+              openModal={handleOpen}
+              img={show.CoverArtLarge}
+              text={show.Title}
+            />
+
+            
+            <Typography
+              className="active-tv-font"
+              fontSize={10}
+              sx={{
+                color: "#fff",
+                fontWeight: "bold",
+                padding: "10px",
+                textTransform: "capitalize",
+                background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px"
+              }}
+            >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
+              {show.Title}
+            </Typography>
+            
+            </a>
+          </Link>
+          </Box>
+        ))} 
+      </Carousel>
+      </Box>
+      </Box>
+
+      <Box sx={{marginTop:"450px"}}>
+      <ShowHeader title="STRUS-BOB"/>
+      <Box sx={{width:"94%", height:"300px",background: "url('https://active-studio-content-bucket.s3.us-east-2.amazonaws.com/Shows/Strus-Bob/large-Strus-Bob.jpg')",backgroundSize:"cover", position:"absolute", borderRadius:"15px"}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
+      >
+        {shows.map((show, index) => (
+          <Box 
+          sx={{
+            position:"relative",
+            marginTop:"160px",
+            width:"290px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            filter:"blur(0px)",
+            "&:hover": {
+              cursor:'pointer',
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+             <a>
+            <ShowCard
+              color={show.color}
+              openModal={handleOpen}
+              img={show.CoverArtLarge}
+              text={show.Title}
+            />
+
+            
+            <Typography
+              className="active-tv-font"
+              fontSize={10}
+              sx={{
+                color: "#fff",
+                fontWeight: "bold",
+                padding: "10px",
+                textTransform: "capitalize",
+                background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px"
+              }}
+            >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
+              {show.Title}
+            </Typography>
+            
+            </a>
+          </Link>
+          </Box>
+        ))} 
+      </Carousel>
+      </Box>
+      </Box>
+
+      <Box sx={{marginTop:"450px"}}>
+      <ShowHeader title="THE-SOUL-OF-CHESS"/>
+      <Box sx={{width:"94%", height:"300px",background: "url('https://active-studio-content-bucket.s3.us-east-2.amazonaws.com/Shows/THe-soul-of-Chess/large-chess.jpg')",backgroundSize:"cover", position:"absolute", borderRadius:"15px"}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
+      >
+        {shows.map((show, index) => (
+          <Box 
+          sx={{
+            position:"relative",
+            marginTop:"160px",
+            width:"290px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            filter:"blur(0px)",
+            "&:hover": {
+              cursor:'pointer',
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+              <a>
+            <ShowCard
+              color={show.color}
+              openModal={handleOpen}
+              img={show.CoverArtLarge}
+              text={show.Title}
+            />
+
+            
+            <Typography
+              className="active-tv-font"
+              fontSize={10}
+              sx={{
+                color: "#fff",
+                fontWeight: "bold",
+                padding: "10px",
+                textTransform: "capitalize",
+                background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px"
+              }}
+            >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
+              {show.Title}
+            </Typography>
+            
+            </a>
+          </Link>
+          </Box>
+        ))} 
+      </Carousel>
+      </Box>
+      </Box>
+
+      <Box sx={{marginTop:"450px"}}>
+      <ShowHeader title="THE-ART-OF-WAR"/>
+      <Box sx={{width:"94%", height:"300px",background: "url('https://active-studio-content-bucket.s3.us-east-2.amazonaws.com/Shows/The-Art-of-War/large-hqdefault.jpg')",backgroundSize:"cover", position:"absolute", borderRadius:"15px"}}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        showStatus={false}
+        infiniteLoop={true}
+        centerMode={true}
+        centerSlidePercentage={30}
+      >
+        {shows.map((show, index) => (
+          <Box 
+          sx={{
+            position:"relative",
+            marginTop:"160px",
+            width:"290px",
+            border: "1px lightgrey solid",
+            borderRadius: "12px",
+            filter:"blur(0px)",
+            "&:hover": {
+              cursor:'pointer',
+              border: "2px #757575 solid",
+              transition: "0.8s",
+              transform: "scale(0.9)",
+              backgroundRepeat: "repeat",
+              backgroundSize:'contain',
+            },
+          }}
+          >
+            <Link passHref={true} key={index} href={`/shows-episodes/${show.Title}`}>
+             <a>
+            <ShowCard
+              color={show.color}
+              openModal={handleOpen}
+              img={show.CoverArtLarge}
+              text={show.Title}
+            />
+
+            
+            <Typography
+              className="active-tv-font"
+              fontSize={10}
+              sx={{
+                color: "#fff",
+                fontWeight: "bold",
+                padding: "10px",
+                textTransform: "capitalize",
+                background: "rgba(0,0,0,0.3)",
+                display:"flex", 
+                alignItems:"center",
+                justifyContent:"center",
+                justifyContent:"space-between",
+                height:"43px"
+              }}
+            >
+              <img
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={show.CoverArtLarge}
+            />
+              {show.Title}
+            </Typography>
+            
+            </a>
+          </Link>
+          </Box>
+        ))} 
+      </Carousel>
+      </Box>
       </Box>
 
     </Box>
@@ -286,7 +495,6 @@ const styles = {
     width: "100%",
     height: "100%",
     display: "flex",
-    // justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
     background: "#111",
