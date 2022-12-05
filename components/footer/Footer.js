@@ -28,7 +28,7 @@ const overLay = {
 };
 
 const container2 = {
-  width: "58%",
+  width: "70%",
   height: "100%",
   display: "flex",
   alignItems: "center",
@@ -38,9 +38,9 @@ const container2 = {
 const container3 = {
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "flex-start",
   flexDirection: "column",
-  width: "50%",
+  width: "40%",
   // alignItems: "flex-start",
 };
 
@@ -64,7 +64,7 @@ const Footer = () => {
                 <Typography
                   className="active-tv-font"
                   align="center"
-                  sx={{ fontSize: "9px", color: "white" }}
+                  sx={{ fontSize: "9px", color: "white",paddingBottom:'3px' }}
                 >
                   Terms & Conditions
                 </Typography>
