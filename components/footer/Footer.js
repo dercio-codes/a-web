@@ -41,7 +41,7 @@ const container3 = {
   justifyContent: "center",
   flexDirection: "column",
   width: "50%",
-  alignItems: "flex-start",
+  // alignItems: "flex-start",
 };
 
 const fontSize = {
@@ -63,6 +63,7 @@ const Footer = () => {
               <a>
                 <Typography
                   className="active-tv-font"
+                  align="center"
                   sx={{ fontSize: "9px", color: "white" }}
                 >
                   Terms & Conditions
@@ -83,18 +84,35 @@ const Footer = () => {
               justifyContent: "space-between",
             }}
           >
-            <InstagramIcon
-              sx={{ color: "white", cursor: "pointer", fontSize: "22px" }}
-            />
-            <YouTubeIcon
-              sx={{ color: "white", cursor: "pointer", fontSize: "22px" }}
-            />
-            <FacebookIcon
-              sx={{ color: "white", cursor: "pointer", fontSize: "20px" }}
-            />
-            <TwitterIcon
-              sx={{ color: "white", cursor: "pointer", fontSize: "20px" }}
-            />
+            <Link href="https://www.instagram.com/activetv_/">
+              <a target="_blank">
+                <InstagramIcon
+                  sx={{ color: "white", cursor: "pointer", fontSize: "22px" }}
+                />
+              </a>
+            </Link>
+
+            <Link href="https://www.facebook.com/profile.php?id=100028422446108">
+              <a target="_blank">
+                <FacebookIcon
+                  sx={{ color: "white", cursor: "pointer", fontSize: "20px" }}
+                />
+              </a>
+            </Link>
+            <Link href="https://www.youtube.com/channel/UCB9RShNb4BgbAQFGgXmTLHg">
+              <a target="_blank">
+                <YouTubeIcon
+                  sx={{ color: "white", cursor: "pointer", fontSize: "22px" }}
+                />
+              </a>
+            </Link>
+            <Link href="https://twitter.com/ActiveTV1">
+              <a target="_blank">
+                <TwitterIcon
+                  sx={{ color: "white", cursor: "pointer", fontSize: "20px" }}
+                />
+              </a>
+            </Link>
           </Box>
         </Box>
       </Box>
