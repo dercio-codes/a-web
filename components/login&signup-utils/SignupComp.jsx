@@ -23,11 +23,13 @@ import RiseLoader from "react-spinners/RiseLoader";
 import MoonLoader from "react-spinners/MoonLoader";
 import PulseLoader from "react-spinners/PulseLoader";
 import HashLoader from "react-spinners/HashLoader";
+import WcIcon from '@mui/icons-material/Wc';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { TrendingUpRounded } from "@mui/icons-material";
 import { USER_CONTEXT } from "../../context/MainContext";
+
 import axios from "axios";
 
 const LoginComp = () => {
@@ -42,6 +44,7 @@ const LoginComp = () => {
     email: "",
     password: "",
     check: "",
+    gender:""
   });
 
   const handleFieldChange = (event) => {
@@ -67,7 +70,7 @@ const LoginComp = () => {
   };
 
   //register user
-  async function signUp(username, password, email) {
+  async function signUp(username, password, email, gender) {
     try {
       const { user } = await Auth.signUp({
         username: email,
@@ -78,7 +81,8 @@ const LoginComp = () => {
           // other custom attributes
           "custom:display_name": username,
           name: username,
-          picture:''
+          picture:'',
+          gender:gender
         },
       });
 
@@ -117,8 +121,7 @@ const LoginComp = () => {
   // submit form
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUp(formDetails.email, formDetails.password, formDetails.email);
-    tokenHalndler();
+    signUp(formDetails.email, formDetails.password, formDetails.email, formDetails.gender);
   };
 
   return redirecting ? (
@@ -249,6 +252,38 @@ const LoginComp = () => {
                     )}
                   </Button>
                 </Box>
+              {/*gender*/}
+               <Box sx={{ ...loginStyles.inputBlocks }}>
+                <label
+                  className="active-tv-font"
+                  style={{ ...loginStyles.inputLabel, fontSize: "10px" }}
+                >
+                  Gender
+                </label>
+                <Box sx={{ ...loginStyles.input }}>
+                  <select
+                    name="gender"
+                    value={formDetails.gender}
+                    onChange={handleFieldChange}
+                    className="focusInput"
+                    style={{ ...loginStyles.inputElement, outline:'none', cursor:'pointer' }}
+                    placeholder="Enter your Gender"
+                  >
+                  <option className={'gender-option'}>male</option>
+                  <option className={'gender-option'}>female</option>
+                  <option className={'gender-option'}>custom</option>
+
+                  </select>
+                  <Button >
+                  
+                      <WcIcon sx={loginStyles.icon} />
+                  
+                  </Button>
+                </Box>
+                </Box>
+
+
+
               </Box>
               {/* checkboxes */}
               <Box sx={{ ...loginStyles.checkboxContainer }}>
