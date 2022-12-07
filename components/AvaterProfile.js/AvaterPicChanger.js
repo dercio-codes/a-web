@@ -84,18 +84,17 @@ export default function AvaterPicChanger({ grady }) {
     useContext(USER_CONTEXT);
 
   const handleConfirm = async (avaters)=>{
+
        const accepted =  window.confirm('are you sure you want to update profile picture?')
-         
-         if(accepted){
-              setImgProfile(avaters);
-              updatePictureAttribute(avaters)
-              setIsContained(true);
+       
+       if(accepted){
+             setImgProfile(avaters);
+             updatePictureAttribute(avaters);
+             setIsContained(true);
          }
   }
 
-
-
-
+  
   return (
     <div>
       <Box
@@ -133,7 +132,6 @@ export default function AvaterPicChanger({ grady }) {
           </Box>
 
           <Box style={buttons}>
-           
             <Button onClick={handleClose} variant="outlined" color="error" style={cancelBtn}>
               close
             </Button>
