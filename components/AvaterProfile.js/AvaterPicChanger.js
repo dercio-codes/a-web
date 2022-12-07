@@ -15,22 +15,24 @@ const style = {
   top: "55%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "720px",
+  minWidth: "720px",
   height: "453px",
   bgcolor: "#1b1b1a",
   boxShadow: 24,
-  padding: "10px",
+  padding: "20px",
   borderRadius: "10px",
   border: "1px solid #121212",
-  paddingLeft: "30px",
+  // paddingLeft: "30px",
 };
 
 const cancelBtn = {
   marginTop: "10px",
   color: "red",
   fontWeight: "bold",
-  border: "1px solid red",
+  // border: "1px solid red",
   height: "30px",
+  marginLeft:'auto'
+
 };
 
 const confirmBtn = {
@@ -43,7 +45,7 @@ const confirmBtn = {
 };
 
 const images = {
-  width: "610px",
+  minWidth: "620px",
   height: "320px",
   background: "#222",
   borderRadius: "15px",
@@ -54,7 +56,7 @@ const images = {
   color: "white",
   fontWeight: "bold",
   padding: "15px",
-  marginLeft: "22px",
+  // marginLeft: "22px",
 };
 
 const buttons = {
@@ -62,8 +64,8 @@ const buttons = {
   alignItems: "center",
   justifyContent: "center",
   justifyContent: "space-evenly",
-  width: "200px",
-  marginLeft: "448px",
+  width: "100%",
+  // marginLeft: "448px",
 };
 
 const imgBackground = {
@@ -89,7 +91,6 @@ export default function AvaterPicChanger({ grady }) {
               updatePictureAttribute(avaters)
               setIsContained(true);
          }
-    
   }
 
 
@@ -129,35 +130,11 @@ export default function AvaterPicChanger({ grady }) {
           </Box>
           <Box style={images}>
             <Images />
-            
-            {data.map((avaters ,index) =>{
-
-              return(
-
-                 <img  
-                   key={index} 
-                   height={100} 
-                   style={{margin:6 , cursor:'pointer', borderRadius:'100px'}} 
-                   src={avaters}
-                   onClick={() => {
-                    handleConfirm(avaters)
-                
-              }}
-                 />
-
-                
-                )
-            })}
-
-
-
           </Box>
 
           <Box style={buttons}>
-            <Button style={confirmBtn} onClick={()=>setAccept(true)}>
-              confirm
-            </Button>
-            <Button onClick={handleClose} style={cancelBtn}>
+           
+            <Button onClick={handleClose} variant="outlined" color="error" style={cancelBtn}>
               close
             </Button>
           </Box>

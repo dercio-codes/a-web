@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
 
 export default function Images() {
-  const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained } =
+  const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained ,updatePictureAttribute } =
     useContext(USER_CONTEXT);
 
   const handleImage = async (url) => {
@@ -46,15 +46,27 @@ export default function Images() {
     console.log(avaters, "official data");
   }, []);
 
-  const changeAvatorHandler = () => {
-    console.log("hello");
-  };
+   const handleConfirm = async (avaters)=>{
+    
+         const accepted =  window.confirm('are you sure you want to update profile picture?')
+         
+         if(accepted){
+              setImgProfile(avaters);
+              updatePictureAttribute(avaters)
+              setIsContained(true);
+         }
+    
+  }
+
+
+  
+
 
   return (
-    <Box style={container} onClick={changeAvatorHandler}>
+    <Box style={container}>
       {avaters.map((profile, index) => {
         return (
-          <div key={index}>
+          <Box key={index}>
             <img
               src={profile}
               alt="avaterImage"
@@ -62,12 +74,10 @@ export default function Images() {
               height={70}
               style={images}
               onClick={() => {
-                setImgProfile(profile);
-                setIsContained(true);
-                handleImage(profile);
+                handleConfirm(profile)
               }}
             />
-          </div>
+          </Box>
         );
       })}
     </Box>
@@ -76,10 +86,16 @@ export default function Images() {
 
 const container = {
   display: "flex",
-  overflowY: "auto",
+  width:"100%",
+  gap:10,
+  height:"100%",
+  // border:"1px solid red",
+  overflowX: "auto",
+  flexWrap:'wrap'
 };
 
 const images = {
-  borderRadius: "10px",
+  borderRadius: "100%",
   cursor: "pointer",
+
 };
