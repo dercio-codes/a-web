@@ -1,41 +1,27 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import Box from "@mui/material/Box";
 import ShowCard from "./ShowCard";
 import Typography from "@mui/material/Typography";
-import data from "./test.json";
-import ShowHeader from "./ShowsHeader";
 import { useEffect, useState, useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
 import Link from "next/link";
-import axios from "axios";
-import Whatlive from "../greenlight-components/greenlight-shows/Whatlive";
+import { ShowsContext } from "../../context/ShowContext";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-// import "./styles.css";
-
-// import required modules
 import { Pagination, Navigation } from "swiper";
+import axios from "axios";
 
-export default function ShowsDisplay({
-  shows,
-  background,
-  img,
-  height,
-  width,
-  logo,
-  title,
-}) {
+
+
+export default function ShowsDisplay({shows}) {
+
   //states
   const [open, setOpen] = React.useState(false);
+ 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [empty, setEmpty] = useState(true);
@@ -43,18 +29,46 @@ export default function ShowsDisplay({
   const { showsDetails, setShowsDetails } = useContext(USER_CONTEXT);
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#FFFFFF");
+  const { show, getShow } = useContext(ShowsContext);
+  
+  const [episodes,setEpisodes] = useState([])
+  
+//  const getEpisodes = async (show) => {
+//     const episodeResponse = await axios.get(`${show.showsMetaData}`)
+//     console.log("episode here : " , episodeResponse)
+//     setEpisodes(episodeResponse.data.episodes)
+//   }
+  
 
-  const getEpisodes = () => {
-    setTimeout(() => {
-      setEmpty(false);
-    }, 3000);
-  };
+  // const getEpisodes =  () => {
+  //   shows.map(async(show)=>{
+      
+  //   })
+  // } 
+
+  // useEffect (() => {
+  //   getEpisodes(show)
+  // },[shows])
+
+// useEffect (() => {
+//   fetch("https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-shows")
+//   .then(res=> res.json())
+//   .then (data => console.log(data ,'episode collection'))
+// },[])
+
+    // getEpisodes(show);
+
+
   return (
     <Box>
       <Box>
-        {shows.map((show, index) => (
-          <Box>
+        {shows.map((show, index) => {
+          // getEpisodes(show)
+          return(
+            <Box>
+                <Box>
             {/* The shows header title */}
+ 
             <Box
               className="active-tv-font"
               sx={{
@@ -67,9 +81,9 @@ export default function ShowsDisplay({
             >
               {show.Title.replace(/-/g, " ")}
             </Box>
-
             {/* The shows with available episodes */}
             <Box sx={{ display: "flex", width: "100%" }}>
+
               {/* The shows image */}
               <Box
                 sx={{
@@ -78,17 +92,6 @@ export default function ShowsDisplay({
                   border: "2px lightgrey solid",
                   borderRadius: "12px",
                   marginBottom: "70px",
-
-                  // filter: "blur(0px)",
-
-                  // "&:hover": {
-                  //   cursor: "pointer",
-                  //   border: "2px #757575 solid",
-                  //   transition: "0.8s",
-                  //   transform: "scale(0.9)",
-                  //   backgroundRepeat: "repeat",
-                  //   backgroundSize: "contain",
-                  // },
                 }}
               >
                 <a>
@@ -131,16 +134,13 @@ export default function ShowsDisplay({
               {/* The shows Episodes */}
               <Box
                 sx={{
-                  border: "1px solid yellow",
                   width: "70%",
                   marginLeft: "30px",
                   height: "220px",
-                  display:"flex",
-                  // alignItems:"center",
-                  // justifyContent:"center",
-                  flexDirection:"column"
                 }}
               >
+
+                <Box sx={{ height:"220px", display:"flex", alignItems:"center", justifyContent:"Center",flexDirection:"column"}}>
                 <Box
                   sx={{
                     display: "flex",
@@ -164,8 +164,6 @@ export default function ShowsDisplay({
                         borderRadius: "17px",
                         fontSize: "12px",
                         cursor: "pointer",
-                        border:"1px solid red",
-
                         "&:hover": {
                           background: "white",
                           color: "#000",
@@ -177,8 +175,7 @@ export default function ShowsDisplay({
                     </Typography>
                   </Link>
                 </Box>
-
-                {/* <Box sx={{border:"1px solid blue", height:"180px", display:"flex", alignItems:"center", justifyContent:"Center"}}>
+     
                   <Swiper
                     slidesPerView={3}
                     spaceBetween={30}
@@ -188,22 +185,27 @@ export default function ShowsDisplay({
                     navigation={true}
                     modules={[Pagination, Navigation]}
                   >
-                    <SwiperSlide>Slide 1</SwiperSlide>
-                    <SwiperSlide>Slide 2</SwiperSlide>
-                    <SwiperSlide>Slide 3</SwiperSlide>
-                    <SwiperSlide>Slide 4</SwiperSlide>
-                    <SwiperSlide>Slide 5</SwiperSlide>
-                    <SwiperSlide>Slide 6</SwiperSlide>
-                    <SwiperSlide>Slide 7</SwiperSlide>
-                    <SwiperSlide>Slide 8</SwiperSlide>
-                    <SwiperSlide>Slide 9</SwiperSlide>
-                  </Swiper>
-                </Box> */}
+                      <SwiperSlide>
+                     {/* {
+                      show.episodes.map((item , index)=>{
+                        return( 
+                          <Box key={index} sx={{border:"1px solid red", marginLeft:"50px"}}>
+                            <p>{item.Title}</p>
+                          </Box>
+                        )})}  */}
+                   </SwiperSlide>
+               
+                    </Swiper>
+                </Box>
 
               </Box>
             </Box>
           </Box>
-        ))}
+              
+
+
+            </Box>
+        )})}
       </Box>
     </Box>
   );

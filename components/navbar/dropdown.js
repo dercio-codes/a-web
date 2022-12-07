@@ -340,6 +340,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    zIndex:"1px",
     // border: "1px solid white",
   },
 };

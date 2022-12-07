@@ -18,7 +18,7 @@ const ShowsEpisodes = () => {
 
   return (
     <Box
-      style={{ background: "#111", height: "100vh", flexDirection: "column" }}
+      style={{ background: "#111", flexDirection: "column" }}
     >
       <Box
         sx={{
@@ -29,9 +29,8 @@ const ShowsEpisodes = () => {
           backgroundPosition: "top-center",
           backgroundRepeat: "no-repeat",
           paddingTop: "100px",
-        }}
-      ></Box>
-      <div>
+        }}></Box>
+      <Box>
         {show?.showJson?.episodes.length === 0 ? (
           <Box sx={{ textAlign: "center", padding: "24px 0px" }}>
             <Typography className="active-tv-font" color="#eee" variant="h3">
@@ -44,7 +43,7 @@ const ShowsEpisodes = () => {
             episodes={show.showJson.episodes}
           />
         )}
-      </div>
+      </Box>
     </Box>
   );
 };

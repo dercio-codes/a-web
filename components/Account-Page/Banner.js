@@ -91,7 +91,7 @@ const Banner = () => {
               backgroundColor: "#fff203",
               width: "423px",
               height: "50px",
-              borderRadius: "5px",
+              borderRadius: "3px",
               border: "none",
               margin: "35px 0 0 2px",
               fontFamily: "Arcade Normal",
