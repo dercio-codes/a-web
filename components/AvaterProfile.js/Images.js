@@ -48,7 +48,7 @@ export default function Images() {
 
    const handleConfirm = async (avaters)=>{
     
-         const accepted =  window.confirm('are you sure you want to update profile picture?')
+         const accepted =  window.confirm('are you sure you want to update the profile picture?')
          
          if(accepted){
               setImgProfile(avaters);
@@ -59,7 +59,6 @@ export default function Images() {
   }
 
 
-  
 
 
   return (
