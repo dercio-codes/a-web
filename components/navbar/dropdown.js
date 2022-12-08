@@ -20,7 +20,7 @@ import { USER_CONTEXT } from "../../context/MainContext";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
-// import StarsIcon from "@mui/icons-material/StarsIcon";
+import StarsIcon from "@mui/icons-material/Stars";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useFavourite } from "../../context/addFavouriteContext";
 // import LoginIcon from '@mui/icons-material/Login';
@@ -259,7 +259,7 @@ export default function PositionedPopper({ user, userInitial }) {
                   Router.push("/AddToFavourite");
                 }}
               >
-                <SettingsIcon sx={{ color: "#fff", marginRight: "16px" }} />
+                <StarsIcon sx={{ color: "#fff", marginRight: "16px" }} />
                 <Typography 
                 className={"active-tv-font"}
                   variant="p"

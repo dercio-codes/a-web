@@ -1,7 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -60,8 +59,8 @@ const Footer = () => {
       <Box sx={overLay}>
         <Box sx={container2}>
           <Box sx={container3}>
-            <Link href="/">
-              <a>
+            <Link href="/terms_and_conditions">
+              <a target="_blank">
                 <Typography
                   className="active-tv-font"
                   align="center"
