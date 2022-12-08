@@ -6,7 +6,7 @@ import { useDispatchFavourite } from "../../context/addFavouriteContext";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
+import Link from 'next/link'
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -72,7 +72,8 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
               justifyContent: "flex-start",
             }}
           >
-            <ShowsCard
+           <Box sx={{border:"1px solid red", background:"black"}}>
+           <ShowsCard
               background={banners[index]}
               height={height}
               width={width}
@@ -81,6 +82,7 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
               img={item.CoverArtLarge}
             />
             <button onClick={() => addToFavourite(item)}>Add</button>
+           </Box>
           </SwiperSlide>
         ))}
       </Swiper>

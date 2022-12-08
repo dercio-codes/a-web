@@ -5,6 +5,7 @@ import {
 } from "../context/addFavouriteContext";
 import { Box, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import Link from "next/link"
 
 export default function Store() {
   const item = useFavourite();
@@ -33,7 +34,11 @@ export default function Store() {
     <Box sx={favouritesContainer}>
       {item.map((items, index) => (
         <Box key={index} sx={showsIndex}>
+        <Link href={`/shows-episodes/${items.Title}`} key={index}>
+          <a>
           <Box><img src={items.CoverArtLarge} width={253} height={129} style={{borderTopRightRadius:"10px",borderTopLeftRadius:"10px"}}/></Box>
+        </a>
+        </Link>
           <Box sx={{display:"flex", alignItems:"center", justifyContent:"center", justifyContent:"space-around"}}>
           <Typography
           className={"active-tv-font"}
@@ -41,7 +46,7 @@ export default function Store() {
           color="#fff"
           fontSize={10}
           >{items.Title}</Typography>
-          <button onClick={() => handleRemove(index)}><DeleteIcon color="error" sx={{fontSize:"15px", cursor:"pointer"}}/></button>
+          <button onClick={() => handleRemove(index)} style={{border:"none", background:"#121212", marginTop:"3px"}}><DeleteIcon color="error" sx={{fontSize:"15px", cursor:"pointer"}}/></button>
           </Box>
         </Box>
       ))}
