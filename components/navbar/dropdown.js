@@ -20,15 +20,18 @@ import { USER_CONTEXT } from "../../context/MainContext";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
+// import StarsIcon from "@mui/icons-material/StarsIcon";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import { useFavourite } from "../../context/addFavouriteContext";
 // import LoginIcon from '@mui/icons-material/Login';
-
+// import StarsIcon from '@mui/icons-material/Stars';
 export default function PositionedPopper({ user, userInitial }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState();
   // const [loggedIn , setLoggedIn]  = React.useState(true)
+
+
   const {
     loggedIn,
     setLoggedIn,
@@ -49,6 +52,7 @@ export default function PositionedPopper({ user, userInitial }) {
     setPlacement(newPlacement);
   };
 
+
   async function signOut() {
     if (loggedIn) {
       try {
@@ -64,6 +68,8 @@ export default function PositionedPopper({ user, userInitial }) {
       console.log("there is no user logged in at thr currentSeession");
     }
   }
+
+  const item = useFavourite();
 
   return (
     <Box sx={{ width: 100, zIndex: 1000 }}>
@@ -236,6 +242,35 @@ export default function PositionedPopper({ user, userInitial }) {
                   Need help?
                 </Typography>
               </Button>
+
+
+              <Button
+                variant="text"
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  "&:hover": {
+                    background: "transparent",
+                  },
+                }}
+                onClick={() => {
+                  Router.push("/AddToFavourite");
+                }}
+              >
+                <SettingsIcon sx={{ color: "#fff", marginRight: "16px" }} />
+                <Typography 
+                className={"active-tv-font"}
+                  variant="p"
+                  color="#fff"
+                  fontSize={10} >
+                Favourites({item.length})
+              </Typography>
+              </Button>
+              
+
+
               {loggedIn ? (
                 <Button
                   variant="text"

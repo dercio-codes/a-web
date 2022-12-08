@@ -2,7 +2,7 @@ import { Typography, Box } from "@mui/material";
 import ShowsCard from "./ShowsCard";
 import ShowsHeader from "./ShowsHeader";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useDispatchFavourite } from "../../context/addFavouriteContext";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -11,7 +11,7 @@ import { Pagination, Navigation, Autoplay } from "swiper";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Homeshows = ({ latestVid, title, height, width }) => {
+const Homeshows = ({ latestVid, title, height, width, shows }) => {
   const [showsContainer, setShowsContainer] = useState([]);
   const getShows = async () => {
     const getShowsResponse = await axios.get(
@@ -32,6 +32,12 @@ const Homeshows = ({ latestVid, title, height, width }) => {
     getShows();
   }, []);
 
+  const dispatch = useDispatchFavourite();
+
+  const addToFavourite = (bucket) => {
+    dispatch({ type: "ADD", bucket})
+  }
+ 
   return (
     <Box
       sx={{
@@ -74,6 +80,7 @@ const Homeshows = ({ latestVid, title, height, width }) => {
               logo={item.CoverArtLarge}
               img={item.CoverArtLarge}
             />
+            <button onClick={() => addToFavourite(item)}>Add</button>
           </SwiperSlide>
         ))}
       </Swiper>

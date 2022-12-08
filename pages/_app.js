@@ -12,6 +12,8 @@ import { FlashlightOnRounded } from "@mui/icons-material";
 import axios from "axios";
 
 import { ShowsProvider } from "../context/ShowContext";
+import { FavouriteProvider } from "../context/addFavouriteContext";
+
 
 function MyApp({ Component, pageProps }) {
   Amplify.configure(CurrentConfig); //moved this file inside the module
@@ -26,7 +28,7 @@ function MyApp({ Component, pageProps }) {
   const [avaters, setAvaters] = useState([]);
   const [imgProfile, setImgProfile] = useState("");
   const [isContained, setIsContained] = useState(false);
-  const [picture , setPicture] = useState('')
+  const [picture, setPicture] = useState("");
   const [showsDetails, setShowsDetails] = useState({
     title: "",
     img: "imortal.webp",
@@ -81,23 +83,15 @@ function MyApp({ Component, pageProps }) {
   };
 
   //update user profile img
-
   const updatePictureAttribute = async (pictureAttribute) => {
     let user = await Auth.currentAuthenticatedUser().then((user) => user);
 
     await Auth.updateUserAttributes(user, {
       picture: pictureAttribute,
-      
     });
     await Router.push("/account");
     ForceReload();
   };
-
-
-
-
-
-
 
   const checkUser = async () => {
     await Auth.currentAuthenticatedUser({
@@ -108,7 +102,7 @@ function MyApp({ Component, pageProps }) {
         const currentUser = user.attributes.email;
         const DisplayUser = user.attributes.name;
         const sub = user.attributes.sub;
-        const picture = user.attributes.picture
+        const picture = user.attributes.picture;
 
         //retrieve web-token
         const token = user.signInUserSession.idToken.jwtToken;
@@ -119,7 +113,7 @@ function MyApp({ Component, pageProps }) {
         // our setters
         setUser(currentUser);
         setDisplayName(DisplayUser);
-        setImgProfile(picture)
+        setImgProfile(picture);
         setLoggedIn(true);
 
         //testing logs
@@ -141,45 +135,48 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <USER_CONTEXT.Provider
-      value={{
-        isContained,
-        setIsContained,
-        updateAttributes,
-        UserContext,
-        imgProfile,
-        setImgProfile,
-        authorisedJWT,
-        setAuthorisedJWT,
-        displayName,
-        selectedCategory,
-        loggedIn,
-        ForceReload,
-        ForceRedirect,
-        setLoggedIn,
-        setUser,
-        setSelectedCategory,
-        showsDetails,
-        setShowsDetails,
-        subCode,
-        setSubCode,
-        avaters,
-        setAvaters,
-        picture,
-        setPicture,
-        updatePictureAttribute,
-        AuthenticatedUser: {
-          name: user,
-          email: user,
-        },
-      }}
-    >
-      <Navbar />
-      <ShowsProvider>
-        <Component {...pageProps} />
-      </ShowsProvider>
-      <Footer />
-    </USER_CONTEXT.Provider>
+    <FavouriteProvider>
+      <USER_CONTEXT.Provider
+        value={{
+          isContained,
+          setIsContained,
+          updateAttributes,
+          UserContext,
+          imgProfile,
+          setImgProfile,
+          authorisedJWT,
+          setAuthorisedJWT,
+          displayName,
+          selectedCategory,
+          loggedIn,
+          ForceReload,
+          ForceRedirect,
+          setLoggedIn,
+          setUser,
+          setSelectedCategory,
+          showsDetails,
+          setShowsDetails,
+          subCode,
+          setSubCode,
+          avaters,
+          setAvaters,
+          picture,
+          setPicture,
+          updatePictureAttribute,
+          AuthenticatedUser: {
+            name: user,
+            email: user,
+          },
+        }}
+      >
+        <Navbar />
+
+        <ShowsProvider>
+          <Component {...pageProps} />
+        </ShowsProvider>
+        <Footer />
+      </USER_CONTEXT.Provider>
+    </FavouriteProvider>
   );
 }
 

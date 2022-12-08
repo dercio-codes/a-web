@@ -7,13 +7,14 @@ import { useEffect, useState, useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
 import Link from "next/link";
 import { ShowsContext } from "../../context/ShowContext";
-
+import { useDispatchFavourite } from "../../context/addFavouriteContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 import axios from "axios";
+import { RadioButtonCheckedTwoTone } from "@mui/icons-material";
 
 
 
@@ -32,38 +33,64 @@ export default function ShowsDisplay({shows}) {
   const { show, getShow } = useContext(ShowsContext);
   
   const [episodes,setEpisodes] = useState([])
+
+  // const dispatch = useDispatchFavourite();
+  // const addToFavourite = (bucket) => {
+  //   dispatch({type: "ADD", bucket})
+  // };
   
 //  const getEpisodes = async (show) => {
-//     const episodeResponse = await axios.get(`${show.showsMetaData}`)
-//     console.log("episode here : " , episodeResponse)
-//     setEpisodes(episodeResponse.data.episodes)
+//     const response = await axios.get(`${show.showsMetaData}`)
+//     console.log("episode here : " , response)
+//     setEpisodes(response.data.episodes)
 //   }
   
 
-  // const getEpisodes =  () => {
-  //   shows.map(async(show)=>{
-      
-  //   })
-  // } 
-
-  // useEffect (() => {
-  //   getEpisodes(show)
-  // },[shows])
-
-// useEffect (() => {
-//   fetch("https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-shows")
-//   .then(res=> res.json())
-//   .then (data => console.log(data ,'episode collection'))
+// useEffect(() => {
+//   getEpisodes(show);
 // },[])
 
-    // getEpisodes(show);
 
+// useEffect ((show) => {
+// async function getEpisodes (show) {
+//     const episodeResponse = await axios.get(`${show.showsMetaData}`)
+//     setEpisodes(episodeResponse.data.episodes)
+//     return episodeResponse;
+//  } 
+//  getEpisodes(show)
+// },[show.showsMetaData])
+
+// console.log(episodes,"hello episodes")
+
+
+  // const [episodes,setEpisodes] = useState([])
+
+  // const loadData = async (show) => {
+  //   const response = await axios.get(`${show.showsMetaData}`);
+  //   setEpisodes(response.data.episodes);
+  // }
+
+  // useEffect(() => {
+  //   loadData();
+  // })
+
+  // console.log(response.data.episodes, "data response")
+  // const [value, setValue] = React.useState(0);
+  // const mediaUrl =
+  //   "https://active-studio-content-bucket.s3.us-east-2.amazonaws.com/Shows/";
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
+
+  // let numOfEp = props.episodes.map(({ seasonNum }) => seasonNum);
+  
 
   return (
     <Box>
       <Box>
         {shows.map((show, index) => {
-          // getEpisodes(show)
+          //  getEpisodes(show);
+
           return(
             <Box>
                 <Box>
@@ -127,6 +154,7 @@ export default function ShowsDisplay({shows}) {
                       src={show.CoverArtLarge}
                     />
                     {show.Title.replace(/-/g, " ")}
+                    {/* <button>add to favourite</button> */}
                   </Box>
                 </a>
               </Box>
@@ -186,13 +214,13 @@ export default function ShowsDisplay({shows}) {
                     modules={[Pagination, Navigation]}
                   >
                       <SwiperSlide>
-                     {/* {
-                      show.episodes.map((item , index)=>{
+                      {/* {
+                      episodes.map((item , index)=>{
                         return( 
                           <Box key={index} sx={{border:"1px solid red", marginLeft:"50px"}}>
                             <p>{item.Title}</p>
                           </Box>
-                        )})}  */}
+                        )})}   */}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                    </SwiperSlide>
                
                     </Swiper>

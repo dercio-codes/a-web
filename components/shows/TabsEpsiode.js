@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -10,6 +10,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 function TabPanel(props) {
   const { children, index, ...other } = props;
@@ -32,7 +33,6 @@ export default function TabsEpisode(props) {
     setValue(newValue);
   };
 
-
   let numOfSeasons = props.episodes.map(({ seasonNum }) => seasonNum);
   let seasonNums = [...new Set(numOfSeasons)];
 
@@ -51,7 +51,6 @@ export default function TabsEpisode(props) {
             paddingTop: "10px",
           }}
         >
-          episodes
         </Box>
         <Tabs
           value={value}
@@ -74,7 +73,8 @@ export default function TabsEpisode(props) {
         {seasonNums.map((num, index) => (
           <TabPanel key={index} value={value} index={index}>
             <Box style={{ marginLeft: "50px", marginTop: "20px" }}>
-              <Box
+
+                <Box
                 style={{
                   marginTop: "20px",
                   alignItems: "center",
@@ -87,8 +87,8 @@ export default function TabsEpisode(props) {
                   .map((episode, index) => {
                     console.log({ episode, index });
                     return (
-                      <div key={index} style={{ display: "flex" }}>
-                        <div className="Episodehover">
+                      <Box key={index} style={{ display: "flex" }}>
+                        <Box className="Episodehover">
                           <img
                             alt="image"
                             src={`${mediaUrl}${episode.showTitle}/episodes/${episode.Title}/large-${episode.thumbnailFilename}`}
@@ -102,7 +102,7 @@ export default function TabsEpisode(props) {
                               objectFit: "cover",
                             }}
                           />
-                          <div
+                          <Box
                             style={{
                               display: "flex",
                               alignItems: "center",
@@ -118,9 +118,9 @@ export default function TabsEpisode(props) {
                                 cursor: "pointer",
                               }}
                             />
-                          </div>
-                        </div>
-                        <div
+                          </Box>
+                        </Box>
+                        <Box
                           style={{
                             marginLeft: "45px",
                             color: "white",
@@ -142,11 +142,12 @@ export default function TabsEpisode(props) {
                               marginLeft: "45px",
                             }}
                           ></Box>
-                        </div>
-                      </div>
+                        </Box>
+                      </Box>
                     );
                   })}
               </Box>
+
             </Box>
           </TabPanel>
         ))}
