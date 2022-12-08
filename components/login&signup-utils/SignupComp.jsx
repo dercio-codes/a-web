@@ -58,18 +58,18 @@ const LoginComp = () => {
   };
 
   console.log("user", AuthenticatedUser);
-  const endpoint = `http://127.0.0.1:3000/store-users`;
+  const endpoint = `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/store-users`;
   const tokenHandler = async () => {
-    // const response = await axios({
-    //   method: "POST",
-    //   url: endpoint,
-    //   data :AuthenticatedUser,
-    //   // BearerToken: authorisedJWT,
-    //   // mode: 'no-cors',
-    //   });
-    const response = await axios.post(endpoint, AuthenticatedUser, {
-      "Content-Type": "application/json",
-    });
+    const response = await axios({
+      method: "POST",
+      url: endpoint,
+      data :{...AuthenticatedUser,},
+      // BearerToken: authorisedJWT,
+      // mode: 'no-cors',
+      });
+    // const response = await axios.post(endpoint, AuthenticatedUser, {
+    //   "Content-Type": "application/json",
+    // });
     console.log("RESPONSE=>", response);
   };
 
