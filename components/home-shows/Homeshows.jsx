@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 
 const Homeshows = ({ latestVid, title, height, width, shows }) => {
   const [showsContainer, setShowsContainer] = useState([]);
@@ -72,7 +73,7 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
               justifyContent: "flex-start",
             }}
           >
-           <Box sx={{border:"1px solid red", background:"black"}}>
+           <Box sx={{ borderRadius:"10px", display:"flex", flexDirection:"column",justifyContent:"flex-start"}}>
            <ShowsCard
               background={banners[index]}
               height={height}
@@ -81,7 +82,7 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
               logo={item.CoverArtLarge}
               img={item.CoverArtLarge}
             />
-            <button onClick={() => addToFavourite(item)}>Add</button>
+            <button onClick={() => addToFavourite(item)} style={{cursor:"pointer", width:"30px",height:"30px", display:"flex", alignItems:"center", justifyContent:"center"}}><TurnedInIcon/></button>
            </Box>
           </SwiperSlide>
         ))}
