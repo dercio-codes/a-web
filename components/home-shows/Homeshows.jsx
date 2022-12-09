@@ -73,7 +73,6 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
               justifyContent: "flex-start",
             }}
           >
-           <Box sx={{ borderRadius:"10px", display:"flex", flexDirection:"column",justifyContent:"flex-start"}}>
            <ShowsCard
               background={banners[index]}
               height={height}
@@ -82,8 +81,7 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
               logo={item.CoverArtLarge}
               img={item.CoverArtLarge}
             />
-            <button onClick={() => addToFavourite(item)} style={{cursor:"pointer", width:"30px",height:"30px", display:"flex", alignItems:"center", justifyContent:"center"}}><TurnedInIcon/></button>
-           </Box>
+            <button onClick={() => addToFavourite(item)} style={{cursor:"pointer", width:"30px",height:"30px", display:"flex", alignItems:"center", justifyContent:"center", position:"relative", paddingRight:"40px"}}><TurnedInIcon/></button>
           </SwiperSlide>
         ))}
       </Swiper>

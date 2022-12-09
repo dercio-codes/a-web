@@ -18,12 +18,12 @@ const ShowsCard = ({ background, img, height, width, logo, title }) => {
         border: "2px #757575 solid",
         position: "relative",
         borderRadius: "12px",
-        // marginRight: "12px",
+        marginRight: "12px",
         "&:hover": {
           cursor: "pointer",
           border: "2px lightgray solid",
           transition: "0.9s",
-          transform: "scale(0.95)",
+          // transform: "scale(0.95)",
           backgroundImage: `url("${background}")`,
           backgroundRepeat: "repeat",
           backgroundSize: "contain",
@@ -40,6 +40,7 @@ const ShowsCard = ({ background, img, height, width, logo, title }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          position:"absolute",
         }}
       >
         <Box
