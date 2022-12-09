@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
 
-const ShowsCard = ({ img, height, width }) => {
+const ShowsCard = ({ background, img, height, width, logo, title }) => {
   return (
     <Box
       sx={{
@@ -12,18 +12,21 @@ const ShowsCard = ({ img, height, width }) => {
         }`,
         background: `url(${img})`,
         backgroundPosition: "center",
-        backgroundSize: "cover",
+        backgroundSize:
+          height == "LG" ? "cover" : height == "MD" ? "cover" : "cover",
         backgroundRepeat: "no-repeat",
         border: "2px #757575 solid",
         position: "relative",
         borderRadius: "12px",
         marginRight: "12px",
         "&:hover": {
+          cursor: "pointer",
           border: "2px lightgray solid",
           transition: "0.6s",
           transform: "scale(1.1)",
-          backgroundImage:
-            "url('https://media0.giphy.com/media/a3kI3iHFoYzSaEbp0U/giphy.gif?cid=ecf05e47ve9i6m9qk5zcvp2saloti1yyxdl23cfi3gltux5z&rid=giphy.gif&ct=g')",
+          backgroundImage: `url("${background}")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "contain",
         },
       }}
     >
@@ -65,7 +68,7 @@ const ShowsCard = ({ img, height, width }) => {
             justifyContent: "space-between",
             alignItems: "center",
             padding: "8px",
-            background: "rgba(0,0,0,0.5)",
+            background: "rgba(0,0,0,0.8)",
           }}
         >
           <Box
@@ -75,16 +78,17 @@ const ShowsCard = ({ img, height, width }) => {
           >
             <img
               style={{ width: "45px", height: "45px", borderRadius: "50%" }}
-              src="https://images.watchcorridor.com/i/bfaab7bf-711f-4c59-9dea-75e994342147.jpg"
+              src={logo}
             />
           </Box>
           <Box>
             <Typography
               sx={{
                 color: "white",
+                fontWeight: "600",
               }}
             >
-              episode 5
+              {title}
             </Typography>
           </Box>
         </Box>

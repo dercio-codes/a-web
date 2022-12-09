@@ -3,41 +3,40 @@ import Navbar from "../components/navbar";
 import { USER_CONTEXT } from "../context/MainContext";
 import { useContext, useState, useEffect } from "react";
 import { Palette } from "@universemc/react-palette";
-
-//amplify imports
-import { Amplify, Auth } from 'aws-amplify';
+import Router from "next/router";
+import Footer from "../components/footer/Footer";
+import { Amplify, Auth } from "aws-amplify";
 import { Hub, Logger } from "aws-amplify";
-// import awsconfig from "./../components/utils/CognitoConfig";
-import {CurrentConfig} from './../components/utils/CognitoConfig' //added curly braces for import signinficance
+import { CurrentConfig } from "./../components/utils/CognitoConfig"; //added curly braces for import signinficance
 import { FlashlightOnRounded } from "@mui/icons-material";
-import axios from 'axios'
+import axios from "axios";
 
-import { ShowsProvider } from '../context/ShowContext'
-
+import { ShowsProvider } from "../context/ShowContext";
+import { FavouriteProvider } from "../context/addFavouriteContext";
+import { API_INSTANCE } from "../config/api-instance";
 
 function MyApp({ Component, pageProps }) {
-
   Amplify.configure(CurrentConfig); //moved this file inside the module
-
 
   const UserContext = useContext(USER_CONTEXT);
   const [selectedCategory, setSelectedCategory] = useState("None");
-  const [user, setUser] = useState("Activetv@gmail.com")
-  const [subCode, setSubCode] = useState("no-sub-user")
-  const [displayName, setDisplayName] = useState("display name")
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [authorisedJWT, setAuthorisedJWT] = useState("no token valid")
+  const [user, setUser] = useState("Activetv@gmail.com");
+  const [subCode, setSubCode] = useState("no-sub-user");
+  const [displayName, setDisplayName] = useState("display name");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [authorisedJWT, setAuthorisedJWT] = useState("no token valid");
+  const [avaters, setAvaters] = useState([]);
+  const [imgProfile, setImgProfile] = useState("");
+  const [isContained, setIsContained] = useState(false);
+  const [picture, setPicture] = useState("");
   const [showsDetails, setShowsDetails] = useState({
-    title: '',
-    img: 'imortal.webp',
-    episodes: []
-  })
-
-
-
-  const ForceReload = () => window.location.reload()
-
-
+    title: "",
+    img: "imortal.webp",
+    episodes: [],
+  });
+  const [userAccount, setUserAccount] = useState({ email: "",favourites : [] });
+  const ForceReload = () => window.location.reload();
+  const ForceRedirect = (direction) => (document.location.href = direction);
 
   //hub listeners
   Hub.listen("auth", (data) => {
@@ -59,100 +58,159 @@ function MyApp({ Component, pageProps }) {
     }
   });
 
-
   //test for federation
   const fetchUserInfo = (domain) => {
-    //let domain = 'activetv38fde85b-38fde85b-dev.auth.us-east-2.amazoncognito.com'
     // the original call  axios.get('https://<your-user-pool-domain>/oauth2/userInfo')
-    axios.get(`https://${domain}/oauth2/userInfo`)
-      .then((response) => console.log(response, 'fetching userInfo info with axios'))
-      .catch(err => console.log('failing to fetch user from axios bcz', err.message))
-  }
-
+    axios
+      .get(`https://${domain}/oauth2/userInfo`)
+      .then((response) =>
+        console.log(response, "fetching userInfo info with axios")
+      )
+      .catch((err) =>
+        console.log("failing to fetch user from axios bcz", err.message)
+      );
+  };
   //updating attributes-or-change-the-values
-  const updateAttributes = async (user, nameAttibute,emailAttribute) => {
+  const updateAttributes = async (nameAttibute, emailAttribute) => {
+    let user = await Auth.currentAuthenticatedUser().then((user) => user);
+
     await Auth.updateUserAttributes(user, {
-      //'name': 'nameAttribute',
-      //'email':'emailAttributes'
+      name: nameAttibute,
+      email: emailAttribute,
     });
-  }
+    await Router.push("/account");
+    ForceReload();
+  };
 
+  //update user profile img
+  const updatePictureAttribute = async (pictureAttribute) => {
+    let user = await Auth.currentAuthenticatedUser().then((user) => user);
 
+    await Auth.updateUserAttributes(user, {
+      picture: pictureAttribute,
+    });
+    await Router.push("/account");
+    ForceReload();
+  };
+
+  //storing user to dynamo db
+  const storeUserToDynamo = async (user) => {
+    // if (userAccount.email) return
+      const res = await fetch(
+        "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: user.attributes.email,
+            displayName: user.attributes.name,
+            favourites : []
+          }),
+        }
+      );
+      let data = await res.json()
+      console.log("stored user", data);
+    
+  };
 
   const checkUser = async () => {
-
     await Auth.currentAuthenticatedUser({
-      bypassCache: false
+      bypassCache: false,
     })
-      .then(user => {
-
+      .then((user) => {
         //assign context variables
-        const currentUser = user.attributes.email
-        const DisplayUser = user.attributes.name
-        const sub = user.attributes.sub
+        const currentUser = user.attributes.email;
+        const DisplayUser = user.attributes.name;
+        const sub = user.attributes.sub;
+        const picture = user.attributes.picture;
 
         //retrieve web-token
-        const token = user.signInUserSession.idToken.jwtToken
-        setAuthorisedJWT(token)
-        setSubCode(sub)
-        console.log(authorisedJWT, 'how to access jwt statefully')
+        const token = user.signInUserSession.idToken.jwtToken;
+        setAuthorisedJWT(token);
+        setSubCode(sub);
+        console.log(authorisedJWT, "how to access jwt statefully");
 
         // our setters
-        setUser(currentUser)
-        setDisplayName(DisplayUser)
-        setLoggedIn(true)
+        setUser(currentUser);
+        setDisplayName(DisplayUser);
+        setImgProfile(picture);
+        setLoggedIn(true);
 
         //testing logs
-        console.log('attributes:', user.attributes);
-        console.log(user, '=> user in current authenticated')
-        console.log("userEmail after succesfull login: ", currentUser)
-        console.log("displayName after succesfull login: ", DisplayUser)
+        console.log("attributes:", user.attributes);
+        console.log(user, "=> user in current authenticated");
+        console.log("userEmail after succesfull login: ", currentUser);
+        console.log("displayName after succesfull login: ", DisplayUser);
 
+        //storing the user to dynamo db once sign up is successful
+        storeUserToDynamo(user);
       })
       .catch((error) => {
         //error handling
-        console.log("failed to get the existing user because ", error)
-        setUser("Active-tv")
-        setLoggedIn(false)
-      })
-  }
+        console.log("failed to get the existing user because ", error);
+        setUser("Active-tv");
+        setLoggedIn(false);
+      });
+  };
 
+  const getUserFromDynamo = async (userEmail) => {
+    if (userEmail === "Activetv@gmail.com" || userEmail === "Active-tv") return;
+    const res = await axios.get(
+      `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-account/${userEmail}`
+    );
+    setUserAccount(res.data.user);
+    console.log("user from dynamo", res.data);
+  };
 
   useEffect(() => {
-    checkUser()
-  }, [])
+    checkUser();
+    getUserFromDynamo(user);
+  }, []);
 
   return (
-    <USER_CONTEXT.Provider
+    <FavouriteProvider>
+      <USER_CONTEXT.Provider
+        value={{
+          isContained,
+          setIsContained,
+          updateAttributes,
+          UserContext,
+          imgProfile,
+          setImgProfile,
+          authorisedJWT,
+          setAuthorisedJWT,
+          displayName,
+          selectedCategory,
+          loggedIn,
+          ForceReload,
+          ForceRedirect,
+          setLoggedIn,
+          setUser,
+          setSelectedCategory,
+          showsDetails,
+          setShowsDetails,
+          subCode,
+          setSubCode,
+          avaters,
+          setAvaters,
+          picture,
+          setPicture,
+          updatePictureAttribute,
+          AuthenticatedUser: {
+            name: user,
+            email: user,
+          },
+          userAccount
+        }}
+      >
+        <Navbar />
 
-      value={{
-        UserContext,
-        authorisedJWT,
-        setAuthorisedJWT,
-        displayName,
-        selectedCategory,
-        loggedIn,
-        ForceReload,
-        setLoggedIn,
-        setUser,
-        setSelectedCategory,
-        showsDetails,
-        setShowsDetails,
-        subCode,
-        setSubCode,
-        AuthenticatedUser: {
-          name: user,
-          email: user
-        }
-      }}
-    >
-      <Navbar />
-      <ShowsProvider>
-        <Component {...pageProps} />
-      </ShowsProvider>
-    </USER_CONTEXT.Provider>
+        <ShowsProvider>
+          <Component {...pageProps} />
+        </ShowsProvider>
+        <Footer />
+      </USER_CONTEXT.Provider>
+    </FavouriteProvider>
   );
 }
 
 export default MyApp;
-

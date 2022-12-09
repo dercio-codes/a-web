@@ -36,7 +36,6 @@ const Produts = () => {
               productName={product.title}
               productPrice={`R ${product.price}`}
               productDescription={product.description}
-              // productRating={product.rate}
             />
           </Grid>
         ))}

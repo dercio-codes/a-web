@@ -76,6 +76,25 @@ const LoginComp = () => {
     }
   }
 
+  const endpoint = `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/cognito_pool/get-shows`;
+  const tokenHalndler = async () => {
+    const response = await axios({
+      method: "get",
+      url: endpoint,
+      Authorization: `Bearer ${authorisedJWT} `,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT,DELETE",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type",
+        "Access-Control-Allow-Credentials": true,
+        Authorization: `Bearer ${authorisedJWT} `,
+      },
+    });
+    console.log(response);
+  };
+
   // submit form
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -165,6 +184,7 @@ const LoginComp = () => {
               </Box>
               <Box sx={{ ...loginStyles.buttonContainer }}>
                 <Button
+                  // onClick={tokenHalndler}
                   sx={{ ...loginStyles.loginBtn }}
                   variant="contained"
                   className={"active-tv-font"}
@@ -207,8 +227,6 @@ const LoginComp = () => {
                 <Button
                   onClick={() => {
                     GoogleSignin();
-                    // Auth.federatedSignIn({provider:CognitoHostedUIIdentityProvider.Google})
-                    // Auth.federatedSignIn({ provider: "Google" });
                   }}
                   sx={{ ...loginStyles.socialBtn }}
                   variant="contained"
@@ -226,8 +244,6 @@ const LoginComp = () => {
                   className={"active-tv-font"}
                   onClick={() => {
                     FacebookSignin();
-                    // Auth.federatedSignIn({provider:CognitoHostedUIIdentityProvider.Facebook})
-                    // Auth.federatedSignIn({ provider: "Facebook" });
                   }}
                 >
                   <FacebookIcon sx={{ margin: "0 10px" }} />
@@ -368,7 +384,6 @@ const loginStyles = {
     },
   },
   formContainer: {
-    // border: "1px solid red",
     height: "100%",
     width: {
       md: "50%",
@@ -382,7 +397,6 @@ const loginStyles = {
     },
   },
   header: {
-    //  border:'1px solid blue',
     minHeight: "250px",
     display: "flex",
     alignItems: "center",
@@ -399,14 +413,12 @@ const loginStyles = {
       sm: "0px",
       xs: "0px",
     },
-    // border: "1px solid yellow",
-    // padding: "20px 0",
+
     color: "white",
   },
   input: {
     width: "100%",
     height: "50px",
-    // padding: " 0 5px",
     fontSize: "15px",
     background: "#fff",
     display: "flex",
@@ -423,7 +435,6 @@ const loginStyles = {
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    // border:'1px solid red',
     padding: {
       md: "5px 0",
       sm: " 5px 10px",
@@ -467,7 +478,6 @@ const loginStyles = {
   fieldset: {
     border: "none",
     borderTop: "1px solid #f2f2f2",
-    // border:'4px 0  2px 1px solid grey',
   },
   legend: {
     margin: "0 auto",

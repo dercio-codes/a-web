@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,20 +13,24 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Dropdown from "./dropdown";
 import Link from "next/link";
+import axios from "axios";
 import { USER_CONTEXT } from "../../context/MainContext";
+import { useContext } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { isEmpty } from "@aws-amplify/core";
 
 const Navbar = () => {
   const pages = ["Home", "Shows", "Greenlight", "Merch", "Learn More"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   const UserContext = React.useContext(USER_CONTEXT);
-
-  // destructuring the authenticated user from context
-  const { AuthenticatedUser } = React.useContext(USER_CONTEXT);
-  // //user initial
-  const currentUser = AuthenticatedUser.name
-  const userIntial = currentUser.charAt(0)
-
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
+  const { AuthenticatedUser, authorisedJWT, loggedIn, setLoggedIn } =
+    React.useContext(USER_CONTEXT);
+  const currentUser = AuthenticatedUser.name;
+  const userIntial = currentUser.charAt(0);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -47,15 +51,27 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  useEffect(() => {
+    const loadingPosts = async () => {
+      setLoading(true);
+      const response = await axios.get(
+        "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-shows"
+      );
+
+      setPosts(response.data);
+      setLoading(false);
+    };
+    loadingPosts();
+  }, []);
+
+  const limit = 5;
+
   return (
     <AppBar
       position="sticky"
       sx={{
-        // background: "#111",
-        // background:'linear-gradient(to bottom, #131313, #111, #181818)',
         background: "black",
         height: "70px",
-        // padding:'10px 0'
       }}
     >
       <Container maxWidth="xl" sx={{ paddingTop: "0px" }}>
@@ -64,20 +80,13 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ mr: 2, display: { xs: "none", md: "flex", sm: "" } }}
           >
-            {/* <img
-              src="https://www.activetvonline.co.za/static/media/logo.718a6dab.png"
-              alt=""
-              height="70px"
-            /> */}
             <Box
               sx={{
                 height: "60px",
                 width: "70px",
-                backgroundImage: 'url("ATV_logo.png")'
-                // 'url("https://www.activetvonline.co.za/static/media/logo.718a6dab.png")'
-                ,
+                backgroundImage: 'url("ATV_logo.png")',
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -144,7 +153,6 @@ const Navbar = () => {
               display: { xs: "none", md: "flex" },
               paddingTop: "0px",
               height: "70px",
-              // border: "0.1px solid #32a453",
               alignItems: "center",
             }}
           >
@@ -159,8 +167,8 @@ const Navbar = () => {
                     display: "block",
                     fontSize: "12px",
                     "&:hover": {
-                      color: "#12171f",
-                      borderBottom: "1px solid #12171F",
+                      color: "#32a453",
+                      borderBottom: "1px solid #32a453",
                     },
                   }}
                 >
@@ -201,8 +209,8 @@ const Navbar = () => {
                     display: "block",
                     fontSize: "12px",
                     "&:hover": {
-                      color: "#7AB273",
-                      borderBottom: "1px solid #7AB273",
+                      color: "#32a453",
+                      borderBottom: "1px solid #32a453",
                     },
                   }}
                 >
@@ -212,8 +220,8 @@ const Navbar = () => {
               </a>
             </Link>
 
-            <Link href="/merch">
-              <a>
+            <Link href="https://activetvstore.com/">
+              <a target="_blank">
                 <Button
                   onClick={handleCloseNavMenu}
                   className={"active-tv-font"}
@@ -223,8 +231,8 @@ const Navbar = () => {
                     display: "block",
                     fontSize: "12px",
                     "&:hover": {
-                      color: "#CCC0BF",
-                      borderBottom: "1px solid #CCC0BF",
+                      color: "#32a453",
+                      borderBottom: "1px solid #32a453",
                     },
                   }}
                 >
@@ -232,35 +240,136 @@ const Navbar = () => {
                 </Button>
               </a>
             </Link>
+            {!loggedIn && (
+              <Link href="/account">
+                <a>
+                  <Button
+                    className={"active-tv-font"}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      m: 2,
+                      color: "#eee",
+                      display: "block",
+                      fontSize: "12px",
+                      "&:hover": {
+                        color: "#7A9EA3",
+                        borderBottom: "1px solid #7A9EA3",
+                      },
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </a>
+              </Link>
+            )}
+          </Box>
 
-            <Link href="/">
-              <a>
-                <Button
-                  className={"active-tv-font"}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    m: 2,
-                    color: "#eee",
-                    display: "block",
-                    fontSize: "12px",
-                    "&:hover": {
-                      color: "#7A9EA3",
-                      borderBottom: "1px solid #7A9EA3",
-                    },
-                  }}
-                >
-                  Learn More
-                </Button>
-              </a>
-            </Link>
+          {/* Shows search input should only display once a user is signed up or logged in */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {loggedIn && (
+              <Box
+                className="outer"
+                sx={{ minWidth: { xs: "50px", sm: "100px", md: "300px" } }}
+              >
+                <a className="anchr">
+                  <SearchIcon />
+                </a>
+                <input
+                  type="text"
+                  name=""
+                  className="search_box"
+                  placeholder="Search shows..."
+                  onChange={(e) => setSearchTitle(e.target.value)}
+                />
+
+                <Box sx={{ marginTop: "55px" }}>
+                  {posts
+                    .slice(0, limit)
+                    .filter((value) => {
+                      if (searchTitle === "") {
+                        return null;
+                      } else if (
+                        value.Title.toLowerCase().includes(
+                          searchTitle.toLowerCase()
+                        )
+                      ) {
+                        return value;
+                      }
+                    })
+                    .slice(0, limit)
+                    .map((item, index) => (
+                      <Link href={`/shows-episodes/${item.Title}`} key={index}>
+                        <a>
+                          <div
+                            style={{
+                              background: "#333333",
+                              width: "400px",
+                              height: "60px",
+                              display: "flex",
+                              marginRight: "500px",
+                              borderBottom: "1px solid #121212",
+                              padding: "5px",
+                              borderRadius: "5px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            <img
+                              src={item.CoverArtLarge}
+                              width={50}
+                              height={50}
+                            />
+                            <Box sx={{ flexDirection: "column" }}>
+                              <p
+                                style={{
+                                  paddingLeft: "10px",
+                                  fontSize: "10px",
+                                }}
+                                className={"active-tv-font"}
+                              >
+                                {item.Title}
+                              </p>
+                              <p
+                               id="SearchDescript"
+                                style={{
+                                  paddingLeft: "10px",
+                                  fontSize: "8px",
+                                  color: "lightgrey",
+                                }}
+                                className={"active-tv-font"}
+                              >
+                                {item.description}
+                              </p>
+                            </Box>
+                          </div>
+                        </a>
+                      </Link>
+                    ))}
+                </Box>
+              </Box>
+            )}
           </Box>
 
           {/* coin system below */}
-          <Box sx={{ ...coinContainer }}>
-            <Typography variant="h6" fontWeight={"bold"} fontSize={16}>
-              {"0"}
-            </Typography>
-            <img src="coin.gif" alt="coin" width={18} height={18} />
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <Box sx={{ ...coinContainer }}>
+              <Typography
+                variant="h6"
+                fontWeight={"bold"}
+                fontSize={16}
+                sx={{ width: "16px" }}
+              >
+                {"0"}
+              </Typography>
+              <Box sx={{ width: "20px" }}>
+                <img src="coin.gif" alt="coin" width={18} height={18} />
+              </Box>
+            </Box>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -275,7 +384,6 @@ const Navbar = () => {
 export default Navbar;
 
 const coinContainer = {
-  // border: "1px solid red",
   width: "100px",
   minHeight: "50px",
   display: "flex",

@@ -30,6 +30,7 @@
    * {
      box-sizing: border-box;
      /* border: 0.2px solid blue; */
+     /* height: 100vh; */
    }
    /* width */
    ::-webkit-scrollbar {
@@ -298,4 +299,65 @@
    }
   
    /* done */
-   
+
+
+   /* search bar */
+   .outer{
+    max-width: 290px;
+    height: 40px;
+    background-color: #333333;
+    border-radius: 40px;
+   }
+
+   .anchr{
+    float: right;
+    height: 40px;
+    width: 40px;
+    color: #ddd;
+    box-shadow: 0 0 10px #2e2e2e;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .search_box{
+    float: left;
+    line-height: 40px;
+    background: transparent;
+    padding: 0;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 0 10px;
+    /* width: 120px; */
+   }
+
+    .search_box::placeholder{
+      color: rgb(170, 170, 170);
+    }
+    image{
+      object-fit: cover;
+    }
+
+    .points{
+        /*background: rgb(41,41,41);*/
+/*background: linear-gradient(0deg, rgba(41,41,41,1) 8%, rgba(17,18,18,1) 10%, rgba(50,178,59,1) 75%);*/
+  }
+
+  #SearchDescript{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+  }
+  .gender-option{
+     height: 50px;
+     background-color: #222;
+     color: #fff;
+  }
+  .gender-option::hover{
+    background-color: yellow;
+  }

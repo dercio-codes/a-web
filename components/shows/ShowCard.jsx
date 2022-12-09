@@ -1,50 +1,27 @@
 import { Typography, Box } from "@mui/material";
 import React, { useContext } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
+import { ShowsContext } from "../../context/ShowContext";
 
-const ShowCard = ({
-  img,
-  text,
-  openModal,
-  color,
-  onFetchEpisode,
-  one,
-  two,
-  three,
-  four,
-  five,
-  six,
-  seven,
-  eight,
-  nine,
-}) => {
+const ShowCard = ({ img, text, openModal }) => {
   const { setShowsDetails } = useContext(USER_CONTEXT);
+  const { getShow } = useContext(ShowsContext);
 
   return (
     <>
       <Box
         onClick={() => {
-          onFetchEpisode();
-          openModal();
+          getShow(text);
           setShowsDetails({
             title: text,
             img: img,
-            episodeone: one,
-            episodetwo: two,
-            episodethree: three,
-            episodefour: four,
-            episodefive: five,
-            episodesix: six,
-            episodeseven: seven,
-            episodeeight: eight,
-            episodenine: nine,
           });
         }}
         style={{
           ...styles.container,
           // background: `url(${img})`,
           borderRadius: "10px 10px 0 0",
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "",
         }}
       >
@@ -54,6 +31,7 @@ const ShowCard = ({
             objectFit: "cover",
             objectPosition: "top",
             borderRadius: "10px 10px 0 0",
+            
           }}
           alt="img"
           width={"100%"}
@@ -63,15 +41,13 @@ const ShowCard = ({
     </>
   );
 };
-
 const styles = {
   container: {
-    height: "200px",
-    width: "200px",
-    backgroundSize: "cover",
+    // height: "200px",
+    // width: "200px",
+    backgroundSize: "contain",
     backgroundPosition: "top",
     cursor: "pointer",
   },
 };
-
 export default ShowCard;

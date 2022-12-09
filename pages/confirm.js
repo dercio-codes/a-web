@@ -9,9 +9,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { handleBreakpoints } from "@mui/system";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import EmailIcon from "@mui/icons-material/Email";
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 import Router from "next/router";
 import Link from "next/link";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -23,10 +23,6 @@ import HashLoader from "react-spinners/HashLoader";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import PropagateLoader from "react-spinners/PropagateLoader";
-//  import signUp from '../../amplify/methods/amplifySdk' // imported the fnction here
-
-
-
 
 const confirmStyles = {
   container: {
@@ -37,7 +33,7 @@ const confirmStyles = {
     justifyContent: "center",
     alignItems: "center",
     padding: {
-      md: '20px',
+      md: "20px",
       sm: 0,
       xs: 0,
     },
@@ -62,7 +58,6 @@ const confirmStyles = {
     },
   },
   formContainer: {
-    // border: "1px solid red",
     height: "100%",
     width: {
       md: "50%",
@@ -76,7 +71,6 @@ const confirmStyles = {
     },
   },
   header: {
-    //  border:'1px solid blue',
     minHeight: "250px",
     display: "flex",
     alignItems: "center",
@@ -97,8 +91,7 @@ const confirmStyles = {
       sm: "0px",
       xs: "0px",
     },
-    // border: "1px solid yellow",
-    // padding: "20px 0",
+
     color: "white",
   },
   input: {
@@ -109,7 +102,7 @@ const confirmStyles = {
     background: "#fff",
     display: "flex",
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   inputLabel: {
     color: "#fff",
@@ -121,7 +114,6 @@ const confirmStyles = {
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    // border:'1px solid red',
     padding: {
       md: "5px 0",
       sm: " 5px 10px",
@@ -139,16 +131,15 @@ const confirmStyles = {
     padding: "0 15px",
     fontSize: "15px",
     fontWeight: "bold",
-    display: 'flex',
-    justifyContent: 'center'
+    display: "flex",
+    justifyContent: "center",
   },
   buttonContainer: {
-    marginTop: '20px',
+    marginTop: "20px",
     display: "flex",
     alignItems: "center",
-    flexDirection: 'column',
+    flexDirection: "column",
     gap: 2,
-    // border: "1px solid blue",
     minHeight: "100px",
 
     padding: {
@@ -170,7 +161,6 @@ const confirmStyles = {
   fieldset: {
     border: "none",
     borderTop: "1px solid #f2f2f2",
-    // border:'4px 0  2px 1px solid grey',
   },
   legend: {
     margin: "0 auto",
@@ -212,12 +202,12 @@ const confirmStyles = {
 const Confirm = () => {
   const [show, setShow] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
-  const [errorLogs, setErrorLogs] = useState("")
+  const [errorLogs, setErrorLogs] = useState("");
 
   // form state
   const [formDetails, setFormDetails] = useState({
     code: "",
-    email: ""
+    email: "",
   });
 
   const handleFieldChange = (event) => {
@@ -238,12 +228,10 @@ const Confirm = () => {
       setTimeout(() => {
         setRedirecting(false);
         Router.push("/login");
-        // Router.push("/subscribepayment");
       }, 2000);
-
     } catch (error) {
-      console.log('error confirming sign up', error);
-      setErrorLogs(error.message)
+      console.log("error confirming sign up", error);
+      setErrorLogs(error.message);
     }
   }
 
@@ -251,33 +239,27 @@ const Confirm = () => {
   async function resendConfirmationCode(username) {
     try {
       await Auth.resendSignUp(username);
-      console.log('code resent successfully');
-
+      console.log("code resent successfully");
     } catch (err) {
-      console.log('error resending code: ', err);
-      setErrorLogs(err.message)
+      console.log("error resending code: ", err);
+      setErrorLogs(err.message);
     }
   }
 
-
   // submit form
   const handleSubmitCode = (e) => {
-    console.log('submitting code.....')
+    console.log("submitting code.....");
     e.preventDefault();
 
     console.log(formDetails.code + " code sent");
-    confirmSignUp(formDetails.email, formDetails.code)
-
+    confirmSignUp(formDetails.email, formDetails.code);
   };
   // resend form
   const handleResendCode = (e) => {
-    console.log('resending code.....')
-    e.preventDefault()
-    resendConfirmationCode(formDetails.email)
-
+    console.log("resending code.....");
+    e.preventDefault();
+    resendConfirmationCode(formDetails.email);
   };
-
-
 
   return redirecting ? (
     <Box
@@ -285,13 +267,12 @@ const Confirm = () => {
         height: "91vh",
         background: "#000000",
         background: "url('login-bg.jpg')",
-
       }}
     >
       <Box
         sx={{
           height: "100%",
-          width: '100%',
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -301,140 +282,144 @@ const Confirm = () => {
         <MoonLoader color={"#f3c11a"} loading={true} size={170} />
       </Box>
     </Box>
-  ) :
-    (
-
-      <Box sx={{ ...confirmStyles.container }}>
-        <Box sx={{ ...confirmStyles.contentCover }}>
-          <Box sx={{ ...confirmStyles.formContainer }}>
-            <Box sx={{ ...confirmStyles.header }}>
-              <img
-                src="glitch-tv.gif"
-                alt="logo"
-                height="80px"
-                style={{ marginBottom: "5" }}
-              />
+  ) : (
+    <Box sx={{ ...confirmStyles.container }}>
+      <Box sx={{ ...confirmStyles.contentCover }}>
+        <Box sx={{ ...confirmStyles.formContainer }}>
+          <Box sx={{ ...confirmStyles.header }}>
+            <img
+              src="glitch-tv.gif"
+              alt="logo"
+              height="80px"
+              style={{ marginBottom: "5" }}
+            />
+            <Typography
+              variant="h4"
+              className={"active-tv-font"}
+              align="center"
+              sx={{
+                margin: "20px 0 0  0",
+                fontWeight: "900",
+                fontSize: {
+                  md: "15px",
+                  xs: "20px",
+                },
+              }}
+            >
+              Verify Your Account
+            </Typography>
+            <Box sx={{ padding: "20px 60px" }}>
               <Typography
-                variant="h4"
                 className={"active-tv-font"}
-                align="center"
+                fontSize={12}
                 sx={{
-                  margin: "20px 0 0  0",
-                  fontWeight: "900",
-                  fontSize: {
-                    md: "15px",
-                    xs: "20px",
-                  },
+                  lineHeight: "25px",
+                  textAlign: "center",
+                  margin: 0,
+                  padding: 0,
+                }}
+                variant="p"
+                align="center"
+              >
+                We send you the six digits code to example@gmail.com Enter the
+                code below to confirm your email address
+              </Typography>
+            </Box>
+          </Box>
+          <Box sx={confirmStyles.formBox}>
+            <form>
+              <Box sx={{ ...confirmStyles.inputBlocks }}>
+                <label style={{ ...confirmStyles.inputLabel }}>
+                  {/* Email address */}
+                </label>
+                <Box sx={{ ...confirmStyles.input }}>
+                  <input
+                    name="email"
+                    className={"confirmInput focusInput"}
+                    value={formDetails.email}
+                    onChange={handleFieldChange}
+                    style={{ ...confirmStyles.inputElement }}
+                    type={"text"}
+                    placeholder="Enter Email address "
+                  />
+                  <Button>
+                    <EmailIcon sx={confirmStyles.icon} />
+                  </Button>
+                </Box>
+              </Box>
+              <Box sx={{ ...confirmStyles.inputBlocks }}>
+                <label style={{ ...confirmStyles.inputLabel }}>
+                  {/* Email address */}
+                </label>
+                <Box sx={{ ...confirmStyles.input }}>
+                  <input
+                    name="code"
+                    className={"confirmInput focusInput"}
+                    value={formDetails.code}
+                    onChange={handleFieldChange}
+                    style={{ ...confirmStyles.inputElement }}
+                    type={"number"}
+                    placeholder="Enter Confirmation code"
+                  />
+                  <Button>
+                    <ConfirmationNumberIcon sx={confirmStyles.icon} />
+                  </Button>
+                </Box>
+              </Box>
+
+              <Box sx={{ ...confirmStyles.buttonContainer }}>
+                <Button
+                  className={"active-tv-font"}
+                  sx={{ ...confirmStyles.loginBtn }}
+                  variant="contained"
+                  color="warning"
+                  type="Submit"
+                  onClick={handleSubmitCode}
+                >
+                  <Typography className={"active-tv-font"} fontSize={12}>
+                    Confirm code
+                  </Typography>
+                </Button>
+
+                <Button
+                  className={"active-tv-font"}
+                  sx={{ ...confirmStyles.loginBtn }}
+                  variant="contained"
+                  color="warning"
+                  type="Submit"
+                  onClick={handleResendCode}
+                >
+                  <Typography className={"active-tv-font"} fontSize={12}>
+                    resend code
+                  </Typography>
+                </Button>
+              </Box>
+              <span
+                className="active-tv-font"
+                style={{
+                  color: "red",
+                  width: "100%",
+                  justifyContent: "center",
+                  display: "flex",
+                  fontSize: 10,
+                  marginTop: 10,
                 }}
               >
-                Verify Your Account
-              </Typography>
-              <Box sx={{ padding: '20px 60px' }}>
-                <Typography className={"active-tv-font"} fontSize={12} sx={{ lineHeight: "25px", textAlign: 'center', margin: 0, padding: 0 }} variant="p" align="center">
-                  We send you the six digits code to example@gmail.com
-                  Enter the code below to confirm your email address
-                </Typography>
-
+                {errorLogs}
+              </span>
+              <Box sx={{ padding: "0 50px" }}>
+                <fieldset style={{ ...confirmStyles.fieldset }}>
+                  <legend style={{ ...confirmStyles.legend }}>
+                    <ConfirmationNumberIcon sx={confirmStyles.icon} />
+                  </legend>
+                </fieldset>
               </Box>
-            </Box>
-            <Box sx={confirmStyles.formBox}>
-              <form>
-                <Box sx={{ ...confirmStyles.inputBlocks }}>
-                  <label style={{ ...confirmStyles.inputLabel }}>
-                    {/* Email address */}
-                  </label>
-                  <Box sx={{ ...confirmStyles.input }}>
-                    <input
-                      name="email"
-                      className={'confirmInput focusInput'}
-                      value={formDetails.email}
-                      onChange={handleFieldChange}
-                      style={{ ...confirmStyles.inputElement }}
-                      type={"text"}
-                      placeholder="Enter Email address "
-                    />
-                    <Button>
-                      <EmailIcon sx={confirmStyles.icon} />
-                    </Button>
-                  </Box>
-                </Box>
-                <Box sx={{ ...confirmStyles.inputBlocks }}>
-                  <label style={{ ...confirmStyles.inputLabel }}>
-                    {/* Email address */}
-                  </label>
-                  <Box sx={{ ...confirmStyles.input }}>
-                    <input
-                      name="code"
-                      className={'confirmInput focusInput'}
-                      value={formDetails.code}
-                      onChange={handleFieldChange}
-                      style={{ ...confirmStyles.inputElement }}
-                      type={"number"}
-                      placeholder="Enter Confirmation code"
-                    />
-                    <Button>
-                      <ConfirmationNumberIcon sx={confirmStyles.icon} />
-                    </Button>
-                  </Box>
-                </Box>
-
-                <Box sx={{ ...confirmStyles.buttonContainer }}>
-                  <Button className={"active-tv-font"}
-                    sx={{ ...confirmStyles.loginBtn }}
-                    variant="contained"
-                    color="warning"
-                    type="Submit"
-                    onClick={handleSubmitCode}
-                  >
-                    <Typography className={"active-tv-font"} fontSize={12}>
-                      Confirm code
-                    </Typography>
-                  </Button>
-
-                  <Button className={"active-tv-font"}
-                    sx={{ ...confirmStyles.loginBtn }}
-                    variant="contained"
-                    color="warning"
-                    type="Submit"
-                    onClick={handleResendCode}
-
-                  >
-                    <Typography className={"active-tv-font"} fontSize={12}>
-                      resend code
-                    </Typography>
-                  </Button>
-                </Box>
-                <span
-                  className="active-tv-font"
-                  style={{
-                    color: "red",
-                    width: "100%",
-                    justifyContent: "center",
-                    display: "flex",
-                    fontSize: 10,
-                    marginTop: 10
-                  }}
-                >
-                  {errorLogs}
-                </span>
-                <Box sx={{ padding: "0 50px" }}>
-                  <fieldset style={{ ...confirmStyles.fieldset }}>
-                    <legend style={{ ...confirmStyles.legend }}>
-                      <ConfirmationNumberIcon sx={confirmStyles.icon} />
-                    </legend>
-                  </fieldset>
-                </Box>
-              </form>
-            </Box>
-
+            </form>
           </Box>
         </Box>
       </Box>
-    )
+    </Box>
+  );
 };
 
 export default Confirm;
-
-
-
-

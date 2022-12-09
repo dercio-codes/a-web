@@ -1,38 +1,42 @@
-import React, { useContext, useRef, useState } from "react";
-// Import Swiper React components
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// import required modules
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { Box } from "@mui/material";
 import BannerItem from "./banner-item";
 import { USER_CONTEXT } from "../../context/MainContext";
-// import LatestShows from "../latest-shows";
 import { Palette } from "@universemc/react-palette";
 import FreeToWatch from "../free-to-watch";
+import axios from "axios";
 
 const HomeBanner = () => {
+  const [banners, setBanners] = useState([]);
+  const [haveBanners, setHaveBanners] = useState(false);
+
+  const getShows = async () => {
+    const endpoint = `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-config`;
+    const getShowsResponse = await axios.get(endpoint);
+    const results = getShowsResponse.data;
+    const copyOfBanners = results.BannerImageUrls;
+    setBanners(copyOfBanners);
+    setHaveBanners(true);
+  };
+  useEffect(() => {
+    getShows();
+  }, []);
   return (
-    <Palette
-      src={
-        // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmf6hqoRXi9B8uEKDix0ijTCZYcoRu46ARJ-ckdaC5EQ&s"
-        "top_banner_full.jpg"
-      }
-    >
+    <Palette src={"top_banner_full.jpg"}>
       {({ data, loading, error }) => {
-        // console.log(data, loading, error);
         return (
           <Box
             sx={{
               minHeight: "100vh",
               maxHeight: "107vh",
-              zIndex:1
-              // background:data.darkVibrant
+              zIndex: 1,
             }}
           >
             <Swiper
@@ -47,38 +51,16 @@ const HomeBanner = () => {
               loop={true}
               modules={[Pagination, Navigation, Autoplay]}
               className="mySwiper"
-              style={{zIndex:0}}
+              style={{ zIndex: 0 }}
             >
-              <SwiperSlide>
-                <BannerItem
-                  background={
-                    "https://cdn.watchcorridor.com/i/3173dc6a-9eba-4f58-b11c-43d5ad8144df.jpg"
-                  }
-                  logo={
-                    "https://cdn.watchcorridor.com/i/3cba7496-c740-4e28-bfdb-b45d31b5b5b9.png"
-                  }
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BannerItem
-                  background={
-                    "https://cdn.watchcorridor.com/i/7a78565c-86ac-4217-83c9-3fb2be9b0f09.jpg"
-                  }
-                  logo={
-                    "https://cdn.watchcorridor.com/i/c9572323-988a-4773-ace9-2b6a1b997fc6.png"
-                  }
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BannerItem
-                  background={
-                    "https://cdn.watchcorridor.com/i/19b0945d-b36c-4741-aefd-f5952c6d20fc.jpg"
-                  }
-                  logo={
-                    "https://cdn.watchcorridor.com/i/94d71c41-71a3-4b1a-ba5c-253ec3d643e8.png"
-                  }
-                />
-              </SwiperSlide>
+              {haveBanners &&
+                banners.map((item, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <BannerItem background={item} />
+                    </SwiperSlide>
+                  );
+                })}
             </Swiper>
 
             <Box
@@ -90,9 +72,7 @@ const HomeBanner = () => {
                 zIndex: "1",
                 position: "relative",
               }}
-            >
-              {/* <LatestShows /> */}
-            </Box>
+            ></Box>
           </Box>
         );
       }}
@@ -101,3 +81,4 @@ const HomeBanner = () => {
 };
 
 export default HomeBanner;
+//changedkk

@@ -23,12 +23,15 @@ import RiseLoader from "react-spinners/RiseLoader";
 import MoonLoader from "react-spinners/MoonLoader";
 import PulseLoader from "react-spinners/PulseLoader";
 import HashLoader from "react-spinners/HashLoader";
+import WcIcon from '@mui/icons-material/Wc';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { TrendingUpRounded } from "@mui/icons-material";
 import { USER_CONTEXT } from "../../context/MainContext";
+
 import axios from "axios";
+import { API_INSTACE } from "../../config/api-instance";
 
 const LoginComp = () => {
   const [show, setShow] = useState(false);
@@ -42,6 +45,7 @@ const LoginComp = () => {
     email: "",
     password: "",
     check: "",
+    gender:""
   });
 
   const handleFieldChange = (event) => {
@@ -58,7 +62,7 @@ const LoginComp = () => {
   };
 
   console.log("user", AuthenticatedUser);
-  const endpoint = `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/store-users`;
+  const endpoint = `${API_INSTACE}/store-users`;
   const tokenHandler = async () => {
     const response = await axios({
       method: "POST",
@@ -73,12 +77,8 @@ const LoginComp = () => {
     console.log("RESPONSE=>", response);
   };
 
-  // useEffect(() => {
-  //   console.log(signUp);
-  // }, []);
-
   //register user
-  async function signUp(username, password, email) {
+  async function signUp(username, password, email, gender) {
     try {
       const { user } = await Auth.signUp({
         username: email,
@@ -89,6 +89,8 @@ const LoginComp = () => {
           // other custom attributes
           "custom:display_name": username,
           name: username,
+          picture:'',
+          gender:gender
         },
       });
 
@@ -96,7 +98,6 @@ const LoginComp = () => {
 
       if (user) {
         setRedirecting(true);
-        // setErrorLogs('signing up')
         setTimeout(() => {
           setRedirecting(false);
           Router.push("/confirm"); //redirecting the user to the confirm page inorder for us to insert the code sent from email
@@ -104,7 +105,6 @@ const LoginComp = () => {
       }
     } catch (error) {
       console.log("error signing up:", error);
-      // alert('something went wrong  ,please fill in the fields correctly')
       setErrorLogs(error.message);
     }
   }
@@ -129,8 +129,7 @@ const LoginComp = () => {
   // submit form
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUp(formDetails.email, formDetails.password, formDetails.email);
-    tokenHalndler();
+    signUp(formDetails.email, formDetails.password, formDetails.email, formDetails.gender);
   };
 
   return redirecting ? (
@@ -261,6 +260,38 @@ const LoginComp = () => {
                     )}
                   </Button>
                 </Box>
+              {/*gender*/}
+               <Box sx={{ ...loginStyles.inputBlocks }}>
+                <label
+                  className="active-tv-font"
+                  style={{ ...loginStyles.inputLabel, fontSize: "10px" }}
+                >
+                  Gender
+                </label>
+                <Box sx={{ ...loginStyles.input }}>
+                  <select
+                    name="gender"
+                    value={formDetails.gender}
+                    onChange={handleFieldChange}
+                    className="focusInput"
+                    style={{ ...loginStyles.inputElement, outline:'none', cursor:'pointer' }}
+                    placeholder="Enter your Gender"
+                  >
+                  <option className={'gender-option'}>male</option>
+                  <option className={'gender-option'}>female</option>
+                  <option className={'gender-option'}>custom</option>
+
+                  </select>
+                  <Button >
+                  
+                      <WcIcon sx={loginStyles.icon} />
+                  
+                  </Button>
+                </Box>
+                </Box>
+
+
+
               </Box>
               {/* checkboxes */}
               <Box sx={{ ...loginStyles.checkboxContainer }}>
@@ -448,7 +479,6 @@ const loginStyles = {
     },
   },
   formContainer: {
-    // border: "1px solid red",
     height: "100%",
     width: {
       md: "50%",
@@ -462,7 +492,6 @@ const loginStyles = {
     },
   },
   header: {
-    //  border:'1px solid blue',
     minHeight: "250px",
     display: "flex",
     alignItems: "center",
@@ -483,14 +512,12 @@ const loginStyles = {
       sm: "0px",
       xs: "0px",
     },
-    // border: "1px solid yellow",
-    // padding: "20px 0",
+
     color: "white",
   },
   input: {
     width: "100%",
     height: "50px",
-    // padding: " 0 5px",
     fontSize: "15px",
     background: "#fff",
     display: "flex",
@@ -506,7 +533,6 @@ const loginStyles = {
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    // border:'1px solid red',
     padding: {
       md: "5px 0",
       sm: " 5px 10px",
@@ -528,7 +554,6 @@ const loginStyles = {
   buttonContainer: {
     display: "flex",
     alignItems: "center",
-    // border: "1px solid blue",
     height: "100px",
 
     padding: {
@@ -550,7 +575,6 @@ const loginStyles = {
   fieldset: {
     border: "none",
     borderTop: "1px solid #f2f2f2",
-    // border:'4px 0  2px 1px solid grey',
   },
   legend: {
     margin: "0 auto",

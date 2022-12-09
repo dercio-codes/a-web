@@ -25,9 +25,10 @@ const NewIdeas = () => {
     <Box sx={styles.container}>
       <Box sx={styles.header}>
         <Typography
+          className={"active-tv-font"}
           sx={{ fontWeight: "bold" }}
           color="#fff"
-          fontSize={20}
+          fontSize={18}
           variant="h3"
           textTransform={"uppercase"}
           letterSpacing={"2px"}
@@ -50,8 +51,8 @@ const styles = {
     backgroundPosition: "top",
     backgroundSize: "cover",
     minHeight: "550px",
-    // border: "1xpx solid red",
     padding: "0px 100px 40px",
+    backgroundColor: "#111",
   },
   cardContainer: {
     height: "450px",
@@ -63,7 +64,6 @@ const styles = {
     borderRadius: "10px",
   },
   header: {
-    // border:'1px solid red' ,
     minHeight: "75px",
     display: "flex",
     alignItems: "center",
