@@ -122,7 +122,7 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
                 img={item.CoverArtLarge}
               />
 
-              {loggedIn ? (
+              {loggedIn && 
                 <Box
                   onClick={() => addToFavourite(item)}
                   className="active-tv-font"
@@ -142,10 +142,8 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
                 >
                   <TurnedInIcon sx={{ width: "20px", height: "20px" }} />
                   add to favourite
-                </Box>
-              ) : (
-                <Box></Box>
-              )}
+                </Box>}
+
             </Box>
           </SwiperSlide>
         ))}

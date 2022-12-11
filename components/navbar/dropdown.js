@@ -244,7 +244,7 @@ export default function PositionedPopper({ user, userInitial }) {
               </Button>
 
 
-              <Button
+              { loggedIn &&    <Button
                 variant="text"
                 sx={{
                   width: "100%",
@@ -267,7 +267,7 @@ export default function PositionedPopper({ user, userInitial }) {
                   fontSize={10} >
                 Favourites({item.length})
               </Typography>
-              </Button>
+              </Button>}
               
 
 
