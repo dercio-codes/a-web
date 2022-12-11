@@ -6,11 +6,13 @@ import { useDispatchFavourite } from "../../context/addFavouriteContext";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Link from 'next/link'
+import Link from "next/link";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import TurnedInIcon from '@mui/icons-material/TurnedIn';
+import TurnedInIcon from "@mui/icons-material/TurnedIn";
+import { USER_CONTEXT } from "../../context/MainContext";
+import { useContext } from "react";
 
 const Homeshows = ({ latestVid, title, height, width, shows }) => {
   const [showsContainer, setShowsContainer] = useState([]);
@@ -33,12 +35,42 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
     getShows();
   }, []);
 
+  const {
+    loggedIn,
+    setLoggedIn,
+    setUser,
+    ForceReload,
+    setAvaters,
+    imgProfile,
+    setImgProfile,
+    isContained,
+    setIsContained,
+    picture,
+    setPicture,
+  } = useContext(USER_CONTEXT);
+
+  async function signOut() {
+    if (loggedIn) {
+      try {
+        await Auth.signOut();
+        await Router.push("/login");
+        setUser("Activetv@gmail.com");
+        ForceReload();
+      } catch (error) {
+        console.log("error signing out: ", error);
+      }
+    } else {
+      Router.push("/login");
+      console.log("there is no user logged in at thr currentSeession");
+    }
+  }
+
   const dispatch = useDispatchFavourite();
 
   const addToFavourite = (bucket) => {
-    dispatch({ type: "ADD", bucket})
-  }
- 
+    dispatch({ type: "ADD", bucket });
+  };
+
   return (
     <Box
       sx={{
@@ -67,21 +99,54 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
           <SwiperSlide
             key={index}
             style={{
-              marginRight: "10px",
               paddingRight: "12px",
-              display: "flex",
-              justifyContent: "flex-start",
+              width: "37%",
+              // border:"1px solid red"
             }}
           >
-           <ShowsCard
-              background={banners[index]}
-              height={height}
-              width={width}
-              title={item.Title}
-              logo={item.CoverArtLarge}
-              img={item.CoverArtLarge}
-            />
-            <button onClick={() => addToFavourite(item)} style={{cursor:"pointer", width:"30px",height:"30px", display:"flex", alignItems:"center", justifyContent:"center", position:"relative", paddingRight:"40px"}}><TurnedInIcon/></button>
+            <Box
+              sx={{
+                // border: "1px solid red",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              <ShowsCard
+                background={banners[index]}
+                height={height}
+                width={width}
+                title={item.Title}
+                logo={item.CoverArtLarge}
+                img={item.CoverArtLarge}
+              />
+
+              {loggedIn ? (
+                <Box
+                  onClick={() => addToFavourite(item)}
+                  className="active-tv-font"
+                  sx={{
+                    cursor: "pointer",
+                    height: "25px",
+                    width: "98%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "#000",
+                    color: "#fff",
+                    marginTop: "5px",
+                    borderRadius: "15px",
+                    fontSize: "9px",
+                  }}
+                >
+                  <TurnedInIcon sx={{ width: "20px", height: "20px" }} />
+                  add to favourite
+                </Box>
+              ) : (
+                <Box></Box>
+              )}
+            </Box>
           </SwiperSlide>
         ))}
       </Swiper>
