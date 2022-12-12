@@ -23,7 +23,7 @@ const reducer = (state, action) => {
       }
       AddToFavourite()
 
-      return  [...state, action.bucket];
+      return  action.userAccount.favourites;
     case "REMOVE":
       const newArr = [...state];
       newArr.splice(action.index, 1);
