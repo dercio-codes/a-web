@@ -43,7 +43,8 @@ export default function PositionedPopper({ user, userInitial }) {
     isContained,
     setIsContained,
     picture,
-    setPicture
+    setPicture,
+    userAccount
   } = useContext(USER_CONTEXT);
   
   const handleClick = (newPlacement) => (event) => {
@@ -266,7 +267,7 @@ export default function PositionedPopper({ user, userInitial }) {
                   variant="p"
                   color="#fff"
                   fontSize={10} >
-                Favourites({item.length})
+                Favourites({userAccount.favourites.length})
               </Typography>
               </Button>
               

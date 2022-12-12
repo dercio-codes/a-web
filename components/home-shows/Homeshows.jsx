@@ -12,12 +12,13 @@ import axios from "axios";
 import { ShowsContext } from "../../context/ShowContext";
 import { FavouriteShowsContext } from "../../context/addFavouriteContext";
 import { USER_CONTEXT } from "../../context/MainContext";
+const api = "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod";
 
 const Homeshows = ({ latestVid, title, height, width,  }) => {
   // const [showsContainer, setShowsContainer] = useState([]);
   const { shows } = useContext(ShowsContext);
   const { state, dispatch } = useContext(FavouriteShowsContext);
-  const {userAccount} = useContext(USER_CONTEXT)
+  const {userAccount,userSync,setUserSync} = useContext(USER_CONTEXT)
   const banners = [
     "https://i.ytimg.com/an_webp/aBGGdza5biM/mqdefault_6s.webp?du=3000&sqp=CNLB45oG&rs=AOn4CLB8wsjheT5oGrhDRTU6TtYl-PLUdQ",
     "https://i.ytimg.com/an_webp/R8hXryB4fXM/mqdefault_6s.webp?du=3000&sqp=CPHK45oG&rs=AOn4CLA72vS_k2HdbA0gKQVpTg1hACbKug",
@@ -49,10 +50,25 @@ const Homeshows = ({ latestVid, title, height, width,  }) => {
       break;
   }
 
-  const addToFavourite = (bucket) => {
-    console.log("state", state);
-    dispatch({ type: "ADD", bucket,userAccount });
+  const addToFavourite = async (show) => {
+    let num = 1
+    console.log('click',num++)
+    const showExists = userAccount.favourites.some(el => el.Title === show.Title);
+    if (showExists){
+      console.log('this show exists')
+      return
+    }
+    const showRes = await axios.put(api + "/edit-show", {
+      Title: show.Title,
+      likes: show.likes ? show.likes+1 : 1,
+    });
+    const userRes = await axios.put(api + "/edit-account", {
+      email: userAccount.email,
+      favourites: [...userAccount.favourites, show],
+    });
+    setUserSync(!userSync)
   };
+
 
   return (
     <Box

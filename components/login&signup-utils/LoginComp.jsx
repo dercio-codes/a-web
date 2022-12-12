@@ -19,10 +19,10 @@ import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import { Hub, Logger } from "aws-amplify";
 import { USER_CONTEXT } from "../../context/MainContext";
 
+
 const LoginComp = () => {
   const [show, setShow] = useState(false);
   const [errorLogs, setErrorLogs] = useState("");
-
   const { ForceReload, authorisedJWT, setAuthorisedJWT, getUserInfo } =
     useContext(USER_CONTEXT);
 
@@ -48,9 +48,9 @@ const LoginComp = () => {
   };
 
   const GoogleSignin = async () => {
-    try {
-      await Auth.federatedSignIn({ provider: "Google" });
+    await Auth.federatedSignIn({ provider: "Google" });
       getUserInfo();
+    try {
       console.log("using Google for federation");
     } catch (err) {
       console.log(`Google auth returns ${err.message}`);
@@ -70,12 +70,12 @@ const LoginComp = () => {
       await Auth.signIn(username, password);
       await Router.push("/");
       ForceReload();
+
     } catch (error) {
       console.log("error signing in ", error);
       setErrorLogs(error.message);
     }
   }
-
   const endpoint = `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/cognito_pool/get-shows`;
   const tokenHalndler = async () => {
     const response = await axios({

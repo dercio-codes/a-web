@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
     img: "imortal.webp",
     episodes: [],
   });
-  const [userAccount, setUserAccount] = useState({ email: "",favourites : [] });
+  const [userAccount, setUserAccount] = useState({ email: "", favourites: [] });
   const ForceReload = () => window.location.reload();
   const ForceRedirect = (direction) => (document.location.href = direction);
 
@@ -95,21 +95,20 @@ function MyApp({ Component, pageProps }) {
 
   //storing user to dynamo db
   const storeUserToDynamo = async (user) => {
-    // if (userAccount.email) return
-      const res = await fetch(
-        "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: user.attributes.email,
-            displayName: user.attributes.name,
-            favourites : []
-          }),
-        }
-      );
-      let data = await res.json()
-      console.log("stored user", data);
-    
+    if (userAccount.email == user.attributes.email) return
+    const res = await fetch(
+      "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: user.attributes.email,
+          displayName: user.attributes.name,
+          favourites: [],
+        }),
+      }
+    );
+    let data = await res.json();
+    console.log("stored user", data);
   };
 
   const checkUser = async () => {
@@ -163,53 +162,60 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     checkUser();
-    getUserFromDynamo(user);
   }, []);
 
+  const [userSync,setUserSync] = useState(false);
+
+  useEffect(()=>{
+    getUserFromDynamo(user);
+
+  },[userSync]);
+
   return (
-    <FavouriteProvider>
-      <USER_CONTEXT.Provider
-        value={{
-          isContained,
-          setIsContained,
-          updateAttributes,
-          UserContext,
-          imgProfile,
-          setImgProfile,
-          authorisedJWT,
-          setAuthorisedJWT,
-          displayName,
-          selectedCategory,
-          loggedIn,
-          ForceReload,
-          ForceRedirect,
-          setLoggedIn,
-          setUser,
-          setSelectedCategory,
-          showsDetails,
-          setShowsDetails,
-          subCode,
-          setSubCode,
-          avaters,
-          setAvaters,
-          picture,
-          setPicture,
-          updatePictureAttribute,
-          AuthenticatedUser: {
-            name: user,
-            email: user,
-          },
-          userAccount
-        }}
-      >
+    <USER_CONTEXT.Provider
+      value={{
+        isContained,
+        setIsContained,
+        updateAttributes,
+        UserContext,
+        imgProfile,
+        setImgProfile,
+        authorisedJWT,
+        setAuthorisedJWT,
+        displayName,
+        selectedCategory,
+        loggedIn,
+        ForceReload,
+        ForceRedirect,
+        setLoggedIn,
+        setUser,
+        setSelectedCategory,
+        showsDetails,
+        setShowsDetails,
+        subCode,
+        setSubCode,
+        avaters,
+        setAvaters,
+        picture,
+        setPicture,
+        updatePictureAttribute,
+        AuthenticatedUser: {
+          name: user,
+          email: user,
+        },
+        userAccount,
+        userSync,setUserSync
+      }}
+    >
+      <FavouriteProvider>
         <Navbar />
 
         <ShowsProvider>
           <Component {...pageProps} />
         </ShowsProvider>
         <Footer />
-      </USER_CONTEXT.Provider>
-    </FavouriteProvider>
+      </FavouriteProvider>
+    </USER_CONTEXT.Provider>
   );
 }
 
