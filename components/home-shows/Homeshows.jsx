@@ -65,12 +65,6 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
     }
   }
 
-  const dispatch = useDispatchFavourite();
-
-  const addToFavourite = (bucket) => {
-    dispatch({ type: "ADD", bucket });
-  };
-
   return (
     <Box
       sx={{
@@ -100,19 +94,9 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
             key={index}
             style={{
               paddingRight: "12px",
-              width: "37%",
-              // border:"1px solid red"
+              width: "30%",
             }}
           >
-            <Box
-              sx={{
-                // border: "1px solid red",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-              }}
-            >
               <ShowsCard
                 background={banners[index]}
                 height={height}
@@ -120,31 +104,8 @@ const Homeshows = ({ latestVid, title, height, width, shows }) => {
                 title={item.Title}
                 logo={item.CoverArtLarge}
                 img={item.CoverArtLarge}
+                item={item}
               />
-
-              {loggedIn && 
-                <Box
-                  onClick={() => addToFavourite(item)}
-                  className="active-tv-font"
-                  sx={{
-                    cursor: "pointer",
-                    height: "25px",
-                    width: "98%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: "#000",
-                    color: "#fff",
-                    marginTop: "5px",
-                    borderRadius: "15px",
-                    fontSize: "9px",
-                  }}
-                >
-                  <TurnedInIcon sx={{ width: "20px", height: "20px" }} />
-                  add to favourite
-                </Box>}
-
-            </Box>
           </SwiperSlide>
         ))}
       </Swiper>

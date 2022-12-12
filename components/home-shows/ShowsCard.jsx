@@ -1,6 +1,36 @@
 import { Typography, Box } from "@mui/material";
+import TurnedInIcon from "@mui/icons-material/TurnedIn";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useDispatchFavourite } from "../../context/addFavouriteContext";
+import AddIcon from '@mui/icons-material/Add';
+import { USER_CONTEXT } from "../../context/MainContext";
+import { useContext } from "react";
 
-const ShowsCard = ({ background, img, height, width, logo, title }) => {
+
+const ShowsCard = ({ background, img, height, width, logo, title , item}) => {
+
+
+  const dispatch = useDispatchFavourite();
+
+  const addToFavourite = (bucket) => {
+    dispatch({ type: "ADD", bucket });
+  };
+
+
+  const {
+    loggedIn,
+    setLoggedIn,
+    setUser,
+    ForceReload,
+    setAvaters,
+    imgProfile,
+    setImgProfile,
+    isContained,
+    setIsContained,
+    picture,
+    setPicture,
+  } = useContext(USER_CONTEXT);
+  
   return (
     <Box
       sx={{
@@ -82,7 +112,7 @@ const ShowsCard = ({ background, img, height, width, logo, title }) => {
               src={logo}
             />
           </Box>
-          <Box>
+          <Box sx={{ display:"flex", alignItems:"center", justifyContent:"center", justifyContent:"space-evenly", width:"200px"}}>
             <Typography
               sx={{
                 color: "white",
@@ -91,6 +121,28 @@ const ShowsCard = ({ background, img, height, width, logo, title }) => {
             >
               {title}
             </Typography>
+
+            {loggedIn && 
+                <Box
+                  onClick={() => addToFavourite(item)}
+                  className="active-tv-font"
+                  sx={{
+                    cursor: "pointer",
+                    height: "35px",
+                    width: "35px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "#000",
+                    color: "#fff",
+                    marginTop: "5px",
+                    borderRadius: "50px",
+                    fontSize: "9px",
+                  }}
+                >
+                  <AddIcon sx={{ width: "20px", height: "20px" }} />
+                </Box>}
+               
           </Box>
         </Box>
       </Box>
