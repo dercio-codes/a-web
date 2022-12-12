@@ -1,15 +1,15 @@
 import React from "react";
 import {
-  useFavourite,
-  useDispatchFavourite,
+  FavouriteShowsContext
 } from "../context/addFavouriteContext";
 import { Box, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Link from "next/link"
 
 export default function Store() {
-  const item = useFavourite();
-  const dispatch = useDispatchFavourite();
+  
+  const {state,dispatch} = React.useContext(FavouriteShowsContext)
+  const item = state
 
   const handleRemove = (index) => {
     dispatch({ type: "REMOVE", index });

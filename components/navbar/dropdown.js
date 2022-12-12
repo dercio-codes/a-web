@@ -22,7 +22,7 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
 import StarsIcon from "@mui/icons-material/Stars";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import { useFavourite } from "../../context/addFavouriteContext";
+import { FavouriteShowsContext } from "../../context/addFavouriteContext";
 // import LoginIcon from '@mui/icons-material/Login';
 // import StarsIcon from '@mui/icons-material/Stars';
 export default function PositionedPopper({ user, userInitial }) {
@@ -45,7 +45,7 @@ export default function PositionedPopper({ user, userInitial }) {
     picture,
     setPicture
   } = useContext(USER_CONTEXT);
-
+  
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
@@ -68,8 +68,9 @@ export default function PositionedPopper({ user, userInitial }) {
       console.log("there is no user logged in at thr currentSeession");
     }
   }
+  const {state} = useContext(FavouriteShowsContext)
 
-  const item = useFavourite();
+  const item = state
 
   return (
     <Box sx={{ width: 100, zIndex: 1000 }}>

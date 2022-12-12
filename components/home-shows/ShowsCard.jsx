@@ -1,5 +1,4 @@
 import { Typography, Box } from "@mui/material";
-import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatchFavourite } from "../../context/addFavouriteContext";
 import AddIcon from '@mui/icons-material/Add';
@@ -10,7 +9,7 @@ import { useContext } from "react";
 const ShowsCard = ({ background, img, height, width, logo, title , item}) => {
 
 
-  const dispatch = useDispatchFavourite();
+  // const dispatch = useDispatchFavourite();
 
   const addToFavourite = (bucket) => {
     dispatch({ type: "ADD", bucket });

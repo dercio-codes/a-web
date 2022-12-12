@@ -1,17 +1,33 @@
 import React, { useReducer, useContext, createContext } from "react";
-
-const FavourtieStateContext = createContext();
-const FavouriteDispatchContext = createContext();
-
+import axios from "axios";
+export const FavouriteShowsContext = createContext();
+const api = "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod";
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-        console.log(state)
-      return [...state, action.bucket];
+        if (state.includes(action.bucket)) {
+          return state;
+        }
+      console.log("favourites", state);
+      async function AddToFavourite(){
+
+        const showRes = await axios.put(api + "/edit-show", {
+              Title: action.bucket.Title,
+              likes: action.bucket.likes ? action.bucket.likes++ : 1,
+            });
+        const userRes = await axios.put(api + '/edit-account',{
+          email : action.userAccount.email,
+          favourites : [...action.userAccount.favourites,action.bucket]
+        });
+        console.log('user res',userRes)
+      }
+      AddToFavourite()
+
+      return  action.userAccount.favourites;
     case "REMOVE":
       const newArr = [...state];
       newArr.splice(action.index, 1);
-      return newArr;
+      return  newArr;
     default:
       throw new Error(`unkown action ${action.type}`);
   }
@@ -21,13 +37,10 @@ export const FavouriteProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, []);
 
   return (
-    <FavouriteDispatchContext.Provider value={dispatch}>
-      <FavourtieStateContext.Provider value={state}>
+    
+      <FavouriteShowsContext.Provider value={{state,dispatch}}>
         {children}
-      </FavourtieStateContext.Provider>
-    </FavouriteDispatchContext.Provider>
+      </FavouriteShowsContext.Provider>
   );
 };
 
-export const useFavourite = () => useContext(FavourtieStateContext);
-export const useDispatchFavourite = () => useContext(FavouriteDispatchContext);

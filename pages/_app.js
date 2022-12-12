@@ -13,7 +13,7 @@ import axios from "axios";
 
 import { ShowsProvider } from "../context/ShowContext";
 import { FavouriteProvider } from "../context/addFavouriteContext";
-
+import { API_INSTANCE } from "../config/api-instance";
 
 function MyApp({ Component, pageProps }) {
   Amplify.configure(CurrentConfig); //moved this file inside the module
@@ -34,6 +34,7 @@ function MyApp({ Component, pageProps }) {
     img: "imortal.webp",
     episodes: [],
   });
+  const [userAccount, setUserAccount] = useState({ email: "",favourites : [] });
   const ForceReload = () => window.location.reload();
   const ForceRedirect = (direction) => (document.location.href = direction);
 
@@ -69,7 +70,6 @@ function MyApp({ Component, pageProps }) {
         console.log("failing to fetch user from axios bcz", err.message)
       );
   };
-
   //updating attributes-or-change-the-values
   const updateAttributes = async (nameAttibute, emailAttribute) => {
     let user = await Auth.currentAuthenticatedUser().then((user) => user);
@@ -91,6 +91,25 @@ function MyApp({ Component, pageProps }) {
     });
     await Router.push("/account");
     ForceReload();
+  };
+
+  //storing user to dynamo db
+  const storeUserToDynamo = async (user) => {
+    // if (userAccount.email) return
+      const res = await fetch(
+        "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: user.attributes.email,
+            displayName: user.attributes.name,
+            favourites : []
+          }),
+        }
+      );
+      let data = await res.json()
+      console.log("stored user", data);
+    
   };
 
   const checkUser = async () => {
@@ -121,6 +140,9 @@ function MyApp({ Component, pageProps }) {
         console.log(user, "=> user in current authenticated");
         console.log("userEmail after succesfull login: ", currentUser);
         console.log("displayName after succesfull login: ", DisplayUser);
+
+        //storing the user to dynamo db once sign up is successful
+        storeUserToDynamo(user);
       })
       .catch((error) => {
         //error handling
@@ -130,8 +152,18 @@ function MyApp({ Component, pageProps }) {
       });
   };
 
+  const getUserFromDynamo = async (userEmail) => {
+    if (userEmail === "Activetv@gmail.com" || userEmail === "Active-tv") return;
+    const res = await axios.get(
+      `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-account/${userEmail}`
+    );
+    setUserAccount(res.data.user);
+    console.log("user from dynamo", res.data);
+  };
+
   useEffect(() => {
     checkUser();
+    getUserFromDynamo(user);
   }, []);
 
   return (
@@ -167,6 +199,7 @@ function MyApp({ Component, pageProps }) {
             name: user,
             email: user,
           },
+          userAccount
         }}
       >
         <Navbar />

@@ -31,6 +31,7 @@ import { TrendingUpRounded } from "@mui/icons-material";
 import { USER_CONTEXT } from "../../context/MainContext";
 
 import axios from "axios";
+import { API_INSTACE } from "../../config/api-instance";
 
 const LoginComp = () => {
   const [show, setShow] = useState(false);
@@ -61,11 +62,18 @@ const LoginComp = () => {
   };
 
   console.log("user", AuthenticatedUser);
-  const endpoint = `http://127.0.0.1:3000/store-users`;
+  const endpoint = `${API_INSTACE}/store-users`;
   const tokenHandler = async () => {
-    const response = await axios.post(endpoint, AuthenticatedUser, {
-      "Content-Type": "application/json",
-    });
+    const response = await axios({
+      method: "POST",
+      url: endpoint,
+      data :{...AuthenticatedUser,},
+      // BearerToken: authorisedJWT,
+      // mode: 'no-cors',
+      });
+    // const response = await axios.post(endpoint, AuthenticatedUser, {
+    //   "Content-Type": "application/json",
+    // });
     console.log("RESPONSE=>", response);
   };
 
