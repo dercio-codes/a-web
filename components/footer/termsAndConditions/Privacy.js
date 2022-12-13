@@ -2,6 +2,10 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import Router from "next/router";
 
 const container = {
   padding: "30px",
@@ -14,7 +18,7 @@ const container = {
 const form = {
   height: "650px",
   width: "700px",
-  background: "rgba(0,0,0,0.9)",
+  background: "rgba(0,0,0,1)",
   borderRadius: "15px",
 };
 
@@ -48,6 +52,43 @@ const red = {
 };
 
 const Privacy = () => {
+  const [redirecting, setRedirecting] = React.useState(false);
+
+  const acceptHandler = () => {
+    toast.success("You have accepted our terms and condition", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+    });
+
+    setTimeout(() => {
+      Router.push("/");
+      console.log("redirecting with router");
+    }, 3000);
+  };
+
+  const declineHandler = () => {
+    toast.error("You have declined our terms and condition", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+    });
+    setTimeout(() => {
+      Router.push("/");
+      console.log("redirecting with router");
+    }, 3000);
+  };
+
   return (
     <Box sx={container}>
       <Box sx={form}>
@@ -170,11 +211,13 @@ const Privacy = () => {
           <Button
             className="active-tv-font"
             variant="outline"
+            onClick={declineHandler}
             sx={[buttons, red]}
           >
             Decline
           </Button>
           <Button
+            onClick={acceptHandler}
             className="active-tv-font"
             variant="outline"
             sx={[buttons, green]}
@@ -183,6 +226,7 @@ const Privacy = () => {
           </Button>
         </Box>
       </Box>
+      <ToastContainer />
     </Box>
   );
 };
