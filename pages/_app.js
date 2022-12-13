@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
     img: "imortal.webp",
     episodes: [],
   });
-  const [userAccount, setUserAccount] = useState({ email: "",favourites : [] });
+  const [userAccount, setUserAccount] = useState({ email: "", favourites: [] });
   const ForceReload = () => window.location.reload();
   const ForceRedirect = (direction) => (document.location.href = direction);
 
@@ -95,7 +95,16 @@ function MyApp({ Component, pageProps }) {
 
   //storing user to dynamo db
   const storeUserToDynamo = async (user) => {
-    // if (userAccount.email) return
+    console.log('checking if user exists...')
+    if (!userAccount.email){
+      getUserFromDynamo(user.attributes.email);
+
+    }
+    if (userAccount.email){
+      return
+    }else if (!userAccount.email && !user.attributes.email){
+      // this should only happen when it is a new user
+      console.log('WELCOME NEW USER!!!')
       const res = await fetch(
         "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
         {
@@ -103,12 +112,16 @@ function MyApp({ Component, pageProps }) {
           body: JSON.stringify({
             email: user.attributes.email,
             displayName: user.attributes.name,
-            favourites : []
+            favourites: [],
+            points : 0,
+            subscriptionType : 'none',
+            imageProfile : ''
           }),
         }
       );
-      let data = await res.json()
+      let data = await res.json();
       console.log("stored user", data);
+    }
     
   };
 
@@ -136,7 +149,7 @@ function MyApp({ Component, pageProps }) {
         setLoggedIn(true);
 
         //testing logs
-        console.log("attributes:", user.attributes);
+        console.log("attributes::", user.attributes);
         console.log(user, "=> user in current authenticated");
         console.log("userEmail after succesfull login: ", currentUser);
         console.log("displayName after succesfull login: ", DisplayUser);
@@ -163,53 +176,60 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     checkUser();
-    getUserFromDynamo(user);
   }, []);
 
+  const [userSync,setUserSync] = useState(false);
+
+  useEffect(()=>{
+    getUserFromDynamo(user);
+
+  },[userSync]);
+
   return (
-    <FavouriteProvider>
-      <USER_CONTEXT.Provider
-        value={{
-          isContained,
-          setIsContained,
-          updateAttributes,
-          UserContext,
-          imgProfile,
-          setImgProfile,
-          authorisedJWT,
-          setAuthorisedJWT,
-          displayName,
-          selectedCategory,
-          loggedIn,
-          ForceReload,
-          ForceRedirect,
-          setLoggedIn,
-          setUser,
-          setSelectedCategory,
-          showsDetails,
-          setShowsDetails,
-          subCode,
-          setSubCode,
-          avaters,
-          setAvaters,
-          picture,
-          setPicture,
-          updatePictureAttribute,
-          AuthenticatedUser: {
-            name: user,
-            email: user,
-          },
-          userAccount
-        }}
-      >
+    <USER_CONTEXT.Provider
+      value={{
+        isContained,
+        setIsContained,
+        updateAttributes,
+        UserContext,
+        imgProfile,
+        setImgProfile,
+        authorisedJWT,
+        setAuthorisedJWT,
+        displayName,
+        selectedCategory,
+        loggedIn,
+        ForceReload,
+        ForceRedirect,
+        setLoggedIn,
+        setUser,
+        setSelectedCategory,
+        showsDetails,
+        setShowsDetails,
+        subCode,
+        setSubCode,
+        avaters,
+        setAvaters,
+        picture,
+        setPicture,
+        updatePictureAttribute,
+        AuthenticatedUser: {
+          name: user,
+          email: user,
+        },
+        userAccount,
+        userSync,setUserSync
+      }}
+    >
+      <FavouriteProvider>
         <Navbar />
 
         <ShowsProvider>
           <Component {...pageProps} />
         </ShowsProvider>
         <Footer />
-      </USER_CONTEXT.Provider>
-    </FavouriteProvider>
+      </FavouriteProvider>
+    </USER_CONTEXT.Provider>
   );
 }
 
