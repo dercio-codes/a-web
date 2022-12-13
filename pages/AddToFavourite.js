@@ -1,21 +1,37 @@
 import React from "react";
 import {
-  useFavourite,
-  useDispatchFavourite,
+  FavouriteShowsContext
 } from "../context/addFavouriteContext";
 import { Box, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Link from "next/link"
+import { USER_CONTEXT } from "../context/MainContext";
+import axios from 'axios';
+const api = "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod";
 
 export default function Store() {
-  const item = useFavourite();
-  const dispatch = useDispatchFavourite();
+  
+  const {state,dispatch} = React.useContext(FavouriteShowsContext)
+  const {userAccount,userSync,setUserSync} = React.useContext(USER_CONTEXT)
+  const item = state
 
-  const handleRemove = (index) => {
-    dispatch({ type: "REMOVE", index });
+  const handleRemove = async (show,index) => {
+    const newArr = userAccount.favourites;
+      newArr.splice(index, 1);
+      await axios.put(api + "/edit-show", {
+        Title: show.Title,
+        likes: show.likes ? show.likes-- : 1,
+      });
+      await axios.put(api + "/edit-account", {
+        email: userAccount.email,
+        favourites: newArr,
+      });
+    setUserSync(!userSync)
+
+    // dispatch({ type: "REMOVE", index,userAccount });
   };
 
-  if (item.length === 0) {
+  if (userAccount.favourites.length === 0) {
     return (
       <Box sx={container}>
         <Typography
@@ -32,7 +48,7 @@ export default function Store() {
   return (
 
     <Box sx={favouritesContainer}>
-      {item.map((items, index) => (
+      {userAccount.favourites.map((items, index) => (
         <Box key={index} sx={showsIndex}>
         <Link href={`/shows-episodes/${items.Title}`} key={index}>
           <a>
@@ -46,7 +62,7 @@ export default function Store() {
           color="#fff"
           fontSize={10}
           >{items.Title}</Typography>
-          <button onClick={() => handleRemove(index)} style={{border:"none", background:"#121212", marginTop:"3px"}}><DeleteIcon color="error" sx={{fontSize:"15px", cursor:"pointer"}}/></button>
+          <button onClick={() => handleRemove(items,index)} style={{border:"none", background:"#121212", marginTop:"3px"}}><DeleteIcon color="error" sx={{fontSize:"15px", cursor:"pointer"}}/></button>
           </Box>
         </Box>
       ))}

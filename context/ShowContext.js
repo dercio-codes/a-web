@@ -11,7 +11,7 @@ export const ShowsProvider = ({ children }) => {
       episodes: [],
     },
   });
-  
+
   useEffect(() => {
     fetch(
       "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-config"

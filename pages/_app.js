@@ -13,7 +13,7 @@ import axios from "axios";
 
 import { ShowsProvider } from "../context/ShowContext";
 import { FavouriteProvider } from "../context/addFavouriteContext";
-
+import { API_INSTANCE } from "../config/api-instance";
 
 function MyApp({ Component, pageProps }) {
   Amplify.configure(CurrentConfig); //moved this file inside the module
@@ -34,6 +34,7 @@ function MyApp({ Component, pageProps }) {
     img: "imortal.webp",
     episodes: [],
   });
+  const [userAccount, setUserAccount] = useState({ email: "", favourites: [] });
   const ForceReload = () => window.location.reload();
   const ForceRedirect = (direction) => (document.location.href = direction);
 
@@ -69,7 +70,6 @@ function MyApp({ Component, pageProps }) {
         console.log("failing to fetch user from axios bcz", err.message)
       );
   };
-
   //updating attributes-or-change-the-values
   const updateAttributes = async (nameAttibute, emailAttribute) => {
     let user = await Auth.currentAuthenticatedUser().then((user) => user);
@@ -91,6 +91,38 @@ function MyApp({ Component, pageProps }) {
     });
     await Router.push("/account");
     ForceReload();
+  };
+
+  //storing user to dynamo db
+  const storeUserToDynamo = async (user) => {
+    console.log('checking if user exists...')
+    if (!userAccount.email){
+      getUserFromDynamo(user.attributes.email);
+
+    }
+    if (userAccount.email){
+      return
+    }else if (!userAccount.email && !user.attributes.email){
+      // this should only happen when it is a new user
+      console.log('WELCOME NEW USER!!!')
+      const res = await fetch(
+        "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: user.attributes.email,
+            displayName: user.attributes.name,
+            favourites: [],
+            points : 0,
+            subscriptionType : 'none',
+            imageProfile : ''
+          }),
+        }
+      );
+      let data = await res.json();
+      console.log("stored user", data);
+    }
+    
   };
 
   const checkUser = async () => {
@@ -117,10 +149,13 @@ function MyApp({ Component, pageProps }) {
         setLoggedIn(true);
 
         //testing logs
-        console.log("attributes:", user.attributes);
+        console.log("attributes::", user.attributes);
         console.log(user, "=> user in current authenticated");
         console.log("userEmail after succesfull login: ", currentUser);
         console.log("displayName after succesfull login: ", DisplayUser);
+
+        //storing the user to dynamo db once sign up is successful
+        storeUserToDynamo(user);
       })
       .catch((error) => {
         //error handling
@@ -130,53 +165,71 @@ function MyApp({ Component, pageProps }) {
       });
   };
 
+  const getUserFromDynamo = async (userEmail) => {
+    if (userEmail === "Activetv@gmail.com" || userEmail === "Active-tv") return;
+    const res = await axios.get(
+      `https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/get-account/${userEmail}`
+    );
+    setUserAccount(res.data.user);
+    console.log("user from dynamo", res.data);
+  };
+
   useEffect(() => {
     checkUser();
   }, []);
 
+  const [userSync,setUserSync] = useState(false);
+
+  useEffect(()=>{
+    getUserFromDynamo(user);
+
+  },[userSync]);
+
   return (
-    <FavouriteProvider>
-      <USER_CONTEXT.Provider
-        value={{
-          isContained,
-          setIsContained,
-          updateAttributes,
-          UserContext,
-          imgProfile,
-          setImgProfile,
-          authorisedJWT,
-          setAuthorisedJWT,
-          displayName,
-          selectedCategory,
-          loggedIn,
-          ForceReload,
-          ForceRedirect,
-          setLoggedIn,
-          setUser,
-          setSelectedCategory,
-          showsDetails,
-          setShowsDetails,
-          subCode,
-          setSubCode,
-          avaters,
-          setAvaters,
-          picture,
-          setPicture,
-          updatePictureAttribute,
-          AuthenticatedUser: {
-            name: user,
-            email: user,
-          },
-        }}
-      >
+    <USER_CONTEXT.Provider
+      value={{
+        isContained,
+        setIsContained,
+        updateAttributes,
+        UserContext,
+        imgProfile,
+        setImgProfile,
+        authorisedJWT,
+        setAuthorisedJWT,
+        displayName,
+        selectedCategory,
+        loggedIn,
+        ForceReload,
+        ForceRedirect,
+        setLoggedIn,
+        setUser,
+        setSelectedCategory,
+        showsDetails,
+        setShowsDetails,
+        subCode,
+        setSubCode,
+        avaters,
+        setAvaters,
+        picture,
+        setPicture,
+        updatePictureAttribute,
+        AuthenticatedUser: {
+          name: user,
+          email: user,
+        },
+        userAccount,
+        userSync,setUserSync
+      }}
+    >
+      <FavouriteProvider>
         <Navbar />
 
         <ShowsProvider>
           <Component {...pageProps} />
         </ShowsProvider>
         <Footer />
-      </USER_CONTEXT.Provider>
-    </FavouriteProvider>
+      </FavouriteProvider>
+    </USER_CONTEXT.Provider>
   );
 }
 

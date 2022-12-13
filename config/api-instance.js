@@ -1,0 +1,1 @@
+export const API_INSTACE = 'https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod'

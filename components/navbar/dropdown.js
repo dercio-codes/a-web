@@ -22,7 +22,7 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
 import StarsIcon from "@mui/icons-material/Stars";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import { useFavourite } from "../../context/addFavouriteContext";
+import { FavouriteShowsContext } from "../../context/addFavouriteContext";
 // import LoginIcon from '@mui/icons-material/Login';
 // import StarsIcon from '@mui/icons-material/Stars';
 export default function PositionedPopper({ user, userInitial }) {
@@ -43,9 +43,10 @@ export default function PositionedPopper({ user, userInitial }) {
     isContained,
     setIsContained,
     picture,
-    setPicture
+    setPicture,
+    userAccount
   } = useContext(USER_CONTEXT);
-
+  
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
@@ -68,8 +69,9 @@ export default function PositionedPopper({ user, userInitial }) {
       console.log("there is no user logged in at thr currentSeession");
     }
   }
+  const {state} = useContext(FavouriteShowsContext)
 
-  const item = useFavourite();
+  const item = state
 
   return (
     <Box sx={{ width: 100, zIndex: 1000 }}>
@@ -99,7 +101,7 @@ export default function PositionedPopper({ user, userInitial }) {
               >
                 <Box
                   style={{
-                    background: imgProfile ? `url(${imgProfile})`: '#111',
+                    background: userAccount.imageProfile ? `url(${userAccount.imageProfile})`: '#111',
                     backgroundSize: isContained ? "cover" : "contain",
                   }}
                   sx={styles.DropUser}
@@ -111,7 +113,7 @@ export default function PositionedPopper({ user, userInitial }) {
                       color="#fff"
                       fontSize={30}
                     >
-                      {!imgProfile && userInitial}
+                      {!userAccount.imageProfile && userInitial}
                     </Typography>
                   ) : (
                     <Box
@@ -244,7 +246,7 @@ export default function PositionedPopper({ user, userInitial }) {
               </Button>
 
 
-              <Button
+              { loggedIn &&    <Button
                 variant="text"
                 sx={{
                   width: "100%",
@@ -265,9 +267,9 @@ export default function PositionedPopper({ user, userInitial }) {
                   variant="p"
                   color="#fff"
                   fontSize={10} >
-                Favourites({item.length})
+                Favourites({userAccount.favourites.length})
               </Typography>
-              </Button>
+              </Button>}
               
 
 
@@ -348,7 +350,7 @@ export default function PositionedPopper({ user, userInitial }) {
                     sx={{ 
                   
                   fontSize: 20 ,
-                  background:  imgProfile ? `url(${imgProfile})`:'#333',
+                  background:  userAccount.imageProfile ? `url(${userAccount.imageProfile})`:'#333',
                   backgroundSize: isContained ? "cover" : "contain"
                 }}
                 >
