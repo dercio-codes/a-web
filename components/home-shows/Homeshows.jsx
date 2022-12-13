@@ -104,7 +104,6 @@ const Homeshows = ({ latestVid, title, height, width,  }) => {
               justifyContent: "flex-start",
             }}
           >
-            <Box sx={{ border: "1px solid red", background: "black" }}>
               <ShowsCard
                 background={banners[index]}
                 height={height}
@@ -112,9 +111,8 @@ const Homeshows = ({ latestVid, title, height, width,  }) => {
                 title={item?.Title}
                 logo={item?.CoverArtLarge}
                 img={item?.CoverArtLarge}
+                item={item}
               />
-              <button onClick={() => addToFavourite(item)}>Add</button>
-            </Box>
           </SwiperSlide>
         ))}
       </Swiper>
