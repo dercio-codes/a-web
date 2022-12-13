@@ -95,20 +95,34 @@ function MyApp({ Component, pageProps }) {
 
   //storing user to dynamo db
   const storeUserToDynamo = async (user) => {
-    if (userAccount.email == user.attributes.email) return
-    const res = await fetch(
-      "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: user.attributes.email,
-          displayName: user.attributes.name,
-          favourites: [],
-        }),
-      }
-    );
-    let data = await res.json();
-    console.log("stored user", data);
+    console.log('checking if user exists...')
+    if (!userAccount.email){
+      getUserFromDynamo(user.attributes.email);
+
+    }
+    if (userAccount.email){
+      return
+    }else if (!userAccount.email && !user.attributes.email){
+      // this should only happen when it is a new user
+      console.log('WELCOME NEW USER!!!')
+      const res = await fetch(
+        "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: user.attributes.email,
+            displayName: user.attributes.name,
+            favourites: [],
+            points : 0,
+            subscriptionType : 'none',
+            imageProfile : ''
+          }),
+        }
+      );
+      let data = await res.json();
+      console.log("stored user", data);
+    }
+    
   };
 
   const checkUser = async () => {
@@ -135,7 +149,7 @@ function MyApp({ Component, pageProps }) {
         setLoggedIn(true);
 
         //testing logs
-        console.log("attributes:", user.attributes);
+        console.log("attributes::", user.attributes);
         console.log(user, "=> user in current authenticated");
         console.log("userEmail after succesfull login: ", currentUser);
         console.log("displayName after succesfull login: ", DisplayUser);

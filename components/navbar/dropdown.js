@@ -101,7 +101,7 @@ export default function PositionedPopper({ user, userInitial }) {
               >
                 <Box
                   style={{
-                    background: imgProfile ? `url(${imgProfile})`: '#111',
+                    background: userAccount.imageProfile ? `url(${userAccount.imageProfile})`: '#111',
                     backgroundSize: isContained ? "cover" : "contain",
                   }}
                   sx={styles.DropUser}
@@ -113,7 +113,7 @@ export default function PositionedPopper({ user, userInitial }) {
                       color="#fff"
                       fontSize={30}
                     >
-                      {!imgProfile && userInitial}
+                      {!userAccount.imageProfile && userInitial}
                     </Typography>
                   ) : (
                     <Box
@@ -350,7 +350,7 @@ export default function PositionedPopper({ user, userInitial }) {
                     sx={{ 
                   
                   fontSize: 20 ,
-                  background:  imgProfile ? `url(${imgProfile})`:'#333',
+                  background:  userAccount.imageProfile ? `url(${userAccount.imageProfile})`:'#333',
                   backgroundSize: isContained ? "cover" : "contain"
                 }}
                 >
