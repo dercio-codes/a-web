@@ -83,10 +83,6 @@ const Privacy = () => {
       progress: undefined,
       theme: "dark",
     });
-    setTimeout(() => {
-      Router.push("/");
-      console.log("redirecting with router");
-    }, 3000);
   };
 
   return (

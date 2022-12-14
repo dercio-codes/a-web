@@ -37,6 +37,8 @@ function MyApp({ Component, pageProps }) {
   const [userAccount, setUserAccount] = useState({ email: "", favourites: [] });
   const ForceReload = () => window.location.reload();
   const ForceRedirect = (direction) => (document.location.href = direction);
+  let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#ffffff");
 
   //hub listeners
   Hub.listen("auth", (data) => {
@@ -95,16 +97,15 @@ function MyApp({ Component, pageProps }) {
 
   //storing user to dynamo db
   const storeUserToDynamo = async (user) => {
-    console.log('checking if user exists...')
-    if (!userAccount.email){
+    console.log("checking if user exists...");
+    if (!userAccount.email) {
       getUserFromDynamo(user.attributes.email);
-
     }
-    if (userAccount.email){
-      return
-    }else if (!userAccount.email && !user.attributes.email){
+    if (userAccount.email) {
+      return;
+    } else if (!userAccount.email) {
       // this should only happen when it is a new user
-      console.log('WELCOME NEW USER!!!')
+      console.log("WELCOME NEW USER!!!");
       const res = await fetch(
         "https://p6x7b95wcd.execute-api.us-east-2.amazonaws.com/Prod/post-account",
         {
@@ -113,16 +114,15 @@ function MyApp({ Component, pageProps }) {
             email: user.attributes.email,
             displayName: user.attributes.name,
             favourites: [],
-            points : 0,
-            subscriptionType : 'none',
-            imageProfile : ''
+            points: 0,
+            subscriptionType: "none",
+            imageProfile: "",
           }),
         }
       );
       let data = await res.json();
       console.log("stored user", data);
     }
-    
   };
 
   const checkUser = async () => {
@@ -178,12 +178,11 @@ function MyApp({ Component, pageProps }) {
     checkUser();
   }, []);
 
-  const [userSync,setUserSync] = useState(false);
+  const [userSync, setUserSync] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     getUserFromDynamo(user);
-
-  },[userSync]);
+  }, [userSync]);
 
   return (
     <USER_CONTEXT.Provider
@@ -218,7 +217,12 @@ function MyApp({ Component, pageProps }) {
           email: user,
         },
         userAccount,
-        userSync,setUserSync
+        userSync,
+        setUserSync,
+        loading,
+        setLoading,
+        color,
+        setColor,
       }}
     >
       <FavouriteProvider>

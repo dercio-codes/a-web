@@ -7,6 +7,7 @@ import { USER_CONTEXT } from "../../context/MainContext";
 import DeleteModal from "./deleteModal";
 import AvaterPicChanger from "../AvaterProfile.js/AvaterPicChanger";
 import Link from "next/link";
+import RedeemCodePopUp from "./redeemCode/RedeemCodePopPup";
 
 const AccountLoggedIn = () => {
   const { AuthenticatedUser, displayName } = useContext(USER_CONTEXT); //pulling out the current authenticated user
@@ -14,11 +15,16 @@ const AccountLoggedIn = () => {
   const [subscribed, setSubscribed] = useState(false);
 
   const [open, setOpen] = React.useState(false);
+  const [openRedeemPopup, setOpenRedeemPopup] = React.useState(false);
 
   const AvaterPack = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  };
+
+  const handleClickOpen = () => {
+    setOpenRedeemPopup(true);
   };
 
   return (
@@ -36,7 +42,6 @@ const AccountLoggedIn = () => {
             alignItems: "center",
             fontSize: "18px",
             letterSpacing: "2px",
-            // borderTop: "1px solid #F2F2F2",
             height: "85px",
           }}
         >
@@ -253,13 +258,13 @@ const AccountLoggedIn = () => {
               </Typography>
               <Typography
                 className="active-tv-font"
-                sx={{ display: "flex", alignItems: "center"}}
+                sx={{ display: "flex", alignItems: "center" }}
                 variant="h3"
                 fontSize={10}
               >
                 Since signing up {"you've"} earned 0 points
                 <img
-                  style={{marginBottom: "2px", paddingLeft:'2px' }}
+                  style={{ marginBottom: "2px", paddingLeft: "2px" }}
                   src="coin.gif"
                   alt="coin"
                   width={18}
@@ -292,6 +297,7 @@ const AccountLoggedIn = () => {
             </Grid>
           </Grid>
         </Box>
+
         <Box
           sx={{
             minHeight: "80px",
@@ -348,13 +354,15 @@ const styles = {
     alignItems: "center",
     width: "100%",
     justifyContent: "center",
+    padding: "30px 0",
   },
   contentBox: {
     width: "75%",
-    background: "rgba(0,0,0,0.6)",
+    background: "rgba(0,0,0,0.7)",
     height: "90%",
     padding: "20px 50px",
     flexDirection: "column",
+    borderRadius: "10px",
   },
   gridItem: {
     minHeight: "80px",

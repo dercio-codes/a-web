@@ -60,7 +60,7 @@ const Footer = () => {
         <Box sx={container2}>
           <Box sx={container3}>
             <Link href="/terms_and_conditions">
-              <a target="_blank">
+              <a>
                 <Typography
                   className="active-tv-font"
                   align="center"

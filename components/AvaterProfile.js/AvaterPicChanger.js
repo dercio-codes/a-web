@@ -5,10 +5,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import Images from "./Images";
-import data from './avatar.json'
-import { useContext } from "react";
+import data from "./avatar.json";
+import { useContext, useState, useEffect } from "react";
 import { USER_CONTEXT } from "../../context/MainContext";
-
+import RotateLoader from "react-spinners/RotateLoader";
 
 const style = {
   position: "absolute",
@@ -31,8 +31,7 @@ const cancelBtn = {
   fontWeight: "bold",
   // border: "1px solid red",
   height: "30px",
-  marginLeft:'auto'
-
+  marginLeft: "auto",
 };
 
 const confirmBtn = {
@@ -75,26 +74,49 @@ const imgBackground = {
   justifyContent: "center",
 };
 
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
 export default function AvaterPicChanger({ grady }) {
   const [open, setOpen] = React.useState(false);
   const [accept, setAccept] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-    const { avaters, setAvaters, imgProfile, setImgProfile, setIsContained,updatePictureAttribute } =
-    useContext(USER_CONTEXT);
+  const {
+    avaters,
+    setAvaters,
+    imgProfile,
+    setImgProfile,
+    setIsContained,
+    updatePictureAttribute,
+    loading,
+    setLoading,
+    color,
+    setColor,
+  } = useContext(USER_CONTEXT);
 
-  const handleConfirm = async (avaters)=>{
+  const handleConfirm = async (avaters) => {
+    const accepted = window.confirm(
+      "are you sure you want to update profile picture?"
+    );
 
-       const accepted =  window.confirm('are you sure you want to update profile picture?')
-       
-       if(accepted){
-             setImgProfile(avaters);
-             updatePictureAttribute(avaters);
-             setIsContained(true);
-         }
-  }
+    if (accepted) {
+      setImgProfile(avaters);
+      updatePictureAttribute(avaters);
+      setIsContained(true);
+    }
+  };
 
-  
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+  }, []);
+
   return (
     <div>
       <Box
@@ -128,11 +150,27 @@ export default function AvaterPicChanger({ grady }) {
             <h4>Select a profile Image</h4>
           </Box>
           <Box style={images}>
-            <Images />
+            {loading ? (
+              <RotateLoader
+                color={color}
+                loading={loading}
+                cssOverride={override}
+                size={20}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              <Images />
+            )}
           </Box>
 
           <Box style={buttons}>
-            <Button onClick={handleClose} variant="outlined" color="error" style={cancelBtn}>
+            <Button
+              onClick={handleClose}
+              variant="outlined"
+              color="error"
+              style={cancelBtn}
+            >
               close
             </Button>
           </Box>

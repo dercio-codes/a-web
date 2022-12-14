@@ -361,3 +361,11 @@
   .gender-option::hover{
     background-color: yellow;
   }
+
+  .popupbutton {
+    display: block;
+    font-family: "ArcadeFont", cursive !important;
+  }
+  .popupbutton:hover {
+    cursor: pointer;
+  }
